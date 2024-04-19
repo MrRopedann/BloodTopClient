@@ -1,0 +1,974 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- первое окно выбора сервера
+-----------------------------------------------------------------------	
+-- форма выбор серв
+frmArea = UI_CreateForm( "frmArea", FALSE, 403, 290, 396, 275, FALSE, FALSE )
+UI_SetFormStyle( frmArea , 2 )
+UI_AddFormToTemplete( frmArea, FORM_LOGIN )
+UI_SetIsDrag( frmArea, TRUE )
+UI_FormSetIsEscClose( frmArea, FALSE )
+
+-- текстура выбор серв
+imgBakTop = UI_CreateCompent( frmArea, IMAGE_TYPE, "imgBakTop", 403, 290, 0, 0 )
+UI_LoadImage( imgBakTop, "texture/ui/xDesign/list1.tga", NORMAL, 403, 290, 0, 0 )
+UI_SetImageAlpha( imgBakTop, 220 )
+
+-- imgBakDown = UI_CreateCompent( frmArea, IMAGE_TYPE, "imgBakDown", 147, 256, 256, 0 )
+-- UI_LoadImage( imgBakDown, "texture/ui/list2.tga", NORMAL, 147, 256, 0, 0 )
+-- UI_SetImageAlpha(imgBakDown,220)
+
+-- imgBakDown1 = UI_CreateCompent( frmArea, IMAGE_TYPE, "imgBakDown1", 256, 34, 0, 256 )
+-- UI_LoadImage( imgBakDown1, "texture/ui/list3.tga", NORMAL, 256, 34, 0, 0 )
+-- UI_SetImageAlpha(imgBakDown1,220)
+
+-- imgBakDown1 = UI_CreateCompent( frmArea, IMAGE_TYPE, "imgBakDown1", 147, 34, 256, 256 )
+-- UI_LoadImage( imgBakDown1, "texture/ui/list3.tga", NORMAL, 147, 34, 0, 44 )
+-- UI_SetImageAlpha(imgBakDown1,220)
+
+imgPapa = UI_CreateCompent( frmArea, IMAGE_TYPE, "imgPapa", 43, 32, 7, 22 )
+-- UI_LoadImage( imgPapa, "texture/ui/PublicC.tga", NORMAL, 43, 32, 213, 15 )
+-- UI_SetImageAlpha(imgPapa,220)
+
+-- заголовок окна 
+-- imgServerTitle1 = UI_CreateCompent( frmArea, IMAGE_TYPE, "imgServerTitle1", 61, 13, 169, 26 )
+-- UI_LoadImage( imgServerTitle1, "texture/ui/Word.dds", NORMAL, 61, 13, 158, 183 )
+labTitle = UI_CreateCompent( frmArea, LABELEX_TYPE, "labTitle", 400, 150, 160, 26 )
+UI_SetCaption( labTitle, "Выберите Сервер")
+UI_SetTextColor( labTitle, 4289000470 )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+lstRegion0 = UI_CreateCompent( frmArea, LIST_TYPE, "lstRegion0", 184, 150, 16, 35 )
+UI_SetMargin( lstRegion0, 19, 20, 15, 0 )
+UI_ListSetItemMargin( lstRegion0, 10, 9 )
+UI_SetListRowHeight( lstRegion0, 23 )
+UI_SetListIsMouseFollow( lstRegion0, TRUE)
+-- UI_ListLoadSelectImage( lstRegion0, "texture/ui/SystemBotton3.tga", 79, 13, 25, 227 )
+UI_SetImageAlpha( lstRegion0, 134 )
+UI_SetListFontColor( lstRegion0, 4288060058, 4289000470 )
+
+lstRegion1 = UI_CreateCompent( frmArea, LIST_TYPE, "lstRegion1", 184, 150, 202, 35 )
+UI_SetMargin( lstRegion1, 19, 20, 15, 0 )
+UI_ListSetItemMargin( lstRegion1, 10, 9 )
+UI_SetListRowHeight( lstRegion1, 23 )
+UI_SetListIsMouseFollow( lstRegion1, TRUE)
+-- UI_ListLoadSelectImage( lstRegion1, "texture/ui/SystemBotton3.tga", 79, 13, 25, 227 )
+UI_SetImageAlpha( lstRegion1, 134 )
+UI_SetListFontColor( lstRegion1, 4288060058, 4289000470 )
+
+
+scrollid = UI_GetScroll( lstServer1 )
+-- UI_SetIsEnabled( scrollid, FALSE )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- кнопка выйти из игры
+btnNo = UI_CreateCompent( frmArea, BUTTON_TYPE, "btnNo", 72, 14, 170, 266 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 72, 14, 203, 0, TRUE )
+-- UI_SetAlpha(btnNo,210)
+
+
+-----------------------------------------------------------------------
+--  второе окно выбора сервера
+-----------------------------------------------------------------------	
+-- Server fenster 2
+frmServer = UI_CreateForm( "frmServer", FALSE, 403, 290, 396, 275, FALSE, FALSE )
+UI_SetFormStyle( frmServer , 2 )
+UI_AddFormToTemplete( frmServer, FORM_LOGIN )
+UI_FormSetIsEscClose( frmServer, FALSE )
+UI_SetIsDrag( frmServer, TRUE )
+
+imgBakTop = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgBakTop", 403, 290, 0, 0 )
+UI_LoadImage( imgBakTop, "texture/ui/xDesign/list1.tga", NORMAL, 403, 290, 0, 0 )
+UI_SetImageAlpha( imgBakTop, 220 )
+-- UI_SetImageAlpha(imgBakTop,240)
+
+-- imgBakDown = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgBakDown", 147, 256, 256, 0 )
+-- UI_LoadImage( imgBakDown, "texture/ui/list2.tga", NORMAL, 147, 256, 0, 0 )
+-- UI_SetImageAlpha(imgBakDown,220)
+
+-- imgBakDown1 = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgBakDown1", 256, 34, 0, 256 )
+-- UI_LoadImage( imgBakDown1, "texture/ui/list3.tga", NORMAL, 256, 34, 0, 0 )
+-- UI_SetImageAlpha(imgBakDown1,220)
+
+-- imgBakDown1 = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgBakDown1", 147, 34, 256, 256 )
+-- UI_LoadImage( imgBakDown1, "texture/ui/list3.tga", NORMAL, 147, 34, 0, 44 )
+-- UI_SetImageAlpha(imgBakDown1,220)
+
+imgPapa = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgPapa", 43, 32, 7, 22 )
+-- UI_LoadImage( imgPapa, "texture/ui/PublicC.tga", NORMAL, 43, 32, 213, 15 )
+-- UI_SetImageAlpha(imgPapa,220)
+
+-- 
+-- imgServerTitle = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgServerTitle", 61, 13, 175, 27 )
+-- UI_LoadImage( imgServerTitle, "texture/ui/Word.dds", NORMAL, 61, 13, 0, 86 )
+
+labTitle = UI_CreateCompent( frmServer, LABELEX_TYPE, "labTitle", 400, 150, 160, 26 )
+UI_SetCaption( labTitle, "Выберите Сервер ")
+UI_SetTextColor( labTitle, 4289000470 )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+imgServerIcon0 = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgServerIcon0", 12, 12, 175, 27 )
+-- UI_LoadImage( imgServerIcon0, "texture/ui/list1.tga", NORMAL, 12, 12, 0, 0 )
+UI_SetMaxImage( imgServerIcon0, 4 )
+UI_LoadImage( imgServerIcon0, "texture/ui/forge3.tga", 0, 11, 11, 164, 76 )
+UI_LoadImage( imgServerIcon0, "texture/ui/forge3.tga", 1, 11, 11, 175, 76 )
+UI_LoadImage( imgServerIcon0, "texture/ui/forge3.tga", 2, 11, 11, 197, 76 )
+UI_LoadImage( imgServerIcon0, "texture/ui/forge3.tga", 3, 11, 11, 186, 76 )
+
+-- imgServerIcon1 = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgServerIcon1", 12, 12, 175, 27 )
+-- UI_LoadImage( imgServerIcon1, "texture/ui/Word.dds", NORMAL, 12, 12, 12, 86 )
+-- UI_SetMaxImage( imgServerIcon1, 4 )
+
+-- imgServerIcon2 = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgServerIcon2", 12, 12, 175, 27 )
+-- UI_LoadImage( imgServerIcon2, "texture/ui/Word.dds", NORMAL, 12, 12, 24, 86 )
+-- UI_SetMaxImage( imgServerIcon2, 4 )
+
+-- imgServerIcon3 = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgServerIcon3", 12, 12, 175, 27 )
+-- UI_LoadImage( imgServerIcon3, "texture/ui/Word.dds", NORMAL, 12, 12, 36, 86 )
+-- UI_SetMaxImage( imgServerIcon3, 4 )
+
+-- 
+lvServer0 = UI_CreateListView( frmServer, "lvServer0", 184, 150, 0, 35, 2, 2 )
+UI_SetMargin( lvServer0, 19, 20, 15, 0 )
+UI_ListViewSetTitle( lvServer0, 0, 15, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lvServer0, 1, 132, "", 0, 0, 0, 0 )
+UI_ListSetItemMargin( lvServer0, 10, 9 )
+UI_SetListRowHeight( lvServer0, 23 )
+UI_SetListIsMouseFollow( lvServer0, TRUE)
+-- UI_ListLoadSelectImage( lvServer0, "texture/ui/SystemBotton3.tga", 79, 13, 25, 227 )
+UI_SetImageAlpha( lvServer0, 134 )
+UI_SetListFontColor( lvServer0, 4288060058, 4289000470 )
+
+lvServer1 = UI_CreateListView( frmServer, "lvServer1", 184, 150, 186, 35, 2, 2 )
+UI_SetMargin( lvServer1, 19, 20, 15, 0 )
+UI_ListViewSetTitle( lvServer1, 0, 15, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lvServer1, 1, 132, "", 0, 0, 0, 0 )
+UI_ListSetItemMargin( lvServer1, 10, 9 )
+UI_SetListRowHeight( lvServer1, 23 )
+UI_SetListIsMouseFollow( lvServer1, TRUE)
+-- UI_ListLoadSelectImage( lvServer1, "texture/ui/SystemBotton3.tga", 79, 13, 25, 227, 2, 2 )
+UI_SetImageAlpha( lvServer1, 134 )
+UI_SetListFontColor( lvServer1, 4288060058, 4289000470 )
+
+-- 
+scrollid = UI_GetScroll( lstServer )
+-- UI_SetIsEnabled( scrollid, FALSE )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- кнопка выход
+btnNo = UI_CreateCompent( frmServer, BUTTON_TYPE, "btnNo", 47, 14, 185, 266 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 47, 14, 0, 42, TRUE )
+-- UI_SetAlpha(btnNo,210)
+
+-- кнопка выход ( Old version / Alpha=0 / Size=1,1 )
+btnNo = UI_CreateCompent( frmServer, BUTTON_TYPE, "btnNo", 1, 1, 185, 267 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/sysbutton1.tga", 36, 12, 0, 42, TRUE )
+UI_SetAlpha(btnNo,0)
+
+
+-----------------------------------------------------------------------
+-- фрма ввода пароля
+-----------------------------------------------------------------------
+-- 
+frmAccount = UI_CreateForm( "frmAccount", FALSE, 185, 101, 310, 350, FALSE, FALSE )
+UI_AddFormToTemplete( frmAccount, FORM_LOGIN )
+UI_SetFormStyle( frmAccount, 2 )
+-- UI_SetIsDrag( frmAccount, TRUE )
+-- UI_SetAlpha( frmAccount, 200 )
+-- UI_FormSetHotKey( frmAccount, ALT_KEY, 75 ) --'K'
+UI_FormSetIsEscClose( frmAccount, FALSE )
+
+-- 
+-- imgLogo1 = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgLogo1", 256, 256, -152, -274 )
+-- UI_LoadImage( imgLogo1, "texture/ui/logo1.tga", NORMAL, 256, 256, 0, 0 )
+
+-- imgLogo2 = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgLogo2", 256, 256, 104, -274 )
+-- UI_LoadImage( imgLogo2, "texture/ui/logo2t.tga", NORMAL, 256, 256, 0, 0 )
+
+-- imgLogo3 = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgLogo3", 166, 40, -62, -18 )
+-- UI_LoadImage( imgLogo3, "texture/ui/logo3.tga", NORMAL, 166, 40, 0, 0 )
+
+-- imgLogo4 = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgLogo4", 170, 40, 104, -18 )
+-- UI_LoadImage( imgLogo4, "texture/ui/logo3.tga", NORMAL, 170, 40, 0, 40 )
+
+imgLogo1 = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgLogo1", 256, 256, -117, -197 )
+-- UI_LoadImage( imgLogo1, "texture/ui/logo1.tga", NORMAL, 256, 256, 0, 0 )
+imgLogo2 = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgLogo2", 256, 256, 139, -173 )
+-- UI_LoadImage( imgLogo2, "texture/ui/logo2t.tga", NORMAL, 256, 256, 0, 0 )
+
+--  
+imgAccout = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgAccout", 185, 101, 0, 0 )
+UI_LoadImage( imgAccout, "texture/ui/xDesign/surelogin.tga", NORMAL, 185, 101, 0, 0 )
+UI_SetImageAlpha(imgAccout,235)
+
+labTitle = UI_CreateCompent( frmAccount, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+-- UI_SetCaption( labTitle, "Логин и Пароль ")
+UI_SetTextColor( labTitle, 4289000470 )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+labID = UI_CreateCompent( frmAccount, LABELEX_TYPE, "labID", 23, 11, 22, 31 )
+UI_SetCaption( labID, "\200\236\255" )-- имя
+UI_SetTextColor( labID, 4288060058 )
+UI_SetLabelExFont( labID, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+labPass = UI_CreateCompent( frmAccount, LABELEX_TYPE, "labPass", 23, 11, 22, 54 )
+UI_SetCaption( labPass, "\207\224\240\238\235\252" )-- пароль
+UI_SetTextColor( labPass, 4288060058 )
+UI_SetLabelExFont( labPass, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+imgID = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgID", 87, 18, 70, 28 )
+-- UI_LoadImage( imgID, "texture/ui/xDesign/PublicC.tga", NORMAL, 87, 18, 99, 235 )
+imgPass = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgPass", 87, 18, 70, 50 )
+-- UI_LoadImage( imgPass, "texture/ui/xDesign/PublicC.tga", NORMAL, 87, 18, 99, 235 )
+
+-- чекбокс, запомнить имя
+chkID = UI_CreateCompent( frmAccount, CHECK_TYPE, "chkID", 10, 10, 165, 29 )
+UI_LoadImage( chkID, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkID, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+UI_SetHint( chkID, "\199\224\239\238\236\237\232\242\252 \200\236\255" )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmAccount, BUTTON_TYPE, "btnYes", 40, 14, 92, 79 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка выход ( доп не исп. под кнопкой выход )
+btnClear = UI_CreateCompent( frmChaNameAlter, BUTTON_TYPE, "btnClear", 36, 12, 70, 120 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/sysbutton1.tga", 36, 12, 0, 72, TRUE )
+
+-- кнопка выход
+btnNo = UI_CreateCompent( frmAccount, BUTTON_TYPE, "btnNo", 40, 14, 137, 79 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 470, TRUE )
+
+labYes = UI_CreateCompent( frmAccount, LABELEX_TYPE, "labYes", 42, 10, 107, 155 )
+UI_SetCaption( labYes, "" )
+UI_SetTextColor( labYes, 4288060058 )
+UI_SetLabelExFont( labYes, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+labNo = UI_CreateCompent( frmAccount, LABELEX_TYPE, "labNo", 42, 10, 152, 155 )
+UI_SetCaption( labNo, "" )
+UI_SetTextColor( labNo, COLOR_WHITE )
+UI_SetLabelExFont( labNo, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+edtID = UI_CreateCompent( frmAccount, EDIT_TYPE, "edtID", 80, 12, 82, 29 )
+UI_SetTextColor( edtID, 4288060058 )
+UI_SetEditCursorColor( edtID, 4288060058 )
+UI_SetEditMaxNum( edtID, 20 )
+UI_SetEditMaxNumVisible( edtID, 12 )
+
+edtPassword = UI_CreateCompent( frmAccount, EDIT_TYPE, "edtPassword", 80, 12, 82, 53 )
+UI_SetTextColor( edtPassword, 4288060058 )
+UI_SetEditCursorColor( edtPassword, 4288060058 )
+UI_SetEditMaxNum( edtPassword, 20 )
+UI_SetEditMaxNumVisible( edtPassword, 12 )
+
+-- кнопка клавиатуры
+btnKeyboard = UI_CreateCompent( frmAccount, BUTTON_TYPE, "btnKeyboard", 63, 16, 8, 77 )
+UI_LoadButtonImage( btnKeyboard, "texture/ui/xDesign/Button1.tga", 63, 16, 203, 16, TRUE )
+
+
+-----------------------------------------------------------------------
+-- В Розыске !!
+-----------------------------------------------------------------------	
+frmAnnounce = UI_CreateForm( "frmAnnounce", FALSE, 198, 207, 396, 190, FALSE, FALSE )
+UI_LoadFormImage( frmAnnounce, "texture/ui/Game.bmp", 198, 207, 0, 0, "", 0, 0 )
+UI_AddFormToTemplete( frmAnnounce, FORM_LOGIN )
+UI_SetFormStyle( frmAnnounce, 2 )
+-- UI_SetAlpha( frmAnnounce, 200 )
+UI_FormSetIsEscClose( frmAnnounce, FALSE )
+
+-- 
+imgAnnTitle = UI_CreateCompent( frmAnnounce, IMAGE_TYPE, "imgAnnTitle", 73, 13, 10, 4 )
+UI_LoadImage( imgAnnTitle, "texture/ui/Word.dds", NORMAL, 73, 13, 0, 58 )
+
+-- 
+btnYes = UI_CreateCompent( frmAnnounce, BUTTON_TYPE, "btnYes", 47, 22, 100, 180 )
+UI_LoadButtonImage( btnYes, "texture/ui2009/button.tga", 47, 22, 0, 0, TRUE )
+UI_SetAlign( btnYes, caWidthCenter )
+
+labYes = UI_CreateCompent( frmAnnounce, LABELEX_TYPE, "labYes", 24, 10, 109, 324 )
+UI_SetCaption( labYes, "" )
+UI_SetTextColor( labYes, COLOR_WHITE )
+UI_SetLabelExFont( labYes, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+
+-----------------------------------------------------------------------
+--  Виртуальная клавиатура
+-----------------------------------------------------------------------	
+frmKeyboard = UI_CreateForm( "frmKeyboard", FALSE, 427, 122, 396, 465, FALSE, FALSE )
+-- UI_LoadFormImage( frmKeyboard, "texture/ui/Game.bmp", 198, 207, 0, 0, "", 0, 0 )
+UI_AddFormToTemplete( frmKeyboard, FORM_LOGIN )
+UI_SetFormStyle( frmKeyboard, 2 )
+UI_SetIsDrag( frmKeyboard, TRUE )
+-- UI_SetAlpha( frmKeyboard, 200 )
+UI_FormSetIsEscClose( frmKeyboard, FALSE )
+-- UI_FormSetHotKey( frmKeyboard, ALT_KEY, 75 ) --'K'
+
+-- 
+imgKeyboard1 = UI_CreateCompent( frmKeyboard, IMAGE_TYPE, "imgKeyboard1", 427, 122, -4, 0 )
+UI_LoadImage( imgKeyboard1, "texture/ui/xDesign/Keyboard1.tga", NORMAL, 427, 122, 0, 0 )
+-- UI_SetImageAlpha( imgKeyboard1, 210 )
+
+-- imgKeyboard2 = UI_CreateCompent( frmKeyboard, IMAGE_TYPE, "imgKeyboard2", 191, 122, 252, 0 )
+-- UI_LoadImage( imgKeyboard2, "texture/ui/Keyboard1.tga", NORMAL, 191, 122, 0, 123 )
+-- UI_SetImageAlpha( imgKeyboard2, 210 )
+
+-- 
+labTitle1 = UI_CreateCompent( frmKeyboard, LABELEX_TYPE, "labTitle1", 24, 10, 112, 4 )
+-- UI_SetCaption( labTitle1, "For the safety of your account" )
+-- UI_SetTextColor( labTitle1, COLOR_BLACK )
+-- UI_SetLabelExFont( labTitle1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labTitle2 = UI_CreateCompent( frmKeyboard, LABELEX_TYPE, "labTitle2", 24, 10, 36, 16 )
+-- UI_SetCaption( labTitle2, "please use the soft keyboard to input your password" )
+-- UI_SetTextColor( labTitle2, COLOR_BLACK )
+-- UI_SetLabelExFont( labTitle2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 
+btnNum1 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum1", 27, 17, 28, 50 )
+UI_LoadButtonImage( btnNum1, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 17, TRUE )
+btnNum2 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum2", 27, 17, 55, 50 )
+UI_LoadButtonImage( btnNum2, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 102, TRUE )
+btnNum3 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum3", 27, 17, 82, 50 )
+UI_LoadButtonImage( btnNum3, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 102, TRUE )
+btnNum4 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum4", 27, 17, 109, 50 )
+UI_LoadButtonImage( btnNum4, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 187, TRUE )
+btnNum5 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum5", 27, 17, 136, 50 )
+UI_LoadButtonImage( btnNum5, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 187, TRUE )
+btnNum6 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum6", 27, 17, 163, 50 )
+UI_LoadButtonImage( btnNum6, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 17, TRUE )
+btnNum7 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum7", 27, 17, 190, 50 )
+UI_LoadButtonImage( btnNum7, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 17, TRUE )
+btnNum8 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum8", 27, 17, 217, 50 )
+UI_LoadButtonImage( btnNum8, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 102, TRUE )
+btnNum9 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum9", 27, 17, 244, 50 )
+UI_LoadButtonImage( btnNum9, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 102, TRUE )
+btnNum0 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum0", 27, 17, 271, 50 )
+UI_LoadButtonImage( btnNum0, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 187, TRUE )
+
+-- 
+btnLetterA = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterA", 27, 17, 1, 84 )
+UI_LoadButtonImage( btnLetterA, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 51, TRUE )
+btnLetterB = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterB", 27, 17, 109, 101 )
+UI_LoadButtonImage( btnLetterB, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 238, TRUE )
+btnLetterC = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterC", 27, 17, 55, 101 )
+UI_LoadButtonImage( btnLetterC, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 153, TRUE )
+btnLetterD = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterD", 27, 17, 55, 84 )
+UI_LoadButtonImage( btnLetterD, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 136, TRUE )
+btnLetterE = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterE", 27, 17, 55, 67 )
+UI_LoadButtonImage( btnLetterE, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 119, TRUE )
+btnLetterF = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterF", 27, 17, 82, 84 )
+UI_LoadButtonImage( btnLetterF, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 136, TRUE )
+btnLetterG = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterG", 27, 17, 109, 84 )
+UI_LoadButtonImage( btnLetterG, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 221, TRUE )
+btnLetterH = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterH", 27, 17, 136, 84 )
+UI_LoadButtonImage( btnLetterH, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 221, TRUE )
+btnLetterI = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterI", 27, 17, 190, 67 )
+UI_LoadButtonImage( btnLetterI, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 34, TRUE )
+btnLetterJ = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterJ", 27, 17, 163, 84 )
+UI_LoadButtonImage( btnLetterJ, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 51, TRUE )
+btnLetterK = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterK", 27, 17, 190, 84 )
+UI_LoadButtonImage( btnLetterK, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 51, TRUE )
+btnLetterL = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterL", 27, 17, 217, 84 )
+UI_LoadButtonImage( btnLetterL, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 136, TRUE )
+btnLetterM = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterM", 27, 17, 163, 101 )
+UI_LoadButtonImage( btnLetterM, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 68, TRUE )
+btnLetterN = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterN", 27, 17, 136, 101 )
+UI_LoadButtonImage( btnLetterN, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 238, TRUE )
+btnLetterO = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterO", 27, 17, 217, 67 )
+UI_LoadButtonImage( btnLetterO, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 119, TRUE )
+btnLetterP = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterP", 27, 17, 244, 67 )
+UI_LoadButtonImage( btnLetterP, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 119, TRUE )
+btnLetterQ = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterQ", 27, 17, 1, 67 )
+UI_LoadButtonImage( btnLetterQ, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 34, TRUE )
+btnLetterR = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterR", 27, 17, 82, 67 )
+UI_LoadButtonImage( btnLetterR, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 119, TRUE )
+btnLetterS = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterS", 27, 17, 28, 84 )
+UI_LoadButtonImage( btnLetterS, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 51, TRUE )
+btnLetterT = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterT", 27, 17, 109, 67 )
+UI_LoadButtonImage( btnLetterT, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 204, TRUE )
+btnLetterU = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterU", 27, 17, 163, 67 )
+UI_LoadButtonImage( btnLetterU, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 34, TRUE )
+btnLetterV = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterV", 27, 17, 82, 101 )
+UI_LoadButtonImage( btnLetterV, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 153, TRUE )
+btnLetterW = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterW", 27, 17, 28, 67 )
+UI_LoadButtonImage( btnLetterW, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 34, TRUE )
+btnLetterX = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterX", 27, 17, 28, 101 )
+UI_LoadButtonImage( btnLetterX, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 68, TRUE )
+btnLetterY = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterY", 27, 17, 136, 67 )
+UI_LoadButtonImage( btnLetterY, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 204, TRUE )
+btnLetterZ = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetterZ", 27, 17, 1, 101 )
+UI_LoadButtonImage( btnLetterZ, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 68, TRUE )
+
+-- enter button
+btnYes = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnYes", 54, 17, 356, 101 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Keyboard4.tga", 54, 17, 54, 85, FALSE )
+-- UI_SetAlign( btnYes, caWidthCenter )
+-- UI_SetCaption( btnYes, "" )
+
+-- input button
+btnClose = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnClose", 1, 1, 387, 34 )
+-- UI_LoadButtonImage( btnClose, "texture/ui/xDesign/Keyboard4.tga", 57, 17, 140, 153, FALSE )
+
+-- caps lock
+chkShift = UI_CreateCompent( frmKeyboard, CHECK_TYPE, "chkShift", 27, 17, 379, 67 )
+UI_LoadImage( chkShift, "texture/ui/xDesign/Keyboard4.tga", UNCHECKED, 27, 17, 140, 85 )
+UI_LoadImage( chkShift, "texture/ui/xDesign/Keyboard4.tga", CHECKED, 27, 17, 140, 119 )
+
+-- backspace
+btnDel = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnDel", 54, 17, 356, 84 )
+UI_LoadButtonImage( btnDel, "texture/ui/xDesign/Keyboard4.tga", 54, 17, 0, 85, FALSE )
+-- UI_SetAlign( btnDel, caWidthCenter )
+-- UI_SetCaption( btnDel, "" )
+
+-- 
+btnOther101 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther101", 27, 17, 1, 33 )
+UI_LoadButtonImage( btnOther101, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 0, TRUE )
+btnOther102 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther102", 27, 17, 28, 33 )
+UI_LoadButtonImage( btnOther102, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 0, TRUE )
+btnOther103 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther103", 27, 17, 55, 33 )
+UI_LoadButtonImage( btnOther103, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 85, TRUE )
+btnOther104 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther104", 27, 17, 82, 33 )
+UI_LoadButtonImage( btnOther104, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 85, TRUE )
+btnOther105 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther105", 27, 17, 109, 33 )
+UI_LoadButtonImage( btnOther105, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 170, TRUE )
+btnOther106 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther106", 27, 17, 136, 33 )
+UI_LoadButtonImage( btnOther106, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 170, TRUE )
+btnOther107 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther107", 27, 17, 163, 33 )
+UI_LoadButtonImage( btnOther107, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 0, TRUE )
+btnOther108 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther108", 27, 17, 190, 33 )
+UI_LoadButtonImage( btnOther108, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 0, TRUE )
+btnOther109 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther109", 27, 17, 217, 33 )
+UI_LoadButtonImage( btnOther109, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 85, TRUE )
+btnOther110 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther110", 27, 17, 244, 33 )
+UI_LoadButtonImage( btnOther110, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 85, TRUE )
+btnOther111 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther111", 27, 17, 271, 33 )
+UI_LoadButtonImage( btnOther111, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 170, TRUE )
+btnOther112 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther112", 27, 17, 298, 33 )
+UI_LoadButtonImage( btnOther112, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 170, TRUE )
+btnOther113 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther113", 27, 17, 325, 33 )
+UI_LoadButtonImage( btnOther113, "texture/ui/xDesign/Keyboard4.tga", 27, 17, 0, 0, TRUE )
+btnOther114 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther114", 27, 17, 352, 33 )
+UI_LoadButtonImage( btnOther114, "texture/ui/xDesign/Keyboard4.tga", 27, 17, 108, 0, TRUE )
+
+btnOther201 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther201", 27, 17, 1, 50 )
+UI_LoadButtonImage( btnOther201, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 17, TRUE )
+btnOther202 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther202", 27, 17, 298, 50 )
+UI_LoadButtonImage( btnOther202, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 187, TRUE )
+btnOther203 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther203", 27, 17, 325, 50 )
+UI_LoadButtonImage( btnOther203, "texture/ui/xDesign/Keyboard4.tga", 27, 17, 0, 17, TRUE )
+btnOther204 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther204", 27, 17, 352, 50 )
+UI_LoadButtonImage( btnOther204, "texture/ui/xDesign/Keyboard4.tga", 27, 17, 108, 17, TRUE )
+
+btnOther301 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther301", 27, 17, 271, 67 )
+UI_LoadButtonImage( btnOther301, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 204, TRUE )
+btnOther302 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther302", 27, 17, 298, 67 )
+UI_LoadButtonImage( btnOther302, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 204, TRUE )
+btnOther303 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther303", 27, 17, 325, 67 )
+UI_LoadButtonImage( btnOther303, "texture/ui/xDesign/Keyboard4.tga", 27, 17, 0, 34, TRUE )
+btnOther304 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther304", 27, 17, 352, 67 )
+UI_LoadButtonImage( btnOther304, "texture/ui/xDesign/Keyboard4.tga", 27, 17, 108, 34, TRUE )
+
+btnOther401 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther401", 27, 17, 244, 84 )
+UI_LoadButtonImage( btnOther401, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 136, TRUE )
+btnOther402 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther402", 27, 17, 271, 84 )
+UI_LoadButtonImage( btnOther402, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 221, TRUE )
+btnOther403 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther403", 27, 17, 298, 84 )
+UI_LoadButtonImage( btnOther403, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 221, TRUE )
+btnOther404 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther404", 27, 17, 325, 84 )
+UI_LoadButtonImage( btnOther404, "texture/ui/xDesign/Keyboard4.tga", 27, 17, 0, 51, TRUE )
+
+btnOther501 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther501", 27, 17, 190, 101 )
+UI_LoadButtonImage( btnOther501, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 68, TRUE )
+btnOther502 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther502", 27, 17, 217, 101 )
+UI_LoadButtonImage( btnOther502, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 153, TRUE )
+btnOther503 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther503", 27, 17, 244, 101 )
+UI_LoadButtonImage( btnOther503, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 153, TRUE )
+btnOther504 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther504", 27, 17, 271, 101 )
+UI_LoadButtonImage( btnOther504, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 238, TRUE )
+btnOther505 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther505", 27, 17, 298, 101 )
+UI_LoadButtonImage( btnOther505, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 238, TRUE )
+btnOther506 = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnOther506", 27, 17, 325, 101 )
+UI_LoadButtonImage( btnOther506, "texture/ui/xDesign/Keyboard4.tga", 27, 17, 0, 68, TRUE )
+
+
+-----------------------------------------------------------------------
+-- FORM1 added by Arcol
+-----------------------------------------------------------------------	
+frmTest1 = UI_CreateForm( "frmTest1_Arcol", FALSE, 160, 120, 600, 200, FALSE, FALSE )
+UI_LoadFormImage( frmTest1, "texture/ui/Test1.bmp", 160, 120, 0, 0, "", 0, 0 )
+UI_AddFormToTemplete( frmTest1, FORM_LOGIN )
+UI_SetIsDrag( frmTest1, TRUE )
+
+-----------------------------------------------------------------------
+-- FORM2 added by Arcol
+-----------------------------------------------------------------------	
+frmTest2 = UI_CreateForm( "frmTest2_Arcol", FALSE, 160, 120, 600, 400, FALSE, FALSE )
+UI_LoadFormImage( frmTest2, "texture/ui/Test2.bmp", 160, 120, 0, 0, "", 0, 0 )
+UI_AddFormToTemplete( frmTest2, FORM_LOGIN )
+UI_SetIsDrag( frmTest2, TRUE )
+labTest = UI_CreateCompent( frmTest2, LABELEX_TYPE, "labTest", 24, 10, 20, 90 )
+UI_SetCaption( labTest, "Speed Test -by Arcol" )
+UI_SetTextColor( labTest, COLOR_BLACK )
+UI_SetLabelExFont( labTest, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+
+-----------------------------------------------------------------------
+-- форма ввода секретного кода при создании персоонажа
+-----------------------------------------------------------------------	
+frmDoublePwdCreate = UI_CreateForm("frmDoublePwdCreate", FALSE, 247, 129, 200, 200, FALSE, FALSE)
+UI_AddFormToTemplete( frmDoublePwdCreate, FORM_SELECT )
+-- UI_SetFormStyle( frmDoublePwdCreate, 2 )
+UI_FormSetIsEscClose( frmDoublePwdCreate, FALSE)
+UI_SetIsDrag( frmDoublePwdCreate, FALSE)
+UI_ShowForm( frmDoublePwdCreate, FALSE)
+UI_FormSetEnterButton(frmDoublePwdCreate,btnYes)
+-- UI_FormSetHotKey( frmDoublePwdCreate, ALT_KEY, HOTKEY_T ) 
+
+-- текстура
+imgDoublePwdCreate = UI_CreateCompent( frmDoublePwdCreate, IMAGE_TYPE,"imgDoublePwdCreate" ,247, 129, 0, 0)
+UI_LoadImage(imgDoublePwdCreate, "texture/ui/xDesign/a001.tga", NORMAL , 247, 129, 0, 0)
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmDoublePwdCreate, BUTTON_TYPE, "btnYes", 40, 14, 149, 105 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка выход
+btnClear = UI_CreateCompent( frmDoublePwdCreate, BUTTON_TYPE, "btnClear", 40, 14, 198, 105 )
+UI_LoadButtonImage( btnClear, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 470, TRUE )
+
+-- Введите код
+lab1 = UI_CreateCompent( frmDoublePwdCreate, LABELEX_TYPE, "lab1", 210, 11, 17, 35)
+UI_SetCaption( lab1, "\194\226\229\228\232\242\229 \234\238\228" )
+UI_SetTextColor( lab1,4289000470 )
+UI_SetLabelExFont( lab1, DEFAULT_FONT, TRUE, COLOR_BLACK )
+edtDoublePwdCreate = UI_CreateCompent(frmDoublePwdCreate, EDIT_TYPE,"edtDoublePwdCreate" ,66, 14, 155, 35)
+UI_SetTextColor( edtDoublePwdCreate,4288060058 )
+UI_SetEditCursorColor( edtDoublePwdCreate, 4288060058 )
+UI_SetEditMaxNum( edtDoublePwdCreate, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdCreate,12)
+
+-- Повторите код
+lab2 = UI_CreateCompent( frmDoublePwdCreate, LABELEX_TYPE, "lab2", 210, 11, 17, 60)
+UI_SetCaption( lab2, "\207\238\226\242\238\240\232\242\229 \234\238\228" )
+UI_SetTextColor( lab2,4289000470 )
+UI_SetLabelExFont( lab2, DEFAULT_FONT, TRUE, COLOR_BLACK )
+edtDoublePwdCreateRetry = UI_CreateCompent(frmDoublePwdCreate, EDIT_TYPE,"edtDoublePwdCreateRetry", 66, 14, 155, 60)
+UI_SetTextColor( edtDoublePwdCreateRetry,4288060058 )
+UI_SetEditCursorColor( edtDoublePwdCreateRetry, 4288060058 )
+UI_SetEditMaxNum( edtDoublePwdCreateRetry, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdCreateRetry,12)
+
+-- подсказка
+-- labID = UI_CreateCompent( frmDoublePwdCreate, LABELEX_TYPE, "labID", 210, 11, 16, 84)
+-- UI_SetCaption( labID, "\209\238\231\228\224\233\242\229 \231\224\249\232\242\237\251\233 \234\238\228, \247\242\238\225\251 \238\225\229\231\238\239\224\241\232\242\252 \241\226\238\254 \243\247\229\242\237\243\254 \231\224\239\232\241\252" )
+-- UI_SetTextColor( labID,COLOR_RED )
+-- UI_SetLabelExFont( labID, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-----------------------------------------------------------------------
+-- форма изменения секретного кода
+-----------------------------------------------------------------------	
+frmDoublePwdAlter = UI_CreateForm("frmDoublePwdAlter", TRUE, 247, 129, 200, 200, TRUE, TRUE)
+UI_ShowForm(frmDoublePwdAlter, FALSE)
+-- UI_SetFormStyle( frmDoublePwdAlter, 2 )
+UI_SetIsDrag(frmDoublePwdAlter, FALSE)
+UI_AddFormToTemplete(frmDoublePwdAlter, FORM_SELECT )
+UI_FormSetIsEscClose(frmDoublePwdAlter, TRUE)
+
+UI_FormSetEnterButton(frmDoublePwdAlter,btnYes)
+-- UI_FormSetHotKey( frmDoublePwdAlter, ALT_KEY, HOTKEY_T )
+
+-- текстура
+imgDoublePwdAlter = UI_CreateCompent(frmDoublePwdAlter, IMAGE_TYPE,"imgDoublePwdAlter", 247, 129, 0, 0)
+UI_LoadImage( imgDoublePwdAlter, "texture/ui/xDesign/a002.tga", NORMAL, 247, 129, 0, 0)
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmDoublePwdAlter, BUTTON_TYPE, "btnYes", 40, 14, 149, 105 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка отмены
+btnClear = UI_CreateCompent( frmDoublePwdAlter, BUTTON_TYPE, "btnClear", 40, 14, 198, 105 )
+UI_LoadButtonImage( btnClear, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+
+-- заголовок окна
+labTitle = UI_CreateCompent( frmDoublePwdAlter, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+UI_SetCaption( labTitle, "\199\224\236\229\237\224 \241\229\234\240\229\242\237\238\227\238 \234\238\228\224")
+UI_SetTextColor( labTitle, 4289000470 )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+lab1 = UI_CreateCompent( frmDoublePwdAlter, LABELEX_TYPE, "lab1", 210, 11, 16, 33)
+UI_SetCaption( lab1, "\194\226\229\228\232\242\229 \226\224\248 \234\238\228" )
+UI_SetTextColor( lab1,4288060058 )
+UI_SetLabelExFont( lab1, DEFAULT_FONT, TRUE, COLOR_BLACK )
+edtDoublePwdAlterOld = UI_CreateCompent(frmDoublePwdAlter, EDIT_TYPE,"edtDoublePwdAlterOld", 66, 14, 155, 35)
+UI_SetTextColor( edtDoublePwdAlterOld,4288060058 )
+UI_SetEditCursorColor( edtDoublePwdAlterOld, 4288060058 )
+UI_SetEditMaxNum( edtDoublePwdAlterOld, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterOld,12)
+
+lab2 = UI_CreateCompent( frmDoublePwdAlter, LABELEX_TYPE, "lab2", 210, 11, 16, 58)
+UI_SetCaption( lab2, "\194\226\229\228\232\242\229 \237\238\226\251\233 \234\238\228" )
+UI_SetTextColor( lab2,4288060058 )
+UI_SetLabelExFont( lab2, DEFAULT_FONT, TRUE, COLOR_BLACK )
+edtDoublePwdAlterNew = UI_CreateCompent(frmDoublePwdAlter, EDIT_TYPE,"edtDoublePwdAlterNew", 66, 14, 155, 60)
+UI_SetTextColor( edtDoublePwdAlterNew,4288060058 )
+UI_SetEditCursorColor( edtDoublePwdAlterNew, 4288060058 )
+UI_SetEditMaxNum( edtDoublePwdAlterNew, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterNew,12)
+
+lab3 = UI_CreateCompent( frmDoublePwdAlter, LABELEX_TYPE, "lab3", 210, 11, 16, 83)
+UI_SetCaption( lab3, "\207\238\226\242\238\240\232\242\229 \237\238\226\251\233 \234\238\228" )
+UI_SetTextColor( lab3,4288060058 )
+UI_SetLabelExFont( lab3, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+edtDoublePwdAlterNewRetry = UI_CreateCompent(frmDoublePwdAlter, EDIT_TYPE,"edtDoublePwdAlterNewRetry" ,66, 14, 155, 85)
+UI_SetTextColor( edtDoublePwdAlterNewRetry,4288060058 )
+UI_SetEditCursorColor( edtDoublePwdAlterNewRetry, 4288060058 )
+UI_SetEditMaxNum( edtDoublePwdAlterNewRetry, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterNewRetry,12)
+
+-----------------------------------------------------------------------
+-- форма секретного кода при открытии замка
+-----------------------------------------------------------------------	
+frmDoublePwd = UI_CreateForm("frmDoublePwd", TRUE, 247, 129, 200, 200, TRUE, TRUE)
+UI_ShowForm( frmDoublePwd, FALSE )
+-- UI_SetFormStyle( frmDoublePwd, 2 )
+UI_AddFormToTemplete( frmDoublePwd, FORM_SELECT )
+UI_SetIsDrag(frmDoublePwd, FALSE)
+UI_FormSetIsEscClose( frmDoublePwd, TRUE)
+
+UI_FormSetEnterButton(frmDoublePwd,btnYes)
+UI_FormSetHotKey( frmDoublePwd, ALT_KEY, HOTKEY_T )
+
+-- ( Ваш инвентарь зарыт на замок ! )
+imgDoublePwd = UI_CreateCompent(frmDoublePwd, IMAGE_TYPE,"imgDoublePwd", 247, 129, 0, 0)
+UI_LoadImage( imgDoublePwd, "texture/ui/xDesign/a003.tga", NORMAL, 247, 129, 0, 0)
+
+labTitle = UI_CreateCompent( frmDoublePwd, LABELEX_TYPE, "labTitle", 400, 150, 15, 32 )
+UI_SetCaption( labTitle, "\194\224\248 \232\237\226\229\237\242\224\240\252 \231\224\240\251\242 \237\224 \231\224\236\238\234 !")
+UI_SetTextColor( labTitle, 4289000470 )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- ( Чтобы открыть, введите ваш секретный код. )
+lab1 = UI_CreateCompent( frmDoublePwd, LABELEX_TYPE, "lab1", 210, 11, 15, 46)
+UI_SetCaption( lab1, "\215\242\238\225\251 \238\242\234\240\251\242\252, \226\226\229\228\232\242\229 \226\224\248 \241\229\234\240\229\242\237\251\233 \234\238\228." )
+UI_SetTextColor( lab1,4289000470 )
+UI_SetLabelExFont( lab1, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+edtDoublePwd = UI_CreateCompent(frmDoublePwd, EDIT_TYPE,"edtDoublePwd", 66, 14, 153, 70)
+UI_SetIsKeyFocus(edtDoublePwd,FALSE)
+UI_SetTextColor( edtDoublePwd, 4289000470 )
+UI_SetEditCursorColor( edtDoublePwd, 4288060058 )
+UI_SetEditMaxNum(edtDoublePwd, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwd,12)
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmDoublePwd, BUTTON_TYPE, "btnYes", 40, 14, 149, 105 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка выход
+btnClear = UI_CreateCompent( frmDoublePwd, BUTTON_TYPE, "btnClear", 40, 14, 198, 105 )
+UI_LoadButtonImage( btnClear, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 470, TRUE )
+
+
+-----------------------------------------------------------------------
+-- форма вирт клавиатуры секретного кода  Ме random code number pad
+-----------------------------------------------------------------------	
+frmDoublePwdInput = UI_CreateForm("frmDoublePwdInput", TRUE, 131, 129, 392, 300, TRUE,TRUE)
+UI_ShowForm(frmDoublePwdInput, FALSE )
+UI_AddAllFormTemplete( frmDoublePwdInput)
+UI_SetIsDrag(frmDoublePwdInput, FALSE)
+UI_FormSetIsEscClose(frmDoublePwdInput, TRUE)
+-- UI_FormSetHotKey( frmDoublePwdInput, ALT_KEY, HOTKEY_J ) 
+
+-- 
+imgDoublePwdInput = UI_CreateCompent(frmDoublePwdInput, IMAGE_TYPE,"imgDoublePwdInput", 131, 129, 0, 0)
+UI_LoadImage( imgDoublePwdInput, "texture/ui/xDesign/a004.tga", NORMAL, 131,129, 0, 0)
+
+-- 
+btnNum1 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum1", 27, 17, 17, 26 )
+UI_LoadButtonImage( btnNum1, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 17, TRUE )
+btnNum2 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum2", 27, 17, 51, 26 )
+UI_LoadButtonImage( btnNum2, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 102, TRUE )
+btnNum3 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum3", 27, 17, 85, 26 )
+UI_LoadButtonImage( btnNum3, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 102, TRUE )
+btnNum4 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum4", 27, 17, 17, 50 )
+UI_LoadButtonImage( btnNum4, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 0, 187, TRUE )
+btnNum5 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum5", 27, 17, 51, 50 )
+UI_LoadButtonImage( btnNum5, "texture/ui/xDesign/Keyboard2.tga", 27, 17, 108, 187, TRUE )
+btnNum6 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum6", 27, 17, 85, 50 )
+UI_LoadButtonImage( btnNum6, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 17, TRUE )
+btnNum7 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum7", 27, 17, 17, 74 )
+UI_LoadButtonImage( btnNum7, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 17, TRUE )
+btnNum8 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum8", 27, 17, 51, 74 )
+UI_LoadButtonImage( btnNum8, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 102, TRUE )
+btnNum9 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum9", 27, 17, 85, 74 )
+UI_LoadButtonImage( btnNum9, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 108, 102, TRUE )
+btnNum0 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum0", 27, 17, 17, 98 )
+UI_LoadButtonImage( btnNum0, "texture/ui/xDesign/Keyboard3.tga", 27, 17, 0, 187, TRUE )
+
+-- 
+btnClear = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnClear", 54, 17, 51, 98 )
+UI_LoadButtonImage( btnClear, "texture/ui/xDesign/a004.tga", 54, 17, 131, 0, FALSE )
+
+-----------------------------------------------------------------------
+-- окно информации под созданием секретного кода Ме describtion on creating security code
+-----------------------------------------------------------------------	
+frmDoublePwdInfo =  UI_CreateForm("frmDoublePwdInfo", TRUE, 378, 129, 200, 329, TRUE,TRUE)
+UI_ShowForm(frmDoublePwdInfo, TRUE )
+UI_AddFormToTemplete( frmDoublePwdInfo, FORM_SELECT )
+UI_SetIsDrag(frmDoublePwdInfo, FALSE)
+-- UI_FormSetHotKey( frmDoublePwdInfo, ALT_KEY, HOTKEY_J ) 
+
+imgWelcomeNotice1 = UI_CreateCompent(frmDoublePwdInfo, IMAGE_TYPE,"imgWelcomeNotice1", 378, 122, 0, 0)
+UI_LoadImage( imgWelcomeNotice1, "texture/ui/xDesign/create.tga", NORMAL, 378,122, 0, 0)
+-- UI_SetImageAlpha(imgWelcomeNotice1, 200)
+
+-- imgWelcomeNotice2 = UI_CreateCompent(frmDoublePwdInfo, IMAGE_TYPE,"imgWelcomeNotice2", 122, 122, 256, 0)
+-- UI_LoadImage( imgWelcomeNotice2, "texture/ui/Keyboard1.tga", NORMAL, 122,122, 69, 123)
+-- UI_SetImageAlpha(imgWelcomeNotice2,200)
+
+labText1  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText1", 400, 150, 10, 8 )
+labText2  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText2", 400, 150, 10, 28 )
+labText3  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText3", 400, 150, 10, 48 )
+labText4  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText4", 400, 150, 10, 68 )
+labText5  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText5", 400, 150, 10, 88 )
+-- labText6  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText6", 400, 150, 10, 105 )
+
+UI_SetCaption( labText1, "\196\238\225\240\238 \239\238\230\224\235\238\226\224\242\252, \243 \226\224\241 \237\229 \241\238\231\228\224\237 \241\229\234\240\229\242\237\251\233 \234\238\228.")
+
+UI_SetCaption( labText2, "\209\238\231\228\224\233\242\229 \241\229\234\240\229\242\237\251\233 \234\238\228, \228\235\255 \231\224\249\232\242\251 \239\229\240\241\238\238\237\224\230\224.")
+
+UI_SetCaption( labText3, "\209\229\234\240\229\242\237\251\233 \234\238\228 \239\238\242\240\229\225\243\229\242\241\255 \226\224\236 \228\235\255 :")
+
+UI_SetCaption( labText4, "\211\228\224\235\229\237\232\255 \239\229\240\241\238\238\237\224\230\224 \224 \242\224\234 \230\229 \225\235\238\234\232\240\238\226\234\232 \232 \240\224\231\225\235\238\234\232\240\238\226\234\232 \232\237\226\229\237\242\224\240\255.")
+
+UI_SetCaption( labText5, "\205\229\231\224\225\243\228\242\229 \231\224\239\232\241\224\242\252 \241\229\234\240\229\242\237\251\233 \234\238\228 \226 \237\224\228\191\230\237\238\236 \236\229\241\242\229.")
+
+-- UI_SetCaption( labText6,"Requires a valid Security Code to delete character or withdraw inventory items")
+UI_SetTextColor( labText1, 4289000470 )
+UI_SetLabelExFont( labText1, DEFAULT_FONT, TRUE, COLOR_BLANK )
+UI_SetTextColor( labText2, 4289000470 )
+UI_SetLabelExFont( labText2, DEFAULT_FONT, TRUE, COLOR_BLANK )
+UI_SetTextColor( labText3, 4289000470 )
+UI_SetLabelExFont( labText3, DEFAULT_FONT, TRUE, COLOR_BLANK )
+UI_SetTextColor( labText4, 4289000470 )
+UI_SetLabelExFont( labText4, DEFAULT_FONT, TRUE, COLOR_BLANK )
+UI_SetTextColor( labText5, 4289000470 )
+UI_SetLabelExFont( labText5, DEFAULT_FONT, TRUE, COLOR_BLANK )
+-- UI_SetTextColor( labText6, 4289000470 )
+-- UI_SetLabelExFont( labText6, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-----------------------------------------------------------------------
+-- Logo
+-----------------------------------------------------------------------	
+frmPathLogo = UI_CreateForm("frmPathLogo", TRUE, 256, 129, 50 , 450, TRUE,TRUE)
+UI_ShowForm(frmPathLogo, FALSE )
+UI_AddAllFormTemplete( frmPathLogo)
+UI_SetIsDrag(frmPathLogo, FALSE)
+UI_FormSetIsEscClose(frmPathLogo, FALSE)
+--UI_FormSetHotKey( frmPathLogo, ALT_KEY, HOTKEY_J ) 
+
+imgPathLogo = UI_CreateCompent(frmPathLogo, IMAGE_TYPE,"imgPathLogo", 256, 129, 0, 0)
+-- UI_LoadImage( imgPathLogo, "texture/ui/PathLogo.tga", NORMAL, 256,129, 0, 0)
+
+
+-----------------------------------------------------------------------
+-- окно приветствия после создания секретного кода
+-----------------------------------------------------------------------	
+frmWelcomeNotice = UI_CreateForm("frmWelcomeNotice", TRUE, 500, 170, 0 , 0, TRUE,TRUE)
+UI_ShowForm(frmWelcomeNotice, FALSE )
+UI_SetIsDrag(frmWelcomeNotice, FALSE)
+UI_FormSetIsEscClose(frmWelcomeNotice, FALSE)
+UI_SetFormStyle(frmWelcomeNotice,1)
+UI_AddFormToTemplete( frmWelcomeNotice, FORM_SELECT )
+-- UI_FormSetHotKey( frmWelcomeNotice, ALT_KEY, HOTKEY_J ) 
+
+imgWelcomeNotice1 = UI_CreateCompent(frmWelcomeNotice, IMAGE_TYPE,"imgWelcomeNotice1", 512, 243, 0, 0)
+UI_LoadImage( imgWelcomeNotice1, "texture/ui/xDesign/login_out_01.tga", NORMAL, 512, 243, 0, 0)
+-- UI_SetImageAlpha(imgWelcomeNotice1,220)
+
+-- imgWelcomeNotice2 = UI_CreateCompent(frmWelcomeNotice, IMAGE_TYPE,"imgWelcomeNotice2", 244, 170, 256, 0)
+-- UI_LoadImage( imgWelcomeNotice2, "texture/ui/newshelp/login_out_02.tga", NORMAL, 244,170, 0, 0)
+-- UI_SetImageAlpha(imgWelcomeNotice2,220)
+
+labTitle = UI_CreateCompent( frmWelcomeNotice, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+-- UI_SetCaption( labTitle, "\196\238\225\240\238 \207\238\230\224\235\238\226\224\242\252")
+-- UI_SetTextColor( labTitle, COLOR_BLACK )
+-- UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labText1  = UI_CreateCompent( frmWelcomeNotice, LABELEX_TYPE, "labText1", 400, 150, 20, 50 )
+labText2  = UI_CreateCompent( frmWelcomeNotice, LABELEX_TYPE, "labText2", 400, 150, 20, 70 )
+labText3  = UI_CreateCompent( frmWelcomeNotice, LABELEX_TYPE, "labText3", 400, 150, 20, 90 )
+labText4  = UI_CreateCompent( frmWelcomeNotice, LABELEX_TYPE, "labText4", 400, 150, 20, 110 )
+labText5  = UI_CreateCompent( frmWelcomeNotice, LABELEX_TYPE, "labText5", 400, 150, 20, 130 )
+labText6  = UI_CreateCompent( frmWelcomeNotice, LABELEX_TYPE, "labText6", 400, 150, 20, 150 )
+UI_SetCaption( labText1, "\211\226\224\230\224\229\236\251\233 \232\227\240\238\234, \239\229\240\229\228 \226\224\236\232 \238\242\234\240\251\226\224\229\242\241\255 \226\238\235\248\229\225\237\251\233 \236\232\240 \207\232\240\224\242\232\255")
+UI_SetCaption( labText2,"\215\242\238\225\251 \241\238\231\228\224\242\252 \241\226\238\229\227\238 \239\229\240\226\238\227\238 \239\229\240\241\238\237\224\230\224, \237\224\230\236\232\242\229 \234\237\238\239\234\243 \"\209\238\231\228\224\242\252\". \199\224\242\229\236")
+UI_SetCaption( labText3,"\204\251 \238\231\237\224\234\238\236\232\236 \226\224\241 \241\238 \226\241\229\236\232 \239\238\228\240\238\225\237\238\241\242\255\236\232 \232\227\240\238\226\238\227\238 \236\232\240\224")
+UI_SetCaption( labText4,"\211\231\237\224\233\242\229 \238\225 \243\237\232\234\224\235\252\237\251\245 \238\241\238\225\229\237\237\238\241\242\255\245 \234\224\230\228\238\227\238 \234\235\224\241\241\224 \232 \226\251\225\229\240\232\242\229 \226\237\229\248\237\238\241\242\252 \239\229\240\241\238\237\224\230\224")
+UI_SetCaption( labText5,"\194\251\225\229\240\232\242\229 \243\237\232\234\224\235\252\237\238\229 \232\236\255. \211\247\242\232\242\229, \232\231\236\229\237\232\242\252 \229\227\238 \239\238\242\238\236 \225\243\228\229\242 \237\229\226\238\231\236\238\230\237\238." )
+UI_SetCaption( labText6,"\209\238\231\228\224\233\242\229 \241\226\238\229\227\238 \239\229\240\241\238\237\224\230\224 \232 \239\240\232\241\238\229\228\232\237\255\233\242\229\241\252 \234 \237\224\236")
+UI_SetTextColor( labText1, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText2, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText3, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText3, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText4, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText4, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText5, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText5, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText6, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText6, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmWelcomeNotice, BUTTON_TYPE, "btnYes", 40, 14, 230, 219 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+
+-----------------------------------------------------------------------
+-- окно уведомления об успешном создании первого персонажа
+-----------------------------------------------------------------------	
+frmCreateOKNotice = UI_CreateForm("frmCreateOKNotice", TRUE, 512, 243, 0 , 0, TRUE,TRUE)
+UI_ShowForm(frmCreateOKNotice, FALSE )
+UI_SetIsDrag(frmCreateOKNotice, FALSE)
+UI_FormSetIsEscClose(frmCreateOKNotice, FALSE)
+UI_SetFormStyle(frmCreateOKNotice,1)
+UI_AddFormToTemplete( frmCreateOKNotice, FORM_SELECT)
+-- UI_FormSetHotKey( frmCreateOKNotice, ALT_KEY, HOTKEY_J ) 
+
+-- текстура
+imgCreateOKNotice1 = UI_CreateCompent(frmCreateOKNotice, IMAGE_TYPE,"imgCreateOKNotice1", 512, 243, 0, 0)
+UI_LoadImage( imgCreateOKNotice1, "texture/ui/xDesign/login_out_01.tga", NORMAL, 512, 243, 0, 0)
+UI_SetImageAlpha(imgCreateOKNotice1,200)
+
+imgCreateOKNotice2 = UI_CreateCompent(frmCreateOKNotice, IMAGE_TYPE,"imgCreateOKNotice2", 244, 150, 256, 0)
+-- UI_LoadImage( imgCreateOKNotice2, "texture/ui/newshelp/login_out_02.tga", NORMAL, 244,150, 0, 0)
+-- UI_SetImageAlpha(imgCreateOKNotice2,220)
+
+-- заголовок окна
+labTitle = UI_CreateCompent( frmCreateOKNotice, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+-- UI_SetCaption( labTitle, "\211\228\224\247\237\238 \241\238\231\228\224\237")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- текст в окне
+labText1  = UI_CreateCompent( frmCreateOKNotice, LABELEX_TYPE, "labText1", 400, 150, 20, 50 )
+labText2  = UI_CreateCompent( frmCreateOKNotice, LABELEX_TYPE, "labText2", 400, 150, 20, 70 )
+labText3  = UI_CreateCompent( frmCreateOKNotice, LABELEX_TYPE, "labText3", 400, 150, 20, 90 )
+labText4  = UI_CreateCompent( frmCreateOKNotice, LABELEX_TYPE, "labText4", 400, 150, 20, 110 )
+UI_SetCaption( labText1, "\209\238\231\228\224\237\232\229 \239\229\240\241\238\237\224\230\224 \243\228\224\247\237\238 \231\224\226\229\240\248\229\237\238. \204\238\230\237\238 \241\238\231\228\224\242\252 \229\249\229 2 \239\229\240\241\238\237\224\230\224.")
+UI_SetCaption( labText2, "\196\226\224\230\228\251 \249\229\235\234\237\232\242\229 \239\238 \239\229\240\241\238\237\224\230\243 \236\251\248\252\254 \232\235\232 \237\224\230\236\232\242\229 \234\237\238\239\234\243 \"\232\227\240\224\242\252\",")
+UI_SetCaption( labText3, "\247\242\238\225\251 \226\238\233\242\232 \226 \232\227\240\243 \232 \237\224\247\224\242\252 \241\226\238\229 \239\243\242\229\248\229\241\242\226\232\229")
+UI_SetCaption( labText4, "\207\238\228\241\234\224\231\234\224: \197\241\235\232 \226\251 \232\227\240\224\229\242\229 \239\229\240\226\251\233 \240\224\231, \237\224\233\228\232\242\229 \205\224\241\242\224\226\237\232\246\243 \237\238\226\232\247\234\238\226. \206\237\224 \226\224\236 \239\238\236\238\230\229\242.")
+UI_SetTextColor( labText1, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText2, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText3, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText3, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText4, FONT1, COLOR_BLACK )
+-- UI_SetLabelExFont( labText4, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmCreateOKNotice, BUTTON_TYPE, "btnYes", 40, 14, 230, 219 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+
+-----------------------------------------------------------------------
+-- в розыске !!
+-----------------------------------------------------------------------	
+frmChaNameAlter = UI_CreateForm("frmChaNameAlter", TRUE, 500, 170, 0 , 0, TRUE,TRUE)
+UI_ShowForm(frmChaNameAlter, FALSE )
+UI_SetIsDrag(frmChaNameAlter, FALSE)
+UI_FormSetIsEscClose(frmChaNameAlter, FALSE)
+UI_SetFormStyle(frmChaNameAlter,1)
+UI_AddFormToTemplete( frmChaNameAlter, FORM_SELECT )
+
+-- 
+imgCreateOKNotice1 = UI_CreateCompent(frmChaNameAlter, IMAGE_TYPE,"imgCreateOKNotice1", 256, 150, 0, 0)
+UI_LoadImage( imgCreateOKNotice1, "texture/ui/newshelp/login_out_01.tga", NORMAL, 256,150, 0, 0)
+UI_SetImageAlpha(imgCreateOKNotice1,220)
+
+-- 
+labTitle = UI_CreateCompent( frmChaNameAlter, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+UI_SetCaption( labTitle, "\200\231\236\229\237\232\242\252 \232\236\255 \239\229\240\241\238\237\224\230\224")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 
+labText1 = UI_CreateCompent( frmChaNameAlter, LABELEX_TYPE, "labText1", 400, 150, 10, 20)
+UI_SetCaption( labText1, "\207\238\230\224\235\243\233\241\242\224, \232\231\236\229\237\232\242\229 \232\236\255 \239\229\240\241\238\237\224\230\224")
+UI_SetTextColor( labText1, COLOR_BLACK )
+UI_SetLabelExFont( labText1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 
+labTitle = UI_CreateCompent( frmChaNameAlter, LABELEX_TYPE, "labTitle", 400, 150, 40, 30 )
+UI_SetCaption( labTitle, "\200\236\255 \237\238\226\238\227\238 \239\229\240\241\238\237\224\230\224")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 
+labTitle = UI_CreateCompent( frmChaNameAlter, LABELEX_TYPE, "labTitle", 400, 150, 40, 50 )
+UI_SetCaption( labTitle, "\200\231\236\229\237\232\242\252 \232\236\255 \239\229\240\241\238\237\224\230\224")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 
+edtChaNameNew = UI_CreateCompent(frmChaNameAlter, EDIT_TYPE,"edtChaNameNew", 66, 14, 140, 30)
+UI_SetEditMaxNum( edtDoublePwdAlterNew, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterNew,12)
+
+edtChaNameNewRetry = UI_CreateCompent(frmChaNameAlter, EDIT_TYPE,"edtChaNameNewRetry" ,66, 14, 140, 50)
+UI_SetEditMaxNum( edtDoublePwdAlterNewRetry, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterNewRetry,12)
+
+-- 
+btnYes = UI_CreateCompent( frmChaNameAlter, BUTTON_TYPE, "btnYes", 47, 22, 50, 120 )
+UI_LoadButtonImage( btnYes, "texture/ui2009/button.tga", 47, 22, 0, 0, TRUE )

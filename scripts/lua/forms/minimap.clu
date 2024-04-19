@@ -1,0 +1,130 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- форма миникарты - радара
+-----------------------------------------------------------------------	
+frmMinimap = UI_CreateForm( "frmMinimap", FALSE, 160, 205, 656, 15, TRUE, FALSE )
+UI_ShowForm( frmMinimap, TRUE )
+UI_AddFormToTemplete( frmMinimap, FORM_MAIN )
+UI_SetFormStyle( frmMinimap, 9 )
+UI_FormSetIsEscClose( frmMinimap, FALSE )
+
+--  текстура радара
+imgMinimapT = UI_CreateCompent( frmMinimap, IMAGE_TYPE, "imgMinimapT", 160, 205, 0, 0 )
+UI_LoadImage( imgMinimapT, "texture/ui/xDesign/minimap.tga", NORMAL, 160, 205, 0, 0 )
+
+imgMinimapN = UI_CreateCompent( frmMinimap, IMAGE_TYPE, "imgMinimapN", 145, 134, 7, 28 )
+UI_LoadImage( imgMinimapN, "texture/ui/xDesign/minimapalpha.tga", NORMAL, 145, 134, 0, 0 )
+UI_SetAlpha( imgMinimapN, 180 )
+
+--  
+imgMinimapRect = UI_CreateCompent( frmMinimap, IMAGE_TYPE, "imgMinimapRect", 130, 130, 15, 30 )
+
+-- название карты - Map name text
+labMapName = UI_CreateCompent( frmMinimap, LABELEX_TYPE, "labMapName", 51, 12, 10, 9 )
+UI_SetCaption( labMapName, "Lokacion" )
+UI_SetTextColor( labMapName, 4278255360 )
+UI_SetLabelExFont( labMapName, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- отображение координат 
+n  = 0
+while 1 do
+	local name = "labMapPos"..n
+	labMapPos = UI_CreateCompent( frmMinimap, LABELEX_TYPE, name, 79, 12, 18, 189 )
+	UI_SetCaption( labMapPos, "2200, 2200" )
+	UI_SetTextColor( labMapPos, 4278255360)
+	UI_SetLabelExFont( labMapPos, DEFAULT_FONT, TRUE, COLOR_BLACK )
+	
+	if n~=0  then UI_SetIsShow( labMapPos, FALSE ) end
+	
+	n = n + 1
+	if n==10 then break end	
+end
+
+-- 
+btnOpen = UI_CreateCompent( frmMinimap, BUTTON_TYPE, "btnOpen", 39, 15, 48, 164 )
+UI_LoadButtonImage( btnOpen, "texture/ui/xDesign/minimap.tga", 39, 15, 0, 232, TRUE )
+--UI_SetHint( btnOpen, "\234\224\240\242\224 \236\232\240\224" )
+
+-- 
+btnSearch = UI_CreateCompent( frmMinimap, BUTTON_TYPE, "btnSearch", 39, 15, 8, 164 )
+UI_LoadButtonImage( btnSearch, "texture/ui/xDesign/minimap.tga", 39, 15, 0, 215, TRUE )
+--UI_SetHint( btnSearch, "\240\224\228\224\240" )
+
+--  кнопка итем мола ( Им ) button ingame mall
+--  btnOpenStore = UI_CreateCompent( frmMinimap, BUTTON_TYPE, "btnOpenStore", 26, 12, 76, 189 )
+--  UI_LoadButtonImage( btnOpenStore, "texture/ui/xDesign/minimap.tga", 26, 12, 67, 249, FALSE )
+--  UI_SetHint( btnOpenStore, "In-game Mall" )
+
+--  
+btnteam = UI_CreateCompent( frmMinimap, BUTTON_TYPE, "btnteam", 63, 15, 88, 164 )
+UI_LoadButtonImage( btnteam, "texture/ui/xDesign/minimap.tga", 63, 15, 0, 249, FALSE )
+
+
+-----------------------------------------------------------------------
+-- форма ввода координат для подсказки пути Радар
+-----------------------------------------------------------------------	
+frmSearch = UI_CreateForm( "frmSearch", FALSE, 218, 115, 300, 200, TRUE, FALSE )
+UI_ShowForm( frmSearch, FALSE )
+UI_AddFormToTemplete( frmSearch, FORM_MAIN )
+UI_FormSetIsEscClose( frmSearch, FALSE )
+UI_FormSetHotKey( frmSearch, ALT_KEY, HOTKEY_R )
+UI_SetIsDrag( frmSearch, TRUE )
+
+-- текстура
+imgSearch = UI_CreateCompent( frmSearch, IMAGE_TYPE, "imgSearch", 218, 115, 0, 0 )
+UI_LoadImage( imgSearch, "texture/ui/xDesign/search.tga", NORMAL, 218, 115, 0, 0 )
+
+-- верхняя кнопка закрытия
+btnClose = UI_CreateCompent( frmSearch, BUTTON_TYPE, "btnClose", 14, 14, 198, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- форма ввода координат
+edtLeft = UI_CreateCompent( frmSearch, EDIT_TYPE, "edtLeft", 45, 11, 110, 57 )
+UI_SetTextColor( edtLeft, 4278255360)
+UI_SetEditCursorColor( edtLeft, 4278255360)
+UI_SetEditMaxNum( edtLeft, 4 )
+UI_SetEditMaxNumVisible( edtLeft, 4 )
+
+edtRight = UI_CreateCompent( frmSearch, EDIT_TYPE, "edtRight", 45, 11, 164, 57 )
+UI_SetTextColor( edtRight, 4278255360 )
+UI_SetEditCursorColor( edtRight, 4278255360)
+UI_SetEditMaxNum( edtRight, 4 )
+UI_SetEditMaxNumVisible( edtRight, 4 )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmSearch, BUTTON_TYPE, "btnYes", 40, 14, 113, 85 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+UI_SetEditEnterButton( edtRight, btnYes )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmSearch, BUTTON_TYPE, "btnNo", 40, 14, 159, 85 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+-- форма выбора континента
+cboMap  = UI_CreateCompent( frmSearch, COMBO_TYPE, "cboMap", 148, 20, 60, 28 )
+UI_ComboSetStyle( cboMap, TRUE )
+UI_LoadComboImage( cboMap, "", 81, 20, 106, 39, "texture/ui/ui/search.tga", 1, 1, 130, 140, FALSE )
+UI_ComboSetTextColor( cboMap, 4278255360)
+lstMap = UI_GetList( cboMap )
+UI_SetListFontColor( lstMap, 4278255360, 4289000470 )
+UI_SetSize( lstMap, 98, 60 )
+UI_SetMargin( lstMap, 9,6,16,0 )
+UI_SetListRowHeight( lstMap, 18 )
+UI_LoadImage( lstMap, "texture/ui/xDesign/searchcbo.tga", NORMAL, 98, 60, 0, 0 )
+UI_SetAlpha( lstMap, 200 )
+UI_AddListText( lstMap, "\192\241\234\224\240\238\237" )
+UI_AddListText( lstMap, "\204\224\227\232\247\229\241\234\232\233 \206\234\229\224\237" )
+UI_AddListText( lstMap, "\194\229\235\232\234\232\233 \209\232\237\232\233 \206\234\229\224\237" )
+UI_SetListIsMouseFollow( lstMap, TRUE)
+-- UI_ListLoadSelectImage( lstMap, "texture/ui/SystemBotton3.tga", 79, 18, 0, 227  )
+UI_ComboSetTextColor( lstMap, COLOR_WHITE )

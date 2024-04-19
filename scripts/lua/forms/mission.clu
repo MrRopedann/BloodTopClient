@@ -1,0 +1,107 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- ќсновано на твике ODS Noir skin от Ryohll - јдаптаци€ к "ѕирати€ 1.38" : mef1sto			------------------ ==
+-- ћодификаци€ и создание части текстур, а так же 										------------------ ==
+-- –усский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- окно вз€тых квестов персоонажа
+-----------------------------------------------------------------------
+frmMission = UI_CreateForm( "frmMission", FALSE, 282, 382, 470, 150, FALSE, FALSE )
+UI_FormSetHotKey( frmMission, ALT_KEY, HOTKEY_Q ) 
+UI_ShowForm( frmMission, TRUE )
+UI_AddFormToTemplete( frmMission, FORM_MAIN )
+UI_SetIsDrag( frmMission, TRUE )
+UI_SetFormStyle( frmMission, 1 )
+UI_SetAlpha( frmMission, 220 )
+
+-- текстура
+imgMissonT = UI_CreateCompent( frmMission, IMAGE_TYPE, "imgMissonT", 282, 382, 0, 0 )
+UI_LoadImage( imgMissonT, "texture/ui/xDesign/Quest2.tga", NORMAL, 282, 382, 0, 0 )
+
+--  imgMissonD = UI_CreateCompent( frmMission, IMAGE_TYPE, "imgMissonD", 235, 138, 0, 256 )
+--  UI_LoadImage( imgMissonD, "texture/ui/mission2.tga", NORMAL, 235, 138, 0, 0 )
+
+-- заголовок окна квестов
+labTitle = UI_CreateCompent( frmMission, LABELEX_TYPE, "labTitle", 400, 150, 10, 4 )
+UI_SetCaption( labTitle, "\198\243\240\237\224\235 \231\224\228\224\237\232\233")
+UI_SetTextColor( labTitle, 4289000470 )
+-- UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--  labMisson = UI_CreateCompent( frmMission, LABELEX_TYPE, "labMisson", 47, 11, 78, 150 )
+--  UI_SetCaption( labMisson, "Quest Hint" )
+--  UI_SetTextColor( labMisson, COLOR_BLACK )
+--  UI_SetLabelExFont( labMisson, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- верхнее окошко списка квестов texture/ui/button.dds", 148, 32, 38, 175 )
+trvMission = UI_CreateCompent( frmMission, TREE_TYPE, "trvMission", 264, 110, 15, 35 )
+
+-- оглавление списка квестов
+UI_SetIsDrag( trvEditor, TRUE )
+UI_TreeLoadImage( trvMission, enumTreeAddImage, "texture/ui/xDesign/Quest2.tga", 14, 13, 0, 389, 14, 13 )
+UI_TreeLoadImage( trvMission, enumTreeSubImage, "texture/ui/xDesign/Quest2.tga", 14, 13, 14, 389, 14, 13 )
+
+-- перемотка 
+scrollid = UI_GetScroll( trvMission )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- перемотка верх
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- перемотка ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 10, 43, 166, 10 )
+UI_SetSize( id, 10, 43 )
+
+-- перемотка низ
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- нижнее окошко описани€ квестов 
+memMiss  = UI_CreateCompent( frmMission, MEMOEX_TYPE, "memMiss", 254, 182, 25, 169 )
+UI_SetCaption( memMiss, "800" )
+UI_SetMemoMaxNumPerRow( memMiss, 40 )
+UI_SetTextColor( memMiss, COLOR_BLACK )
+UI_SetLabelExFont( memMiss, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetMemoPageShowNum( memMiss, 11 )
+
+-- полоса перемотки нижнее окошко списка квестов
+scrollid = UI_GetScroll( memMiss )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- перемотка верх нижнее окошко списка квестов
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- перемотка ползунок нижнее окошко списка квестов
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 10, 42, 166, 10 )
+UI_SetSize( id, 10, 42 )
+
+-- перемотка низ нижнее окошко списка квестов
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- ¬ерх кнопка закрыть
+btnClose = UI_CreateCompent( frmMission, BUTTON_TYPE, "btnClose", 14, 14, 263, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+
+-- нижн€€ кнопка закрыти€ окна
+btnClose = UI_CreateCompent( frmMission, BUTTON_TYPE, "btnClose", 47, 14, 222, 361 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/Button1.tga", 47, 14, 0, 0, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- кнопка покинуть квест
+btnBreak = UI_CreateCompent( frmMission, BUTTON_TYPE, "btnBreak", 89, 14, 12, 361 )
+UI_LoadButtonImage( btnBreak, "texture/ui/xDesign/Button1.tga", 89, 14, 203, 64, TRUE )
+--  UI_SetHint( btnBreak, "покинуть квест" )

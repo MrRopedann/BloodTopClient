@@ -1,0 +1,407 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- форма окна постройки и информации о судне
+----------------------------------------------------------------------- 
+frmShipBiuld = UI_CreateForm( "frmShipBiuld", FALSE, 471, 466, 150, 75, FALSE, FALSE )
+UI_ShowForm( frmShipBiuld, FALSE )
+UI_AddFormToTemplete( frmShipBiuld, FORM_MAIN )
+UI_SetIsDrag( frmShipBiuld, TRUE )
+-- UI_FormSetHotKey( frmShipBiuld, ALT_KEY, HOTKEY_J ) 
+
+-- текстура
+imgBakLeftTop = UI_CreateCompent( frmShipBiuld, IMAGE_TYPE, "imgBakLeftTop", 471, 466, 0, 0 )
+UI_LoadImage( imgBakLeftTop, "texture/ui/xDesign/ShipBuild.tga", NORMAL, 471, 466, 0, 0 )
+-- UI_SetImageAlpha(imgBakLeftTop, 180 )
+
+-- imgBakRightTop = UI_CreateCompent( frmShipBiuld, IMAGE_TYPE, "imgBakRightTop", 126, 256, 256, 0 )
+-- UI_LoadImage( imgBakRightTop, "texture/ui/ShipBuildT.tga", NORMAL, 126, 256, 0, 0 )
+--imgBakLeftButtom = UI_CreateCompent( frmShipBiuld, IMAGE_TYPE, "imgBakLeftButtom", 256, 118, 0, 256 )
+--UI_LoadImage( imgBakLeftButtom, "texture/ui/ShipBuildD.tga", NORMAL, 256, 118, 0, 0 )
+--imgBakRightButtom = UI_CreateCompent( frmShipBiuld, IMAGE_TYPE, "imgBakRightButtom", 126, 118, 256, 256 )
+--UI_LoadImage( imgBakRightButtom, "texture/ui/ShipBuildT.tga", NORMAL, 126, 118, 130, 0 )
+
+--  верх кнопка закрытия
+btnClose = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnClose", 14, 14, 452, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- изображение корабля
+ui3dship = UI_CreateCompent( frmShipBiuld, UI3D_COMPENT, "ui3dship", 318, 147, 80, 140 )
+
+-- уровень корабля значение
+labShipLvName = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipLvName", 40, 13, 52, 264 )
+-- UI_SetCaption( labShipLvName, "Lv:" )
+UI_SetTextColor( labShipLvName, COLOR_BLACK )
+UI_SetLabelExFont( labShipLvName, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- уровень корабля
+labShipLv = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipLv", 65, 8, 110, 323 )
+UI_SetCaption( labShipLv, "1" )
+UI_SetTextColor( labShipLv, 4289000470 )
+-- UI_SetLabelExFont( labShipLv, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- опыт корабля
+labShipExpName = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipExpName", 40, 13, 35, 261 )
+-- UI_SetCaption( labShipExpName, "EXP:" )
+UI_SetTextColor( labShipExpName, COLOR_BLACK )
+UI_SetLabelExFont( labShipExpName, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- опыт корабля значение
+labShipExp = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipExp", 65, 8, 95, 336 )
+UI_SetCaption( labShipExp, "0" )
+UI_SetTextColor( labShipExp, 4289000470 )
+-- UI_SetLabelExFont( labShipExp, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопки поворота
+btnLeft = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnLeft", 17, 34, 27, 164 )
+UI_LoadButtonImage( btnLeft, "texture/ui/xDesign/ShipBuild.tga", 17, 34, 0, 478, TRUE )
+
+btnRight = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnRight", 17, 34, 427, 164 )
+UI_LoadButtonImage( btnRight, "texture/ui/xDesign/ShipBuild.tga", 17, 34, 78, 478, TRUE )
+
+btnTop = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnTop", 34, 17, 221, 36 )
+UI_LoadButtonImage( btnTop, "texture/ui/xDesign/ShipBuild.tga", 34, 17, 478, 444, FALSE )
+
+btnDown = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnDown", 34, 17, 221, 302 )
+UI_LoadButtonImage( btnDown, "texture/ui/xDesign/ShipBuild.tga", 34, 17, 478, 369, FALSE )
+
+-- имя корабля
+edtShipName = UI_CreateCompent( frmShipBiuld, EDIT_TYPE, "edtShipName", 103, 13, 180, 329 )
+UI_SetTextColor( edtShipName, 4289000470 )
+UI_SetEditCursorColor( edtShipName, 4289000470 )
+UI_SetEditMaxNum( edtShipName, 16 )
+
+-- характеристика корпус
+labShipBody = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipBody", 103, 13, 71, 363 )
+UI_SetCaption( labShipBody, "Fool" )
+UI_SetTextColor( labShipBody, 4289000470 )
+-- UI_SetLabelExFont( labShipBody, DEFAULT_FONT, TRUE, COLOR_WHITE )
+-- btnBodyLeft = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnBodyLeft", 8, 16, 55, 361 )
+-- UI_LoadButtonImage( btnBodyLeft, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 254, 496, TRUE )
+-- btnBodyRight = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnBodyRight", 8, 16, 212, 361 )
+-- UI_LoadButtonImage( btnBodyRight, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 220, 496, TRUE )
+
+-- характеристика двигатель
+labShipPower = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipPower", 103, 13, 71, 381 )
+UI_SetCaption( labShipPower, "Wheel of Fate" )
+UI_SetTextColor( labShipPower, 4289000470 )
+-- UI_SetLabelExFont( labShipPower, DEFAULT_FONT, TRUE, COLOR_WHITE )
+btnPowerLeft = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnPowerLeft", 8, 16, 55, 379 )
+UI_LoadButtonImage( btnPowerLeft, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 254, 496, TRUE )
+btnPowerRight = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnPowerRight", 8, 16, 212, 379 )
+UI_LoadButtonImage( btnPowerRight, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 220, 496, TRUE )
+
+-- характеристика нос корабля
+labShipHead = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipHead", 35, 13, 71, 399 )
+UI_SetCaption( labShipHead, "Queen" )
+UI_SetTextColor( labShipHead, 4289000470 )
+-- UI_SetLabelExFont( labShipHead, DEFAULT_FONT, TRUE, COLOR_WHITE )
+btnHeadLeft = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnHeadLeft", 8, 16, 55, 397 )
+UI_LoadButtonImage( btnHeadLeft, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 254, 496, TRUE )
+btnHeadRight = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnHeadRight", 8, 16, 212, 397 )
+UI_LoadButtonImage( btnHeadRight, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 220, 496, TRUE )
+
+-- характеристика оружие корабля
+labShipSign = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipSign", 103, 13, 71, 417 )
+UI_SetCaption( labShipSign, "Skull" )
+UI_SetTextColor( labShipSign, 4289000470 )
+-- UI_SetLabelExFont( labShipSign, DEFAULT_FONT, TRUE, COLOR_WHITE )
+btnSignLeft = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnSignLeft", 8, 16, 55, 415 )
+UI_LoadButtonImage( btnSignLeft, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 254, 496, TRUE )
+btnSignRight = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnSignRight", 8, 16, 212, 415 )
+UI_LoadButtonImage( btnSignRight, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 220, 496, TRUE )
+
+-- характеристика оборудование корабля
+labShipCanon = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labShipCanon", 103, 13, 71, 435 )
+UI_SetCaption( labShipCanon, "Cannon" )
+UI_SetTextColor( labShipCanon, 4289000470 )
+-- UI_SetLabelExFont( labShipCanon, DEFAULT_FONT, TRUE, COLOR_WHITE )
+btnCanonLeft = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnCanonLeft", 8, 16, 55, 432 )
+UI_LoadButtonImage( btnCanonLeft, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 254, 496, TRUE )
+btnCanonRight = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnCanonRight", 8, 16, 212, 432 )
+UI_LoadButtonImage( btnCanonRight, "texture/ui/xDesign/ShipBuild.tga", 8, 16, 220, 496, TRUE )
+
+--  характеристика атака
+labAtackShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labAtackShow", 62, 12, 290, 357 )
+UI_SetCaption( labAtackShow, "11111/11111" )
+UI_SetTextColor( labAtackShow, 4289000470 )
+-- UI_SetLabelExFont( labAtackShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--  характеристика скорость
+labTimeShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labTimeShow", 27, 12, 425, 357 )
+UI_SetCaption( labTimeShow, "11111" )
+UI_SetTextColor( labTimeShow, 4289000470 )
+-- UI_SetLabelExFont( labTimeShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--  характеристика прочность
+labSailorShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labSailorShow", 62, 12, 285, 376 )
+UI_SetCaption( labSailorShow, "22222/22222" )
+UI_SetTextColor( labSailorShow, 4289000470 )
+-- UI_SetLabelExFont( labSailorShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--  характеристика исп.
+labFlyspeedShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labFlyspeedShow", 27, 12, 433, 395 )
+UI_SetCaption( labFlyspeedShow, "22222" )
+UI_SetTextColor( labFlyspeedShow, 4289000470 )
+-- UI_SetLabelExFont( labFlyspeedShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--  характеристика зашита
+labDefenceShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labDefenceShow", 27, 12, 429, 413 )
+UI_SetCaption( labDefenceShow, "33333" )
+UI_SetTextColor( labDefenceShow, 4289000470 )
+-- UI_SetLabelExFont( labDefenceShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--  характеристика топливо
+labCanonShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labCanonShow", 62, 12, 292, 395 )
+UI_SetCaption( labCanonShow, "33333/33333" )
+UI_SetTextColor( labCanonShow, 4289000470 )
+-- UI_SetLabelExFont( labCanonShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--  характеристика место в трюме
+labContentShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labContentShow", 62, 12, 302, 413 )
+UI_SetCaption( labContentShow, "44444/44444" )
+UI_SetTextColor( labContentShow, 4289000470 )
+-- UI_SetLabelExFont( labContentShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--  характеристика скорость стрельбы
+labSpeedShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labSpeedShow", 27, 12, 429, 376 )
+UI_SetCaption( labSpeedShow, "44444" )
+UI_SetTextColor( labSpeedShow, 4289000470 )
+-- UI_SetLabelExFont( labSpeedShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-------------------------------------------
+--  
+-------------------------------------------
+-- картинка цена корабля
+imgMomeyTitle = UI_CreateCompent( frmShipBiuld, IMAGE_TYPE, "imgMomeyTitle", 60, 30, 220, 432 )
+UI_LoadImage( imgMomeyTitle,  "texture/ui/xDesign/ShipBuild.tga", NORMAL, 60, 30, 359, 482 )
+
+-- фон надписи цены или порта корабля
+imgMoney = UI_CreateCompent( frmShipBiuld, IMAGE_TYPE, "imgMoney", 152, 18, 224, 331 )
+-- UI_LoadImage( imgMoney, "texture/ui/word.dds", NORMAL, 152, 18, 2, 197 )
+
+-- надпись цены или порта корабля
+labMenShow = UI_CreateCompent( frmShipBiuld, LABELEX_TYPE, "labMenShow", 62, 12, 285, 442 )
+UI_SetCaption( labMenShow, "55555555555" )
+UI_SetTextColor( labMenShow, 4289000470 )
+-- UI_SetLabelExFont( labMenShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnYes", 40, 14, 365, 444 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка отмена
+btnNo = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnNo", 40, 14, 415, 444 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+
+-------------------------------------------
+-- 
+-------------------------------------------
+
+-- картинка к осн характеристики
+imgShipo = UI_CreateCompent( frmShipBiuld, IMAGE_TYPE, "imgShipo", 73, 13, 320, 325 )
+-- UI_LoadImage( imgShipo, "texture/ui/ShipR2.tga", NORMAL, 73, 13, 62, 212 )
+
+-- чекбокс осн характеристики
+chkShip = UI_CreateCompent( frmShipBiuld, CHECK_TYPE, "chkShip", 10, 10, 385, 330 )
+UI_LoadImage( chkShip, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkShip, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- картинка порт корабля
+imgSpace = UI_CreateCompent( frmShipBiuld, IMAGE_TYPE, "imgSpace", 42, 13, 182, 333 )
+-- UI_LoadImage( imgSpace, "texture/ui/shipR2.tga", NORMAL, 42, 13, 63, 192 )
+
+-- кнопка трюма
+btnROpen = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnROpen", 67, 15, 367, 40 )
+UI_LoadButtonImage( btnROpen, "texture/ui/xDesign/ShipRum.tga", 67, 15, 0, 343, FALSE )
+
+-- кнопка характеристики ( из трюма )
+btnRClose = UI_CreateCompent( frmShipBiuld, BUTTON_TYPE, "btnRClose", 67, 15, 367, 40 )
+UI_LoadButtonImage( btnRClose, "texture/ui/xDesign/ShipRum.tga", 67, 15, 69, 343, FALSE )
+
+
+-----------------------------------------------------------------------
+-- трюм корабля
+-----------------------------------------------------------------------
+frmShipRoom = UI_CreateForm( "frmShipRoom", FALSE, 471, 121, 294, 353, FALSE, FALSE )
+UI_ShowForm( frmShipRoom, FALSE )
+UI_AddFormToTemplete( frmShipRoom, FORM_MAIN )
+UI_SetIsDrag( frmShipRoom, TRUE )
+-- UI_FormSetHotKey( frmShipRoom, ALT_KEY, HOTKEY_J ) 
+
+-- текстура трюма 
+imgRoomLeft = UI_CreateCompent( frmShipRoom, IMAGE_TYPE, "imgRoomLeft", 471, 121, 0, 103 )
+UI_LoadImage( imgRoomLeft, "texture/ui/xDesign/ShipRum.tga", NORMAL, 471, 121, 0, 391 )
+
+-- imgRoomRight = UI_CreateCompent( frmShipRoom, IMAGE_TYPE, "imgRoomRight", 126, 168, 256, 0 )
+-- UI_LoadImage( imgRoomRight, "texture/ui/shipR.tga", NORMAL, 126, 168, 0, 0 )
+
+-- сетка ячеек трюма 
+grdRoom = UI_CreateCompent( frmShipRoom, GOODS_GRID_TYPE, "grdRoom", 409, 106, 31, 110 ) 
+UI_SetGridSpace( grdRoom, 2, 2 )
+UI_SetGridContent( grdRoom, 3, 12 )
+UI_SetGridUnitSize( grdRoom, 32, 32 )
+UI_SetMargin( grdRoom, 3, 2, 0, 0 )
+
+-- UI_GridLoadSelectImage( grdRoom, "texture/ui/StartF.dds", 32, 32, 123, 99 )
+
+-- прокрутка
+scrollid = UI_GetScroll( grdRoom )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- прокрутка
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- прокрутка
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+
+-- прокрутка
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+
+-----------------------------------------------------------------------
+-- диалог - с продавцом товаров мор торговли, повышение ур корабля, посадка на корабль
+-----------------------------------------------------------------------	
+frmNPCShip = UI_CreateForm( "frmNPCShip", FALSE, 320, 241, 240, 70, TRUE, FALSE )
+UI_ShowForm( frmNPCShip, TRUE )
+UI_AddFormToTemplete( frmNPCShip, FORM_MAIN )
+-- UI_FormSetHotKey( frmNPCShip, ALT_KEY, HOTKEY_J )
+UI_SetFormStyle( frmNPCShip, 2 )
+UI_SetIsDrag( frmNPCShip, TRUE )
+
+-- текстура
+imgBakLeft = UI_CreateCompent( frmNPCShip, IMAGE_TYPE, "imgBakLeft", 320, 241, 0, 0 )
+UI_LoadImage( imgBakLeft, "texture/ui/xDesign/ShipRum.tga", NORMAL, 320, 241, 0, 0 )
+
+-- imgBakRight = UI_CreateCompent( frmNPCShip, IMAGE_TYPE, "imgBakRight", 64, 241, 256, 0 )
+-- UI_LoadImage( imgBakRight, "texture/ui/shipbuild3.dds", NORMAL, 64, 241, 189, 0 )
+
+-- заголовок ( изображение )
+imgchatTitle = UI_CreateCompent( frmNPCShip, IMAGE_TYPE, "imgchatTitle", 25, 13, 10, 4 )
+-- UI_LoadImage( imgchatTitle, "texture/ui/Word.dds", NORMAL, 25, 13, 0, 0 )
+
+--  верх кнопка закрытия
+btnClose = UI_CreateCompent( frmNPCShip, BUTTON_TYPE, "btnClose", 14, 14, 301, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+
+-- 
+labNPCCity = UI_CreateCompent( frmNPCShip, LABELEX_TYPE, "labNPCCity", 34, 11, 53, 29 )
+-- UI_SetCaption( labNPCCity, "11" )
+UI_SetTextColor( labNPCCity, COLOR_WHITE )
+UI_SetLabelExFont( labNPCCity, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+labNPCName = UI_CreateCompent( frmNPCShip, LABELEX_TYPE, "labNPCName", 155, 11, 53, 44 )
+-- UI_SetCaption( labNPCName, "22" )
+UI_SetTextColor( labNPCName, COLOR_WHITE )
+UI_SetLabelExFont( labNPCName, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- 
+memCtrl = UI_CreateCompent( frmNPCShip, MEMO_TYPE, "memCtrl", 280, 134, 33, 68 )
+UI_SetTextColor( memCtrl, COLOR_BLACK )
+-- UI_SetCaption( memCtrl, "333" ) 
+UI_SetMemoMaxNumPerRow(memCtrl, 42 )
+UI_SetMemoPageShowNum(memCtrl, 6 )
+UI_SetMemoRowHeight( memCtrl , 21 )
+
+-- 
+scrollid = UI_GetScroll( memCtrl )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmNPCShip, BUTTON_TYPE, "btnNo", 40, 14, 140, 219 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+
+
+-----------------------------------------------------------------------
+-- форма характеристик корабля при принахождении на корабле
+-----------------------------------------------------------------------
+frmShipsail = UI_CreateForm( "frmShipsail", FALSE, 357, 96, 294, 10, FALSE, FALSE )
+UI_ShowForm( frmShipsail, FALSE )
+UI_AddFormToTemplete( frmShipsail, FORM_MAIN )
+UI_SetIsDrag( frmShipsail, TRUE )
+-- UI_SetFormStyleEx( frmShipsail, 2, 0, 0 )
+-- UI_FormSetHotKey( frmShipsail, ALT_KEY, HOTKEY_J ) 
+UI_FormSetIsEscClose( frmShipsail, FALSE )
+
+-- текстура
+imgBakLeft = UI_CreateCompent( frmShipsail, IMAGE_TYPE, "imgBakLeft", 357, 96, 0, 0 )
+UI_LoadImage( imgBakLeft, "texture/ui/xDesign/ShipRum.tga", NORMAL, 357, 96, 154, 264 )
+
+-- imgBakRight = UI_CreateCompent( frmShipsail, IMAGE_TYPE, "imgBakRight", 143, 41, 194, 14 )
+-- UI_LoadImage( imgBakRight, "texture/ui/Shipdetail.tga", NORMAL, 143, 41, 0, 46 )
+-- imgBakLeftTop = UI_CreateCompent( frmShipsail, IMAGE_TYPE, "imgBakLeftTop", 256, 46, 0, 0 )
+-- UI_LoadImage( imgBakLeftTop, "texture/ui/shipinfo.tga", NORMAL, 256, 46, 0, 0 )
+-- imgBakRightTop = UI_CreateCompent( frmShipsail, IMAGE_TYPE, "imgBakRightTop", 49, 28, 256, 7 )
+-- UI_LoadImage( imgBakRightTop, "texture/ui/shipinfo.tga", NORMAL, 49, 28, 0, 51 )
+
+-- прочность  корабля цифры
+labSailorShow1 = UI_CreateCompent( frmShipsail, LABELEX_TYPE, "labSailorShow1", 62, 12, 38, 55 )
+UI_SetCaption( labSailorShow1, "22222/22222" )
+UI_SetTextColor( labSailorShow1, 4289000470 )
+-- UI_SetLabelExFont( labSailorShow1, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- топливо  корабля цифры
+labCanonShow1 = UI_CreateCompent( frmShipsail, LABELEX_TYPE, "labCanonShow1", 62, 12, 268, 55 )
+UI_SetCaption( labCanonShow1, "33333/33333" )
+UI_SetTextColor( labCanonShow1, 4289000470 )
+-- UI_SetLabelExFont( labCanonShow1, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- опыт корабля
+labExpship = UI_CreateCompent( frmShipsail, LABELEX_TYPE, "labExpship", 62, 12, 232, 78 )
+UI_SetCaption( labExpship, "10000" )
+UI_SetTextColor( labExpship, 4289000470 )
+-- UI_SetLabelExFont( labExpship, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- уровень корабля
+labLvship = UI_CreateCompent( frmShipsail, LABELEX_TYPE, "labLvship", 62, 12, 172, 78 )
+UI_SetCaption( labLvship, "100" )
+UI_SetTextColor( labLvship, 4289000470 )
+-- UI_SetLabelExFont( labLvship, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- полоска жизней корабля
+proSailor = UI_CreateCompent( frmShipsail, PROGRESS_TYPE, "proSailor", 123, 2, 15, 32 )
+UI_LoadScaleImage( proSailor, "texture/ui/xDesign/ShipRum.tga", PROGRESS_PROGRESS, 123, 2, 0, 328, 1.0, 2.0 )
+
+-- полоска топлива корабля
+proCanon = UI_CreateCompent( frmShipsail, PROGRESS_TYPE, "proCanon", 123, 2, 219, 32 )
+UI_LoadScaleImage( proCanon, "texture/ui/xDesign/ShipRum.tga", PROGRESS_PROGRESS, 123, 2, 0, 332, 1.0, 2.0 )
+
+-- кнопка открытия окна характеристик
+btnShip = UI_CreateCompent( frmShipsail, BUTTON_TYPE, "btnShip", 56, 44, 151, 17 )
+UI_LoadButtonImage( btnShip, "texture/ui/xDesign/ShipRum.tga", 56, 44, 344, 183, TRUE )
+-- UI_SetHint( btnShip, "Check ship attribute" )

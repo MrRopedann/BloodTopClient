@@ -1,0 +1,141 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- анимация широкой полосы загрузки  ( внизу экрана )
+-----------------------------------------------------------------------	
+-- 
+frmLoading = UI_CreateForm( "frmLoading", FALSE, 1024, 768, 0, 0, FALSE, FALSE )
+-- UI_LoadFormImage( frmLoading, "texture/ui/loading.bmp", 1024, 768, 0, 0, "", 0, 0 )
+UI_SetFormStyle( frmLoading , 8 )
+UI_ShowForm( frmLoading, TRUE )
+UI_AddFormToTemplete( frmLoading, FORM_SWITCH_SCENE )
+UI_FormSetIsEscClose( frmLoading, FALSE )
+
+imgLoading1 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading1", 256, 256, 0, 0 )
+-- UI_LoadImage( imgLoading1, "texture/ui/loading/l1.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading2 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading2", 256, 256, 256, 0 )
+-- UI_LoadImage( imgLoading2, "texture/ui/loading/l2.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading3 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading3", 256, 256, 512, 0 )
+-- UI_LoadImage( imgLoading3, "texture/ui/loading/l3.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading4 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading4", 256, 256, 768, 0 )
+-- UI_LoadImage( imgLoading4, "texture/ui/loading/l4.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading5 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading5", 256, 256, 0, 256 )
+-- UI_LoadImage( imgLoading5, "texture/ui/loading/l5.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading6 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading6", 256, 256, 256, 256  )
+-- UI_LoadImage( imgLoading6, "texture/ui/loading/l6.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading7 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading7", 256, 256, 512, 256 )
+-- UI_LoadImage( imgLoading7, "texture/ui/loading/l7.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading8 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading8", 256, 256, 768, 256 )
+-- UI_LoadImage( imgLoading8, "texture/ui/loading/l8.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading9 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading9", 256, 256, 0, 512 )
+-- UI_LoadImage( imgLoading9, "texture/ui/loading/l9.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading10 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading10", 256, 256, 256, 512 )
+-- UI_LoadImage( imgLoading10, "texture/ui/loading/l10.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading11 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading11", 256, 256, 512, 512 )
+-- UI_LoadImage( imgLoading11, "texture/ui/loading/l11.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading12 = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading12", 256, 256, 768, 512 )
+-- UI_LoadImage( imgLoading12, "texture/ui/loading/l12.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading = UI_CreateCompent( frmLoading, IMAGE_TYPE, "imgLoading", 120,123, 132, 447)
+-- UI_LoadImage( imgLoading, "texture/ui/LoadProgress.tga", NORMAL, 120,23, 0, 0 )
+
+labLoad= UI_CreateCompent( frmLoading, LABELEX_TYPE, "labLoad", 52, 13, 377,553 )
+-- UI_SetCaption( labLoad, "\199\224\227\240\243\231\234\224..." )
+UI_SetTextColor( labLoad, COLOR_BLACK )
+UI_SetLabelExFont( labLoad, DEFAULT_FONT, TRUE, COLOR_WHITE)
+
+
+-----------------------------------------------------------------------
+-- анимация при загрузке прямоугольная с бегушими квадратами
+-----------------------------------------------------------------------	
+frmConnect = UI_CreateForm( "frmConnect", FALSE, 199, 320, 0, 0, FALSE, FALSE )
+UI_LoadFormImage( frmConnect, "texture/ui/xDesign/loading.tga", 191, 128, 0, 0, "", 0, 0 )
+-- UI_FormSetHotKey( frmConnect, ALT_KEY, HOTKEY_J ) 
+UI_SetFormStyle( frmConnect, 1 )
+UI_AddFormToTemplete( frmConnect, FORM_SWITCH_SCENE )
+UI_FormSetIsEscClose( frmConnect, FALSE )
+UI_SetAlpha( frmConnect, 200 )
+
+-- коментарий ( подождите, загрузка)
+labConnect = UI_CreateCompent( frmConnect, LABELEX_TYPE, "labConnect", 52, 13, 70, 24 )
+-- UI_SetCaption( labConnect, "\207\238\228\238\230\228\232\242\229\133" )
+UI_SetTextColor( labConnect, COLOR_BLACK )
+UI_SetLabelExFont( labConnect, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- полоса загрузки
+imgLoading = UI_CreateCompent( frmConnect, IMAGE_FLASH_TYPE, "imgLoading", 158, 48, 0, 15 )
+UI_LoadScaleImage( imgLoading, "texture/ui/xDesign/loading.tga", 0, 8, 148, 0, 155, 1.0, 1.0 )
+-- полоса загрузки  OLD
+-- imgLoading = UI_CreateCompent( frmConnect, IMAGE_FLASH_TYPE, "imgLoading", 158, 2, 12, 49 )
+-- UI_LoadScaleImage( imgLoading, "texture/ui/xDesign/loading.tga", 0, 10, 2, 0, 63, 1.0, 1.0 )
+
+
+-----------------------------------------------------------------------
+-- окно с описанием гор. клавиш при первом старте
+-----------------------------------------------------------------------	
+frmVHelp = UI_CreateForm( "frmVHelp", FALSE, 800, 600, 0, 0, TRUE, FALSE )
+UI_AddFormToTemplete( frmVHelp, FORM_MAIN )
+UI_ShowForm( frmVHelp, TRUE )
+UI_FormSetIsEscClose( frmVHelp, FALSE )
+-- UI_FormSetHotKey( frmVHelp, ALT_KEY, HOTKEY_J )
+
+imgLoading1 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading1", 256, 256, 0, 0 )
+UI_LoadImage( imgLoading1, "texture/ui/f1.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading2 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading2", 256, 256, 256, 0 )
+UI_LoadImage( imgLoading2, "texture/ui/f2.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading3 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading3", 256, 256, 512, 0 )
+UI_LoadImage( imgLoading3, "texture/ui/f3.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading4 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading4", 32, 256, 768, 0 )
+UI_LoadImage( imgLoading4, "texture/ui/f9.tga", NORMAL, 32, 256, 224, 0 )
+
+imgLoading5 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading5", 256, 256, 0, 256 )
+UI_LoadImage( imgLoading5, "texture/ui/f4.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading6 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading6", 256, 256, 256, 256  )
+UI_LoadImage( imgLoading6, "texture/ui/f5.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading7 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading7", 256, 256, 512, 256 )
+UI_LoadImage( imgLoading7, "texture/ui/f6.tga", NORMAL, 256, 256, 0, 0 )
+
+imgLoading8 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading8", 32, 256, 768, 256 )
+UI_LoadImage( imgLoading8, "texture/ui/f9.tga", NORMAL, 32, 256, 192, 0 )
+
+imgLoading9 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading9", 256, 88, 0, 512 )
+UI_LoadImage( imgLoading9, "texture/ui/f7.tga", NORMAL, 256, 88, 0, 168 )
+
+imgLoading10 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading10", 256, 88, 256, 512 )
+UI_LoadImage( imgLoading10, "texture/ui/f7.tga", NORMAL, 256, 88, 0, 80 )
+
+imgLoading11 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading11", 128, 88, 512, 512 )
+UI_LoadImage( imgLoading11, "texture/ui/f9.tga", NORMAL, 128, 88, 0, 88 )
+
+imgLoading13 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading13", 128, 88, 640, 512 )
+UI_LoadImage( imgLoading13, "texture/ui/f9.tga", NORMAL, 128, 88, 0, 0 )
+
+imgLoading12 = UI_CreateCompent( frmVHelp, IMAGE_TYPE, "imgLoading12", 32, 88, 768, 512 )
+UI_LoadImage( imgLoading12, "texture/ui/f9.tga", NORMAL, 32, 88, 160, 168 )
+
+-- кнопка закрытия
+btnClose = UI_CreateCompent( frmVHelp, BUTTON_TYPE, "btnClose", 222, 78, 50, 400 )
+UI_LoadButtonImage( btnClose, "texture/ui/f10.tga", 222, 78, 0, 0, FALSE )

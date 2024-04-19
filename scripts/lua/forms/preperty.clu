@@ -1,0 +1,212 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- форма окна параметров персоонажа ( статов )
+-----------------------------------------------------------------------
+frmState = UI_CreateForm( "frmState", FALSE, 198, 368, 0, 140, TRUE, FALSE )
+UI_FormSetHotKey( frmState, ALT_KEY, HOTKEY_A )
+UI_ShowForm( frmState, FALSE )
+UI_AddFormToTemplete( frmState, 1 )
+UI_SetIsDrag( frmState, TRUE )
+-- UI_SetFormStyle( frmState, 0 )
+-- UI_SetAlpha( frmState, 200 )
+
+-- текстура
+imgBakTop = UI_CreateCompent( frmState, IMAGE_TYPE, "imgBakTop", 198, 368, 0, 0 )
+UI_LoadImage( imgBakTop, "texture/ui/xDesign/CharterStat.tga", NORMAL, 198, 368, 0, 0 )
+
+-- верх кнопка закрытия 
+btnClose = UI_CreateCompent( frmState, BUTTON_TYPE, "btnClose", 14, 14, 180, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- ник персоонажа ( скрыт )
+labStateName = UI_CreateCompent( frmState, LABELEX_TYPE, "labStateName", 96, 11, 40, 46 )
+-- UI_SetCaption( labStateName, "Child of Demon what is that" )
+UI_SetTextColor( labStateName, 4280558890 )
+UI_SetLabelExFont( labStateName, DEFAULT_FONT, TRUE, 4280558890 )
+
+-- профессия
+labStateJob = UI_CreateCompent( frmState, LABELEX_TYPE, "labStateJob", 47, 11, 77, 29 )
+-- UI_SetCaption( labStateJob, "Warrior" )
+UI_SetTextColor( labStateJob, 4289000470 )
+UI_SetLabelExFont( labStateJob, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- гильдия
+labStateGuid = UI_CreateCompent( frmState, LABELEX_TYPE, "labStateGuid", 128, 11, 77, 45 )
+-- UI_SetCaption( labStateGuid, "game developer" )
+UI_SetTextColor( labStateGuid, 4289000470 )
+UI_SetLabelExFont( labStateGuid, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- уровень
+labStateLevel  = UI_CreateCompent( frmState, LABELEX_TYPE, "labStateLevel", 22, 10, 55, 72 )
+UI_SetCaption( labStateLevel, "22" )
+UI_SetTextColor( labStateLevel, 4289000470 )
+UI_SetLabelExFont( labStateLevel, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- опыт
+labStateEXP = UI_CreateCompent( frmState, LABELEX_TYPE, "labStateEXP", 45, 10, 152, 72 )
+UI_SetCaption( labStateEXP, "11" )
+UI_SetTextColor( labStateEXP, 4289000470 )
+UI_SetLabelExFont( labStateEXP, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- S.lv. - Rebirth Level
+labSailLevel  = UI_CreateCompent( frmState, LABELEX_TYPE, "labSailLevel", 45, 10, 152, 89 )
+--UI_SetCaption( labSailLevel, "22" )
+UI_SetTextColor( labSailLevel, 4289000470 )
+UI_SetLabelExFont( labSailLevel, DEFAULT_FONT, TRUE, COLOR_BLACK )
+UI_SetHint(labSailLevel,"Rebirth Level")
+
+-- SeXp - Rebirth Experience points
+labSailEXP = UI_CreateCompent( frmState, LABELEX_TYPE, "labSailEXP", 45, 10, 152, 107 )
+--UI_SetCaption( labSailEXP, "9999999999" )
+UI_SetTextColor( labSailEXP, 4289000470 )
+UI_SetLabelExFont( labSailEXP, DEFAULT_FONT, TRUE, COLOR_BLACK )
+UI_SetHint(labSailEXP,"Rebirth Experience points")
+
+-- жизни
+labStateHP  = UI_CreateCompent( frmState, LABELEX_TYPE, "labStateHP", 22, 10, 75, 89 )
+UI_SetCaption( labStateHP, "9999/9999" )
+UI_SetTextColor( labStateHP, 4289000470 )
+UI_SetLabelExFont( labStateHP, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- манна
+labStateSP  = UI_CreateCompent( frmState, LABELEX_TYPE, "labStateSP", 45, 10, 56, 107 )
+UI_SetCaption( labStateSP, "9999/9999" )
+UI_SetTextColor( labStateSP, 4289000470 )
+UI_SetLabelExFont( labStateSP, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+
+
+-- сила
+btnStr = UI_CreateCompent( frmState, BUTTON_TYPE, "btnStr", 10, 10, 78, 143 )
+UI_LoadButtonImage( btnStr, "texture/ui/xDesign/PublicC.tga", 10, 10, 195, 239, TRUE )
+UI_SetHint( btnStr, "Strength increases Melee attack power" )
+
+labStrshow = UI_CreateCompent( frmState, LABELEX_TYPE, "labStrshow", 72, 10, 57, 142 )
+UI_SetCaption( labStrshow, "9527" )
+UI_SetTextColor( labStrshow, 4289000470 )
+UI_SetLabelExFont( labStrshow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- ловкость
+btnAgi = UI_CreateCompent( frmState, BUTTON_TYPE, "btnAgi", 10, 10, 171, 143 )
+UI_LoadButtonImage( btnAgi, "texture/ui/xDesign/PublicC.tga", 10, 10, 195, 239, TRUE )
+UI_SetHint( btnAgi, "Agility increases Attack speed and Dodge rate" )
+
+labAgishow = UI_CreateCompent( frmState, LABELEX_TYPE, "labAgishow", 23, 10, 150, 142 )
+UI_SetCaption( labAgishow, "9527" )
+UI_SetTextColor( labAgishow, 4289000470 )
+UI_SetLabelExFont( labAgishow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- тело
+btnCon = UI_CreateCompent( frmState, BUTTON_TYPE, "btnCon", 10, 10, 78, 161 )
+UI_LoadButtonImage( btnCon, "texture/ui/xDesign/PublicC.tga", 10, 10, 195, 239, TRUE )
+UI_SetHint( btnCon, "Constitution increases Defense, Max HP and HP recovery rate" )
+
+labConshow = UI_CreateCompent( frmState, LABELEX_TYPE, "labConshow", 23, 10, 57, 161 )
+UI_SetCaption( labConshow, "9527" )
+UI_SetTextColor( labConshow, 4289000470 )
+UI_SetLabelExFont( labConshow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- дух
+btnSta = UI_CreateCompent( frmState, BUTTON_TYPE, "btnSta", 10, 10, 171, 162 )
+UI_LoadButtonImage( btnSta, "texture/ui/xDesign/PublicC.tga", 10, 10, 195, 239, TRUE )
+UI_SetHint( btnSta, "Spirit increases Max SP, SP recovery rate, Magic defence and Magic attack" )
+
+labStashow = UI_CreateCompent( frmState, LABELEX_TYPE, "labStashow", 23, 10, 150, 161 )
+UI_SetCaption( labStashow, "9527" )
+UI_SetTextColor( labStashow, 4289000470 )
+UI_SetLabelExFont( labStashow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- точность
+btnDex = UI_CreateCompent( frmState, BUTTON_TYPE, "btnDex", 10, 10, 78, 181 )
+UI_LoadButtonImage( btnDex, "texture/ui/xDesign/PublicC.tga", 10, 10, 195, 239, TRUE )
+UI_SetHint( btnDex, "Accuracy increases Range attack power and Hit Rate" )
+
+labDexshow = UI_CreateCompent( frmState, LABELEX_TYPE, "labDexshow", 23, 10, 57, 180 )
+UI_SetCaption( labDexshow, "9527" )
+UI_SetTextColor( labDexshow, 4289000470 )
+UI_SetLabelExFont( labDexshow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+
+
+-- мин атк
+labMinAtackShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labMinAtackShow", 22, 10, 70, 219 )
+UI_SetCaption( labMinAtackShow, "95278" )
+UI_SetTextColor( labMinAtackShow, 4289000470 )
+UI_SetLabelExFont( labMinAtackShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- макс атк
+labMaxAtackShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labMaxAtackShow", 22, 10, 168, 219 )
+UI_SetCaption( labMaxAtackShow, "95278" )
+UI_SetHint( labMaxAtackShow, "9999999VaxAterr" )
+UI_SetTextColor( labMaxAtackShow, 4289000470 )
+UI_SetLabelExFont( labMaxAtackShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- шанс урона
+labHitShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labHitShow", 22, 10, 70, 235 )
+UI_SetCaption( labHitShow, "400" )
+UI_SetTextColor( labHitShow, 4289000470 )
+UI_SetLabelExFont( labHitShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- уклонение
+labFleeShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labFleeShow", 22, 10, 168, 235 )
+UI_SetCaption( labFleeShow, "400" )
+UI_SetTextColor( labFleeShow, 4289000470 )
+UI_SetLabelExFont( labFleeShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- защита
+labDefenceShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labDefenceShow", 22, 10, 70, 252 )
+UI_SetCaption( labDefenceShow, "4000" )
+UI_SetTextColor( labDefenceShow, 4289000470 )
+UI_SetLabelExFont( labDefenceShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- скорость атаки
+labAspeedShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labAspeedShow", 22, 10, 168, 252 )
+UI_SetCaption( labAspeedShow, "400" )
+UI_SetTextColor( labAspeedShow, 4289000470 )
+UI_SetLabelExFont( labAspeedShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- физ сопротивление
+labPhysDefineShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labPhysDefineShow", 22, 10, 138, 272 )
+UI_SetCaption( labPhysDefineShow, "400" )
+UI_SetTextColor( labPhysDefineShow, 4289000470 )
+UI_SetLabelExFont( labPhysDefineShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+
+-- репутация
+labFameShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labFameShow", 26, 10, 67, 310 )
+UI_SetCaption( labFameShow, "0" )
+UI_SetTextColor( labFameShow, 4289000470 )
+UI_SetLabelExFont( labFameShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- титул
+labTitleShow  = UI_CreateCompent( frmState, LABELEX_TYPE, "labTitleShow", 71, 11, 67, 326 )
+-- UI_SetCaption( labTitleShow, "TestTitul" )
+UI_SetTextColor( labTitleShow, 4289000470 )
+UI_SetLabelExFont( labTitleShow, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+
+-- очки параметров
+labStatePoint  = UI_CreateCompent( frmState, LABELEX_TYPE, "labStatePoint", 35, 10, 87, 345 )
+UI_SetCaption( labStatePoint, "1500" )
+UI_SetTextColor( labStatePoint, 4289000470 )
+UI_SetLabelExFont( labStatePoint, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- очки умений
+labSkillPoint  = UI_CreateCompent( frmState, LABELEX_TYPE, "labSkillPoint", 35, 10, 170, 345 )
+UI_SetCaption( labSkillPoint, "300" )
+UI_SetTextColor( labSkillPoint, 4289000470 )
+UI_SetLabelExFont( labSkillPoint, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- cboAppellationShow  = UI_CreateCompent( frmState, COMBO_TYPE, "cboAppellationShow", 110, 20, 77, 418 )
+-- lstAppellation = UI_GetList( cboAppellationShow )
+-- UI_SetSize( lstAppellation, 110, 170 )
+-- UI_LoadImage( lstAppellation, "texture/ui/QQ.dds", COMPENT_BACK, 142, 170, 0, 0 )

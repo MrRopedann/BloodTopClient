@@ -1,0 +1,246 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- окно редактирования Гильдии
+-----------------------------------------------------------------------
+frmManage = UI_CreateForm( "frmManage", FALSE, 456, 373, 130, 40, TRUE, FALSE )
+UI_FormSetHotKey( frmManage, ALT_KEY, HOTKEY_C )
+UI_ShowForm( frmManage, FALSE )
+UI_AddFormToTemplete( frmManage, 1 )
+UI_SetIsDrag( frmManage, TRUE )
+UI_SetFormStyleEx( frmManage, FORM_BOTTOM, 0, 45)
+
+-- текстура
+imgTradeTop = UI_CreateCompent( frmManage, IMAGE_TYPE, "imgTradeTop", 456, 362, 0, 0 )
+UI_LoadImage( imgTradeTop, "texture/ui/xDesign/manage1.tga", NORMAL, 456, 362, 0, 0 )
+
+--imgTradeDown = UI_CreateCompent( frmManage, IMAGE_TYPE, "imgTradeDown", 256, 117, 0, 256 )
+--UI_LoadImage( imgTradeDown, "texture/ui/manage3.tga", NORMAL, 256, 117, 0, 0 )
+--imgTradeTopR = UI_CreateCompent( frmManage, IMAGE_TYPE, "imgTradeTopR", 200, 256, 256, 0 )
+--UI_LoadImage( imgTradeTopR, "texture/ui/manage2.tga", NORMAL, 200, 256, 0, 0 )
+--imgTradeDownR = UI_CreateCompent( frmManage, IMAGE_TYPE, "imgTradeDownR", 200, 117, 256, 256 )
+--UI_LoadImage( imgTradeDownR, "texture/ui/manage3.tga", NORMAL, 200, 117, 0, 117 )
+
+-- верх кнопка закрыть
+btnClose = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnClose", 14, 14, 437, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- список участников гильдии
+lstNum = UI_CreateListView( frmManage, "lstNum", 315, 244, 123, 10, 6, 2 )
+UI_ListViewSetTitle( lstNum, 0, 130, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 1, 100, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 2, 20, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 3, 28, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 4, 28, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 6, 30, "", 0, 0, 0, 0 )
+UI_SetListRowHeight( lstNum, 18 )
+
+-- полоса прокрутки
+scrollid = UI_GetScroll( lstNum )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+-- верх  прокрутки
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+-- ползунок прокрутки
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+-- низ прокрутки
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, FALSE )
+UI_SetSize( id, 11, 9 )
+
+-- ширина столбцов и таблицы ( 315, 244 - полный размер до скрола )
+lstAsk = UI_CreateListView( frmManage, "lstAsk", 315, 244, 123, 10, 6, 2 )
+UI_ListViewSetTitle( lstAsk, 0, 130, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstAsk, 1, 100, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstAsk, 2, 20, "", 0, 0, 0, 0 )
+UI_SetListRowHeight( lstAsk, 18 )
+
+-- полоса прокрутки
+scrollid = UI_GetScroll( lstAsk )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- верх  прокрутки
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, FALSE )
+UI_SetSize( id, 11, 9 )
+
+-- ползунок прокрутки
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+
+-- низ прокрутки
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- 
+pgePublic = UI_CreateCompent( frmManage, PAGE_TYPE, "pgePublic", 185, 275, 11, 79 )
+UI_SetPageButton( pgePublic, PAGE_BUTTON_CUSTOM, 48, 16 )
+
+-- вкладка участники
+skillid = UI_CreatePageItem( pgePublic )
+ttlNum = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlNum, "texture/ui/xDesign/guildtab.tga", PAGE_ITEM_TITLE_NORMAL, 55, 23, 0, 0 )
+UI_LoadImage( ttlNum, "texture/ui/xDesign/guildtab.tga", PAGE_ITEM_TITLE_ACTIVE, 55, 23, 55, 0 )
+UI_SetPos( ttlNum, 146, -47 )
+UI_SetSize( ttlNum, 55, 23 )
+UI_AddCompent( skillid, lstNum )
+
+-- вкладка заявки
+skillid = UI_CreatePageItem( pgePublic )
+ttlLive = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlAsk, "texture/ui/xDesign/guildtab.tga", PAGE_ITEM_TITLE_NORMAL, 43, 23, 0, 23 )
+UI_LoadImage( ttlLive, "texture/ui/xDesign/guildtab.tga", PAGE_ITEM_TITLE_ACTIVE, 43, 23, 43, 23 )
+UI_SetPos( ttlLive, 344, -47 )
+UI_SetSize( ttlLive, 43, 23 )
+
+id1 = UI_CreateCompent( frmManage, IMAGE_TYPE, "id1", 256, 256, 118, -24 )
+-- UI_LoadImage( id1, "texture/ui/manage4.tga", NORMAL, 256, 256, 0, 0 )
+UI_AddCompent( skillid, id1 )
+
+id2 = UI_CreateCompent( frmManage, IMAGE_TYPE, "id2", 256, 23, 118, 232 )
+-- UI_LoadImage( id2, "texture/ui/ShipD.tga", NORMAL, 256, 23, 0, 162 )
+UI_AddCompent( skillid, id2 )
+
+id3 = UI_CreateCompent( frmManage, IMAGE_TYPE, "id3", 52, 256, 374, -24 )
+-- UI_LoadImage( id3, "texture/ui/botton2.tga", NORMAL, 52, 256, 0, 0 )
+UI_AddCompent( skillid, id3 )
+
+id4 = UI_CreateCompent( frmManage, IMAGE_TYPE, "id4", 52, 23, 374, 232 )
+-- UI_LoadImage( id4, "texture/ui/botton2.tga", NORMAL, 52, 23, 52, 0 )
+
+UI_AddCompent( skillid, id4 )
+UI_AddCompent( skillid, lstAsk )
+
+-- название гильдии
+labName = UI_CreateCompent( frmManage, LABELEX_TYPE, "labName", 49, 13, 52, 45 )
+UI_SetCaption( labName, "\199\224\239\240\229\249\229\237\237\251\229 \241\235\238\226\224" )
+UI_SetTextColor( labName, 4289000470 )
+-- UI_SetLabelExFont( labName, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- сторона гильдии
+labState = UI_CreateCompent( frmManage, LABELEX_TYPE, "labState", 49, 13, 50, 30 )
+UI_SetCaption( labState, "\207\232\240\224\242\241\234\224\255 \227\232\235\252\228\232\255" )
+UI_SetTextColor( labState, 4289000470 )
+-- UI_SetLabelExFont( labState, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- создатель гильдии
+labPeople = UI_CreateCompent( frmManage, LABELEX_TYPE, "labPeople", 49, 13, 40, 138 )
+UI_SetCaption( labPeople, "\199\224\239\240\229\249\229\237\237\251\229 \241\235\238\226\224" )
+UI_SetTextColor( labPeople, FONT1, COLOR_BLACK )
+UI_SetLabelExFont( labPeople, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- количество участников гильдии
+labNum = UI_CreateCompent( frmManage, LABELEX_TYPE, "labNum", 49, 13, 38, 185 )
+UI_SetCaption( labNum, "\207\232\240\224\242\241\234\224\255 \227\232\235\252\228\232\255" )
+UI_SetTextColor( labNum, FONT1, COLOR_BLACK )
+UI_SetLabelExFont( labNum, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- опыт гильдии
+labExp = UI_CreateCompent( frmManage, LABELEX_TYPE, "labExp", 49, 13, 35, 226 )
+UI_SetCaption( labExp, "11111111" )
+UI_SetTextColor( labExp, FONT1, COLOR_BLACK )
+UI_SetLabelExFont( labExp, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+--  монеты гильдии
+labMen = UI_CreateCompent( frmManage, LABELEX_TYPE, "labMen", 49, 13, 35, 266 )
+UI_SetCaption( labMen, "11111111" )
+UI_SetTextColor( labMen, FONT1, COLOR_BLACK )
+UI_SetLabelExFont( labMen, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+--  режим обычный
+labReason = UI_CreateCompent( frmManage, LABELEX_TYPE, "labReason", 49, 11, 45, 305 )
+UI_SetCaption( labReason, "\206\242\241\243\242\241\242\226\243\229\242: \211\247\224\241\242\237\232\234\232 \241 \231\238\235\238\242\238\233 \240\229\239\243\242\224\246\232\229\233" )
+UI_SetTextColor( labReason, FONT1, COLOR_BLACK )
+UI_SetLabelExFont( labReason, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+labState = UI_CreateCompent( frmManage, LABELEX_TYPE, "labRemain", 49, 13, 35, 285 )
+UI_SetCaption( labState, "\206\242\241\247\229\242 \240\238\241\239\243\241\234\224: 7 \228\237\229\233" )
+UI_SetTextColor( labState, FONT1, COLOR_BLACK )
+UI_SetLabelExFont( labState, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- кнопка отказать
+btnNo = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnNo", 36, 12, 327, 340 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/managebutton.tga", 36, 12, 0, 24, TRUE )
+
+-- кнопка убрать
+btnkick = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnkick", 36, 12, 368, 340 )
+UI_LoadButtonImage( btnkick, "texture/ui/xDesign/managebutton.tga", 36, 12, 0, 36, TRUE )
+
+-- кнопка выйти
+btnSan = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnSan", 41, 19, 409, 338 )
+-- UI_LoadButtonImage( btnSan, "texture/ui/xDesign/managebutton.tga", 41, 19, 0, 12, TRUE )
+
+-- кнопка принять
+btnYes = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnYes", 38, 12, 284, 340 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/managebutton.tga", 38, 12, 0, 48, TRUE )
+
+-- кнопка девиз
+btnMaxim = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnMaxim", 36, 12, 12, 340 )
+UI_LoadButtonImage( btnMaxim, "texture/ui/xDesign/managebutton.tga", 36, 12, 0, 0, TRUE )
+
+-- imgMaxim = UI_CreateCompent( frmManage, IMAGE_TYPE, "imgMaxim", 193, 18, 71, 343 )
+-- UI_LoadImage( imgMaxim, "texture/ui/ShipBuild4.tga", NORMAL, 193, 18, 4, 202 )
+
+labMaxim = UI_CreateCompent( frmManage, LABELEX_TYPE, "labMaxim", 179, 11, 78, 341 )
+UI_SetCaption( labMaxim, "\199\224\239\240\229\249\229\237\237\251\229 \241\235\238\226\224" )
+UI_SetTextColor( labMaxim, 4289000470 )
+UI_SetLabelExFont( labMaxim, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+
+-----------------------------------------------------------------------
+-- форма редактирования девиза
+-----------------------------------------------------------------------
+frmEditMaxim = UI_CreateForm( "frmEditMaxim",  FALSE, 318, 141, 397, 500, TRUE, FALSE )
+UI_LoadFormImage( frmEditMaxim, "texture/ui/xDesign/manage1.tga", 318, 141, 0, 371, "", 0, 0 )
+UI_ShowForm( frmEditMaxim, FALSE )
+UI_AddFormToTemplete( frmEditMaxim, FORM_MAIN )
+UI_SetFormStyle( frmEditMaxim, 0 )
+UI_SetIsDrag( frmEditMaxim, TRUE )
+-- UI_FormSetHotKey( frmEditMaxim, ALT_KEY, HOTKEY_J ) 
+
+-- кнопка закрытия
+btnClose = UI_CreateCompent( frmEditMaxim, BUTTON_TYPE, "btnClose", 14, 14, 300, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- положение заголовок ( ред. девиз )
+imgMaxim = UI_CreateCompent( frmEditMaxim, IMAGE_TYPE, "imgMaxim", 193, 18, 15, 65 )
+-- UI_LoadImage( imgMaxim, "texture/ui/ShipBuild4.tga", NORMAL, 193, 18, 4, 202 )
+
+-- заголовок ( ред. девиз )
+labMaxim = UI_CreateCompent( frmEditMaxim, LABELEX_TYPE, "labMaxim", 58, 11, 72, 44 )
+-- UI_SetCaption( labMaxim, "\208\229\228\224\234\242\232\240\238\226\224\242\252 \228\229\226\232\231" )
+UI_SetTextColor( labMaxim, COLOR_BLACK )
+UI_SetLabelExFont( labMaxim, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- текст девиза
+edtMaxim = UI_CreateCompent( frmEditMaxim, EDIT_TYPE, "edtMaxim", 220, 11, 55, 67 )
+UI_SetTextColor( edtMaxim, 4289000470 )
+UI_SetEditCursorColor( edtMaxim, 4287072135 )
+UI_SetEditMaxNum( edtMaxim, 30 )
+UI_SetEditMaxNumVisible( edtMaxim, 30 )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmEditMaxim, BUTTON_TYPE, "btnYes", 40, 14, 117, 121 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+UI_SetEditEnterButton( edtTradeGold, btnYes )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmEditMaxim, BUTTON_TYPE, "btnNo", 40, 14, 165, 121 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )

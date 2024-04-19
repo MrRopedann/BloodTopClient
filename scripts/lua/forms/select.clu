@@ -1,0 +1,797 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- нижнее окно кнопок при создании, выборе пресоонажа
+-----------------------------------------------------------------------
+frmSelect = UI_CreateForm( "frmSelect", FALSE, 328, 36, 200, 200, TRUE, FALSE )
+UI_ShowForm( frmSelect, TRUE )
+UI_AddFormToTemplete( frmSelect, FORM_SELECT )
+-- UI_SetFormStyleEx( frmSelect, 7, 0, 2 )
+UI_FormSetIsEscClose( frmSelect, FALSE )
+UI_SetFormStyle( frmSelect, 2 )
+
+-- текстура
+imgSelect1 = UI_CreateCompent( frmSelect, IMAGE_TYPE, "imgSelect1",328, 36, 0, 0 )
+UI_LoadImage( imgSelect1, "texture/ui/xDesign/select.tga", NORMAL, 328, 36, 0, 0 )
+UI_SetImageAlpha(imgSelect1,210)
+
+-- кнопка создать
+btnCreate = UI_CreateCompent( frmSelect, BUTTON_TYPE, "btnCreate", 45, 12, 75, 12 )
+UI_LoadButtonImage( btnCreate, "texture/ui/xDesign/sysbutton1.tga", 45, 12, 0, 108, TRUE )
+
+-- кнопка сменить код
+btnAlter = UI_CreateCompent( frmSelect, BUTTON_TYPE, "btnAlter", 56, 12, 129 , 12 )
+UI_LoadButtonImage( btnAlter, "texture/ui/xDesign/sysbutton1.tga", 56, 12, 0, 132, TRUE )
+
+-- кнопка играть
+btnYes = UI_CreateCompent( frmSelect, BUTTON_TYPE, "btnYes", 45, 12, 20, 12 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/sysbutton1.tga", 45, 12, 0, 120, TRUE )
+
+-- кнопка удалить
+btnDel = UI_CreateCompent( frmSelect, BUTTON_TYPE, "btnDel", 45, 12, 230, 12 )
+UI_LoadButtonImage( btnDel, "texture/ui/xDesign/sysbutton1.tga", 45, 12, 0, 144, TRUE )
+
+-- кнопка выход
+btnNo = UI_CreateCompent( frmSelect, BUTTON_TYPE, "btnNo", 36, 12, 278, 12 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/sysbutton1.tga", 36, 12, 0, 72, TRUE )
+
+
+-----------------------------------------------------------------------
+--  кнопка назад из окна выбора класса персоонажа при создании пресоонажа 
+-----------------------------------------------------------------------
+frmQuit = UI_CreateForm( "frmQuit", FALSE, 328, 36, 380, 507, TRUE, FALSE )
+UI_ShowForm( frmQuit, TRUE )
+UI_AddFormToTemplete( frmQuit, FORM_CREATE_CHA )
+UI_SetAlpha( frmQuit, 240 )
+UI_SetFormStyleEx( frmQuit, 7, 0, 2 )
+UI_FormSetIsEscClose( frmQuit, FALSE )
+
+-- текстура
+imgQuit = UI_CreateCompent( frmQuit, IMAGE_TYPE, "imgQuit", 328, 36, 0, -15 )
+UI_LoadImage( imgQuit, "texture/ui/xDesign/select.tga", NORMAL, 328, 36, 0, 85 )
+
+-- imgLogo = UI_CreateCompent( frmQuit, IMAGE_TYPE, "imgLogo", 242, 115, -312, -510 )
+-- UI_LoadImage( imgLogo, "texture/ui/logot.tga", NORMAL, 242, 115, 0, 0 )
+
+-- кнопка назад
+btnNo = UI_CreateCompent( frmQuit, BUTTON_TYPE, "btnNo", 47, 16, 245, -5 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 47, 16, 203, 152, TRUE )
+
+imgBack = UI_CreateCompent( frmQuit, IMAGE_TYPE, "imgBack", 1024, 768, -380, -675 )
+-- UI_LoadImage( imgBack, "texture/ui/select4.tga", NORMAL, 1, 1, 232, 1 )
+
+
+-----------------------------------------------------------------------
+-- форма окна создания персоонажа
+-----------------------------------------------------------------------
+frmFound = UI_CreateForm( "frmFound", FALSE, 495, 378, 30, 25, TRUE, FALSE )
+UI_ShowForm( frmFound, TRUE )
+UI_AddFormToTemplete( frmFound, FORM_CREATE_CHA )
+-- UI_AddFormToTemplete( frmFound, 1 )
+UI_FormSetIsEscClose( frmFound, FALSE )
+-- UI_FormSetHotKey( frmFound, ALT_KEY, HOTKEY_I )
+
+--imgLogo = UI_CreateCompent( frmFound, IMAGE_TYPE, "imgLogo", 242, 115, -134, -98 )
+--UI_LoadImage( imgLogo, "texture/ui/logot.tga", NORMAL, 242, 115, 0, 0 )
+
+--imgBack = UI_CreateCompent( frmFound, IMAGE_TYPE, "imgBack", 1024, 768, -173, -112 )
+--UI_LoadImage( imgBack, "texture/ui/select4.tga", NORMAL, 1, 1, 232, 1 )
+
+-- текстура
+imgFoundTop = UI_CreateCompent( frmFound, IMAGE_TYPE, "imgFoundTop", 495, 378, 0, 0 )
+UI_LoadImage( imgFoundTop, "texture/ui/xDesign/GreateCharter.tga", NORMAL, 495, 378, 0, 0 )
+
+-- imgFoundDown = UI_CreateCompent( frmFound, IMAGE_TYPE, "imgFoundDown", 256, 117, 0, 256 )
+-- UI_LoadImage( imgFoundDown, "texture/ui/select3.tga", NORMAL, 256, 117, 0, 0 )
+-- imgFoundTopR = UI_CreateCompent( frmFound, IMAGE_TYPE, "imgFoundTopR", 198, 256, 256, 0 )
+-- UI_LoadImage( imgFoundTopR, "texture/ui/select2.tga", NORMAL, 198, 256, 0, 0 )
+-- imgFoundDownR = UI_CreateCompent( frmFound, IMAGE_TYPE, "imgFoundDownR", 198, 117, 256, 256 )
+-- UI_LoadImage( imgFoundDownR, "texture/ui/select3.tga", NORMAL, 198, 117, 0, 117 )
+
+-- описание рассы персоонажа
+memChaDescribe  = UI_CreateCompent( frmFound, MEMO_TYPE, "memChaDescribe", 162, 145, 242, 42 )
+UI_SetTextColor( memChaDescribe, COLOR_BLACK )
+UI_SetLabelExFont( memChaDescribe, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetMemoMaxNumPerRow( memChaDescribe, 31 )
+UI_SetMemoPageShowNum( memChaDescribe, 9 )
+
+-- форма ввода имени
+edtName = UI_CreateCompent( frmFound, EDIT_TYPE, "edtName", 117, 12, 320, 262 )
+UI_SetTextColor( edtName, 4289000470 )
+-- UI_SetLabelExFont( edtName, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetEditCursorColor( edtName, 4289000470 )
+UI_SetEditMaxNum( edtName, 16 )
+UI_SetEditMaxNumVisible( edtName, 16 )
+
+-- наименование прически
+labHairShow = UI_CreateCompent( frmFound, LABELEX_TYPE, "labHairShow", 65, 12, 313, 298 )
+UI_SetCaption( labHairShow, "Long Hair" )
+UI_SetTextColor( labHairShow, 4289000470 )
+-- UI_SetLabelExFont( labHairShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- наименование стиля лица
+labFaceShow = UI_CreateCompent( frmFound, LABELEX_TYPE, "labFaceShow", 65, 12, 325, 318 )
+UI_SetCaption( labFaceShow, "Nightmare" )
+UI_SetTextColor( labFaceShow, 4289000470 )
+-- UI_SetLabelExFont( labFaceShow, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопки поворотв и выбора влево
+btnLeftHair = UI_CreateCompent( frmFound, BUTTON_TYPE, "btnLeftHair", 8, 16, 267, 295 )
+UI_LoadButtonImage( btnLeftHair, "texture/ui/xDesign/GreateCharter.tga", 8, 16, 34, 383, TRUE )
+
+btnLeftFace = UI_CreateCompent( frmFound, BUTTON_TYPE, "btnLeftFace", 8, 16, 267, 315 )
+UI_LoadButtonImage( btnLeftFace, "texture/ui/xDesign/GreateCharter.tga", 8, 16, 34, 383, TRUE )
+
+btnLeft3d = UI_CreateCompent( frmFound, BUTTON_TYPE, "btnLeft3d", 32, 38, 28, 291 )
+UI_LoadButtonImage( btnLeft3d, "texture/ui/xDesign/GreateCharter.tga", 32, 38, 0, 474, TRUE )
+
+-- кнопки поворотв и выбора вправо
+btnRightHair = UI_CreateCompent( frmFound, BUTTON_TYPE, "btnRightHair", 8, 16, 413, 295 )
+UI_LoadButtonImage( btnRightHair, "texture/ui/xDesign/GreateCharter.tga", 8, 16, 0, 383, TRUE )
+
+btnRightFace = UI_CreateCompent( frmFound, BUTTON_TYPE, "btnRightFace", 8, 16, 413, 315 )
+UI_LoadButtonImage( btnRightFace, "texture/ui/xDesign/GreateCharter.tga", 8, 16, 0, 383, TRUE )
+
+btnRight3d = UI_CreateCompent( frmFound, BUTTON_TYPE, "btnRight3d", 32, 38, 204, 291 )
+UI_LoadButtonImage( btnRight3d, "texture/ui/xDesign/GreateCharter.tga", 32, 38, 0, 436, TRUE )
+
+--  
+ui3dCreateCha = UI_CreateCompent( frmFound, UI3D_COMPENT, "ui3dCreateCha", 160, 300, 52, 35 )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmFound, BUTTON_TYPE, "btnYes", 40, 14, 303, 339 )
+UI_LoadButtonImage( btnYes,  "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка отказа
+btnNo = UI_CreateCompent( frmFound, BUTTON_TYPE, "btnNo", 40, 14, 353, 339 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+
+
+-----------------------------------------------------------------------
+-- форма окна выбора стартового города
+-----------------------------------------------------------------------
+frmCity = UI_CreateForm( "frmCity", FALSE, 459, 385, 30, 25, TRUE, FALSE )
+UI_ShowForm( frmCity, TRUE )
+UI_AddFormToTemplete( frmCity, FORM_CREATE_CHA )
+UI_AddFormToTemplete( frmCity, 1 )
+UI_FormSetIsEscClose( frmCity, FALSE )
+-- UI_FormSetHotKey( frmCity, ALT_KEY, HOTKEY_J )
+
+-- город не выбран
+imgCity00 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity00", 459, 385, 0, 0 )
+UI_LoadImage( imgCity00, "texture/ui/xDesign/StartSity1.tga", NORMAL, 459, 385, 0, 0 )
+imgCity01 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity01", 203, 256, 256, 0 )
+-- UI_LoadImage( imgCity01, "texture/ui/s2.tga", NORMAL, 203, 256, 0, 0 )
+imgCity02 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity02", 256, 129, 0, 256 )
+-- UI_LoadImage( imgCity02, "texture/ui/s3.tga", NORMAL, 256, 129, 0, 0 )
+imgCity03 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity03", 203, 129, 256, 256 )
+-- UI_LoadImage( imgCity03, "texture/ui/s4.tga", NORMAL, 203, 129, 0, 0 )
+
+-- Аргент
+imgCity2 = UI_CreateCompent( frmCity, BUTTON_TYPE, "imgCity2", 226, 152, 218, 244 )
+
+imgCity20 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity20", 459, 385, 0, 0 )
+UI_LoadImage( imgCity20, "texture/ui/xDesign/StartSityA.tga", NORMAL, 459, 385, 0, 0 )
+imgCity21 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity21", 203, 256, 256, 0 )
+-- UI_LoadImage( imgCity21, "texture/ui/s6.tga", NORMAL, 203, 256, 0, 0 )
+imgCity22 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity22", 256, 129, 0, 256 )
+-- UI_LoadImage( imgCity22, "texture/ui/s7.tga", NORMAL, 256, 129, 0, 0 )
+imgCity23 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity23", 203, 129, 256, 256 )
+-- UI_LoadImage( imgCity23, "texture/ui/s8.tga", NORMAL, 203, 129, 0, 0 )
+
+-- Шайтан
+imgCity1 = UI_CreateCompent( frmCity, BUTTON_TYPE, "imgCity1", 226, 152, 218, 244 )
+
+imgCity10= UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity10", 459, 385, 0, 0 )
+UI_LoadImage( imgCity10, "texture/ui/xDesign/StartSityS.tga", NORMAL, 459, 385, 0, 0 )
+imgCity11 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity11", 203, 256, 256, 0 )
+-- UI_LoadImage( imgCity11, "texture/ui/s10.tga", NORMAL, 203, 256, 0, 0 )
+imgCity12 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity12", 256, 129, 0, 256 )
+-- UI_LoadImage( imgCity12, "texture/ui/s11.tga", NORMAL, 256, 129, 0, 0 )
+imgCity13 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity13", 203, 129, 256, 256 )
+-- UI_LoadImage( imgCity13, "texture/ui/s12.tga", NORMAL, 203, 129, 0, 0 )
+
+-- Ледынь
+imgCity3 = UI_CreateCompent( frmCity, BUTTON_TYPE, "imgCity3", 226, 152, 218, 244 )
+
+imgCity30 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity30", 459, 385, 0, 0 )
+UI_LoadImage( imgCity30, "texture/ui/xDesign/StartSityDb.tga", NORMAL, 459, 385, 0, 0 )
+imgCity31 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity31", 203, 256, 256, 0 )
+-- UI_LoadImage( imgCity31, "texture/ui/s14.tga", NORMAL, 203, 256, 0, 0 )
+imgCity32 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity32", 256, 129, 0, 256 )
+-- UI_LoadImage( imgCity32, "texture/ui/s15.tga", NORMAL, 256, 129, 0, 0 )
+imgCity33 = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgCity33", 203, 129, 256, 256 )
+-- UI_LoadImage( imgCity33, "texture/ui/s16.tga", NORMAL, 203, 129, 0, 0 )
+
+-- фон кнопки выхода
+imgQuit = UI_CreateCompent( frmCity, IMAGE_TYPE, "imgQuit", 328, 36, 70, 390 )
+UI_LoadImage( imgQuit, "texture/ui/xDesign/select.tga", NORMAL, 328, 36, 0, 85 )
+
+-- кнопка выход
+btnNo = UI_CreateCompent( frmCity, BUTTON_TYPE, "btnNo", 47, 16, 205, 400 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 47, 16, 203, 152, TRUE )
+
+
+-----------------------------------------------------------------------
+-- окно описания рассы при создание персоонажа - ланс, филис и тд
+-----------------------------------------------------------------------	
+frmRoleInfo = UI_CreateForm("frmRoleInfo", FALSE, 730, 494, 0, 650, TRUE,FALSE)
+UI_ShowForm(frmRoleInfo, FALSE )
+UI_SetIsDrag(frmRoleInfo, FALSE)
+UI_FormSetIsEscClose(frmRoleInfo, FALSE)
+UI_SetFormStyle(frmRoleInfo,1)
+UI_AddFormToTemplete( frmRoleInfo, FORM_CREATE_CHA )
+-- UI_FormSetHotKey( frmRoleInfo, ALT_KEY, HOTKEY_J ) 
+
+-- текстура
+imgRoleInfo1 = UI_CreateCompent(frmRoleInfo, IMAGE_TYPE,"imgRoleInfo1", 730, 494, 0, 0)
+UI_LoadImage( imgRoleInfo1, "texture/ui/xDesign/CreateRoleInfo.tga", NORMAL, 730,494, 0, 0)
+
+-- imgRoleInfo2 = UI_CreateCompent(frmRoleInfo, IMAGE_TYPE,"imgRoleInfo2", 256, 256, 256, 0)
+-- UI_LoadImage( imgRoleInfo2, "texture/ui/newshelp/create_role_info_02.tga", NORMAL, 256,256, 0, 0)
+-- imgRoleInfo3 = UI_CreateCompent(frmRoleInfo, IMAGE_TYPE,"imgRoleInfo3", 88, 256, 512, 0)
+-- UI_LoadImage( imgRoleInfo3, "texture/ui/newshelp/create_role_info_05.tga", NORMAL, 88,256, 0, 0)
+-- imgRoleInfo4 = UI_CreateCompent(frmRoleInfo, IMAGE_TYPE,"imgRoleInfo4", 256, 194, 0, 256)
+-- UI_LoadImage( imgRoleInfo4, "texture/ui/newshelp/create_role_info_03.tga", NORMAL, 256,194, 0, 0)
+-- imgRoleInfo5 = UI_CreateCompent(frmRoleInfo, IMAGE_TYPE,"imgRoleInfo5", 256, 194, 256, 256)
+-- UI_LoadImage( imgRoleInfo5, "texture/ui/newshelp/create_role_info_04.tga", NORMAL, 256,194, 0, 0)
+-- imgRoleInfo6 = UI_CreateCompent(frmRoleInfo, IMAGE_TYPE,"imgRoleInfo6", 88, 194, 512, 256)
+-- UI_LoadImage( imgRoleInfo6, "texture/ui/newshelp/create_role_info_05.tga", NORMAL, 88,194, 88, 0)
+
+-- заголовок окна
+labTitle = UI_CreateCompent( frmRoleInfo, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+-- UI_SetCaption( labTitle, "Character Introduction")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопка начать играть
+btnNextStep = UI_CreateCompent(frmRoleInfo, BUTTON_TYPE,"btnNextStep", 166, 26, 270, 453)
+UI_LoadButtonImage( btnNextStep,"texture/ui/xDesign/CreateRoleInfo.tga", 166, 26, 0, 496, FALSE )
+
+
+-------------------------------------------------------------------------
+-- окно описания профессий для класса при созданиии персоонажа - Ланс
+-------------------------------------------------------------------------
+frmLanchInfo = UI_CreateForm("frmLanchInfo", TRUE, 730, 494, 50 , 450, TRUE,TRUE)
+UI_ShowForm(frmLanchInfo, FALSE )
+UI_SetIsDrag(frmLanchInfo, FALSE)
+UI_FormSetIsEscClose(frmLanchInfo, FALSE)
+UI_SetFormStyle(frmLanchInfo,1)
+UI_AddFormToTemplete( frmLanchInfo, FORM_CREATE_CHA )
+-- UI_FormSetHotKey( frmLanchInfo, ALT_KEY, HOTKEY_J ) 
+
+-- текстура
+imgLanchInfo1 = UI_CreateCompent(frmLanchInfo, IMAGE_TYPE,"imgLanchInfo1", 730, 494, 0, 0)
+UI_LoadImage( imgLanchInfo1, "texture/ui/xDesign/LanchLance.tga", NORMAL, 730, 494, 0, 0)
+
+-- imgLanchInfo2 = UI_CreateCompent(frmLanchInfo, IMAGE_TYPE,"imgLanchInfo2", 256, 256, 256, 0)
+-- UI_LoadImage( imgLanchInfo2, "texture/ui/newshelp/frmLanch02.tga", NORMAL, 256, 256, 0, 0)
+-- imgLanchInfo3 = UI_CreateCompent(frmLanchInfo, IMAGE_TYPE,"imgLanchInfo3", 256, 194, 0, 256)
+-- UI_LoadImage( imgLanchInfo3, "texture/ui/newshelp/frmLanch03.tga", NORMAL, 256, 194, 0, 0)
+-- imgLanchInfo4 = UI_CreateCompent(frmLanchInfo, IMAGE_TYPE,"imgLanchInfo4", 256, 194, 256, 256)
+-- UI_LoadImage( imgLanchInfo4, "texture/ui/newshelp/frmLanch04.tga", NORMAL, 256, 194, 0, 0)
+-- imgLanchInfo5 = UI_CreateCompent(frmLanchInfo, IMAGE_TYPE,"imgLanchInfo5", 88, 256, 512, 0)
+-- UI_LoadImage( imgLanchInfo5, "texture/ui/newshelp/frmLanch05.tga", NORMAL, 88,256, 0, 0)
+-- imgLanchInfo6 = UI_CreateCompent(frmLanchInfo, IMAGE_TYPE,"imgLanchInfo6", 88, 194, 512, 256)
+-- UI_LoadImage( imgLanchInfo6, "texture/ui/newshelp/frmLanch05.tga", NORMAL, 88,194, 88, 0)
+
+-- заголовок
+labTitle = UI_CreateCompent( frmLanchInfo, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+-- UI_SetCaption( labTitle, "Available class for Lance")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Ланс Новичёк
+btnViewPlayer_1 = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnViewPlayer_1", 109, 168, 47, 65 )
+UI_ButtonSetHint(btnViewPlayer_1,"Lance Newbie ")
+-- подпись для Ланс Новичёк
+labTitle1 = UI_CreateCompent( frmLanchInfo, LABELEX_TYPE, "labTitle1", 400, 150, 77, 274 )
+-- UI_SetCaption( labTitle1, "Ланс Новичёк ")
+UI_SetTextColor( labTitle1, COLOR_BLACK )
+UI_SetLabelExFont( labTitle1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-- область выделения Ланс Мечник
+btnViewPlayer_2 = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnViewPlayer_2", 140, 160, 238, 65 )
+UI_ButtonSetHint(btnViewPlayer_2,"Lance Swordsman")
+-- подпись для Ланс Мечник
+labTitle2 = UI_CreateCompent( frmLanchInfo, LABELEX_TYPE, "labTitle2", 400, 150, 256, 151 )
+-- UI_SetCaption( labTitle2, "Lance Swordsman")
+UI_SetTextColor( labTitle2, COLOR_BLACK )
+UI_SetLabelExFont( labTitle2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-- область выделения Ланс Охотник
+btnViewPlayer_3 = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnViewPlayer_3", 130, 160, 396, 65 )
+UI_ButtonSetHint(btnViewPlayer_3,"Lance Hunter")
+-- подпись для Ланс Охотник
+labTitle3 = UI_CreateCompent( frmLanchInfo, LABELEX_TYPE, "labTitle3", 400, 150, 256, 274 )
+-- UI_SetCaption( labTitle3, "Lance Hunter")
+UI_SetTextColor( labTitle3, COLOR_BLACK )
+UI_SetLabelExFont( labTitle3, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-- область выделения Ланс Исследователь
+btnViewPlayer_4 = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnViewPlayer_4", 145, 165, 545, 65 )
+UI_ButtonSetHint(btnViewPlayer_4,"Lance Explorer")
+-- подпись для Ланс Исследователь
+labTitle4 = UI_CreateCompent( frmLanchInfo, LABELEX_TYPE, "labTitle4", 400, 150, 256, 402 )
+-- UI_SetCaption( labTitle4, "Lance Explorer")
+UI_SetTextColor( labTitle4, COLOR_BLACK )
+UI_SetLabelExFont( labTitle4, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-- область выделения Ланс Воитель
+btnViewPlayer_5 = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnViewPlayer_5", 147, 178, 232, 292 )
+UI_ButtonSetHint(btnViewPlayer_5,"Lance Crusader")
+-- подпись для Ланс Воитель
+labTitle5 = UI_CreateCompent( frmLanchInfo, LABELEX_TYPE, "labTitle5", 400, 150, 439, 151 )
+-- UI_SetCaption( labTitle5, "Lance Crusader")
+UI_SetTextColor( labTitle5, COLOR_BLACK )
+UI_SetLabelExFont( labTitle5, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-- область выделения Ланс Стрелок
+btnViewPlayer_6 = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnViewPlayer_6", 121, 180, 398, 291 )
+UI_ButtonSetHint(btnViewPlayer_6,"Lance Sharpshooter")
+-- подпись для Ланс Стрелок
+labTitle6 = UI_CreateCompent( frmLanchInfo, LABELEX_TYPE, "labTitle6", 400, 150, 439, 274 )
+-- UI_SetCaption( labTitle6, "Lance Sharpshooter")
+UI_SetTextColor( labTitle6, COLOR_BLACK )
+UI_SetLabelExFont( labTitle6, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-- область выделения Ланс Покоритель Морей
+btnViewPlayer_7 = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnViewPlayer_7", 153, 189, 541, 285 )
+UI_ButtonSetHint(btnViewPlayer_7,"Lance Voyager")
+-- подпись для Ланс Покоритель Морей
+labTitle7 = UI_CreateCompent( frmLanchInfo, LABELEX_TYPE, "labTitle7", 400, 150, 439, 402 )
+-- UI_SetCaption( labTitle7, "Lance Voyager")
+UI_SetTextColor( labTitle7, COLOR_BLACK )
+UI_SetLabelExFont( labTitle7, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопка далее
+btnNextStep = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnNextStep", 61, 26, 105, 449 )
+UI_LoadButtonImage( btnNextStep, "texture/ui/xDesign/LanchLance.tga", 61, 26, 0, 500, FALSE )
+UI_ButtonSetHint(btnNextStep,"Далее ")
+
+-- кнопка назад
+btnPrevStep = UI_CreateCompent(frmLanchInfo, BUTTON_TYPE,"btnPrevStep", 61, 26, 36, 449 )
+UI_LoadButtonImage( btnPrevStep, "texture/ui/xDesign/LanchLance.tga", 61, 26, 69, 500, FALSE )
+UI_ButtonSetHint(btnPrevStep,"Назад ")
+
+
+-------------------------------------------------------------------------
+-- окно описания профессий для класса при созданиии персоонажа - Карциз
+-------------------------------------------------------------------------
+frmCaxiusInfo = UI_CreateForm("frmCaxiusInfo", TRUE, 730, 494, 50 , 450, TRUE,TRUE)
+UI_ShowForm(frmCaxiusInfo, FALSE )
+UI_SetIsDrag(frmCaxiusInfo, FALSE)
+UI_FormSetIsEscClose(frmCaxiusInfo, FALSE)
+UI_SetFormStyle(frmCaxiusInfo,1)
+UI_AddFormToTemplete( frmCaxiusInfo, FORM_CREATE_CHA )
+-- UI_FormSetHotKey( frmCaxiusInfo, ALT_KEY, HOTKEY_J ) 
+
+imgLanchInfo1 = UI_CreateCompent(frmCaxiusInfo, IMAGE_TYPE,"imgLanchInfo1", 730, 494, 0, 0)
+UI_LoadImage( imgLanchInfo1, "texture/ui/xDesign/LanchCarcize.tga", NORMAL, 730, 494, 0, 0)
+
+-- imgLanchInfo2 = UI_CreateCompent(frmCaxiusInfo, IMAGE_TYPE,"imgLanchInfo2", 256, 256, 256, 0)
+-- UI_LoadImage( imgLanchInfo2, "texture/ui/newshelp/frmCaxius02.tga", NORMAL, 256, 256, 0, 0)
+-- imgLanchInfo3 = UI_CreateCompent(frmCaxiusInfo, IMAGE_TYPE,"imgLanchInfo3", 256, 194, 0, 256)
+-- UI_LoadImage( imgLanchInfo3, "texture/ui/newshelp/frmCaxius03.tga", NORMAL, 256, 194, 0, 0)
+-- imgLanchInfo4 = UI_CreateCompent(frmCaxiusInfo, IMAGE_TYPE,"imgLanchInfo4", 256, 194, 256, 256)
+-- UI_LoadImage( imgLanchInfo4, "texture/ui/newshelp/frmCaxius04.tga", NORMAL, 256, 194, 0, 0)
+-- imgLanchInfo5 = UI_CreateCompent(frmCaxiusInfo, IMAGE_TYPE,"imgLanchInfo5", 88, 256, 512, 0)
+-- UI_LoadImage( imgLanchInfo5, "texture/ui/newshelp/frmCaxius05.tga", NORMAL, 88,256, 0, 0)
+-- imgLanchInfo6 = UI_CreateCompent(frmCaxiusInfo, IMAGE_TYPE,"imgLanchInfo6", 88, 194, 512, 256)
+-- UI_LoadImage( imgLanchInfo6, "texture/ui/newshelp/frmCaxius05.tga", NORMAL, 88,194, 88, 0)
+
+-- заголовок
+labTitle = UI_CreateCompent( frmCaxiusInfo, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+-- UI_SetCaption( labTitle, "Available class for Carsise")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Карциз Новичок
+btnViewPlayer_8 = UI_CreateCompent(frmCaxiusInfo, BUTTON_TYPE,"btnViewPlayer_8", 116, 185, 39, 63 )
+UI_ButtonSetHint(btnViewPlayer_8,"Carsise Newbie")
+-- подпись для Карциз Новичок
+labTitle8 = UI_CreateCompent( frmCaxiusInfo, LABELEX_TYPE, "labTitle8", 400, 150, 77, 274 )
+-- UI_SetCaption( labTitle8, "Carsise Newbie")
+UI_SetTextColor( labTitle8, COLOR_BLACK )
+UI_SetLabelExFont( labTitle8, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-- область выделения Карциз Мечник
+btnViewPlayer_9 = UI_CreateCompent(frmCaxiusInfo, BUTTON_TYPE,"btnViewPlayer_9", 193, 187, 377, 52 )
+UI_ButtonSetHint(btnViewPlayer_9,"Carsise Swordsman")
+-- подпись для Карциз Мечник
+labTitle9 = UI_CreateCompent( frmCaxiusInfo, LABELEX_TYPE, "labTitle9", 400, 150, 256, 274 )
+-- UI_SetCaption( labTitle9, "Carsise Swordsman")
+UI_SetTextColor( labTitle9, COLOR_BLACK )
+UI_SetLabelExFont( labTitle9, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-- область выделения Карциз Чемпион
+btnViewPlayer_10 = UI_CreateCompent(frmCaxiusInfo, BUTTON_TYPE,"btnViewPlayer_10", 212, 198, 371, 275 )
+UI_ButtonSetHint(btnViewPlayer_10,"Carsise Champion")
+-- подпись для Карциз Чемпион
+labTitle10 = UI_CreateCompent( frmCaxiusInfo, LABELEX_TYPE, "labTitle10", 400, 150, 438, 274 )
+-- UI_SetCaption( labTitle10, "Carsise Champion")
+UI_SetTextColor( labTitle10, COLOR_BLACK )
+UI_SetLabelExFont( labTitle10, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопка далее
+btnNextStep = UI_CreateCompent(frmCaxiusInfo, BUTTON_TYPE,"btnNextStep", 61, 26, 105, 449 )
+UI_LoadButtonImage( btnNextStep, "texture/ui/xDesign/LanchLance.tga", 61, 26, 0, 500, FALSE )
+UI_ButtonSetHint(btnNextStep,"Далее ")
+
+-- кнопка назад
+btnPrevStep = UI_CreateCompent(frmCaxiusInfo, BUTTON_TYPE,"btnPrevStep", 61, 26, 36, 449 )
+UI_LoadButtonImage( btnPrevStep, "texture/ui/xDesign/LanchLance.tga", 61, 26, 69, 500, FALSE )
+UI_ButtonSetHint(btnPrevStep,"Назад ")
+
+
+-------------------------------------------------------------------------
+-- окно описания профессий для класса при созданиии персоонажа - Филлис
+-------------------------------------------------------------------------
+frmFelierInfo = UI_CreateForm("frmFelierInfo", TRUE, 730, 494, 50 , 450, TRUE,TRUE)
+UI_ShowForm(frmFelierInfo, FALSE )
+UI_SetIsDrag(frmFelierInfo, FALSE)
+UI_FormSetIsEscClose(frmFelierInfo, FALSE)
+UI_SetFormStyle(frmFelierInfo,1)
+UI_AddFormToTemplete( frmFelierInfo, FORM_CREATE_CHA )
+-- UI_FormSetHotKey( frmFelierInfo, ALT_KEY, HOTKEY_J ) 
+
+-- 
+imgFelierInfo1 = UI_CreateCompent(frmFelierInfo, IMAGE_TYPE,"imgFelierInfo1", 730, 494, 0, 0)
+UI_LoadImage( imgFelierInfo1, "texture/ui/xDesign/LanchPhillis.tga", NORMAL, 730, 494, 0, 0)
+
+-- imgFelierInfo2 = UI_CreateCompent(frmFelierInfo, IMAGE_TYPE,"imgFelierInfo2", 256, 256, 256, 0)
+-- UI_LoadImage( imgFelierInfo2, "texture/ui/newshelp/frmFelier02.tga", NORMAL, 256, 256, 0, 0)
+-- imgFelierInfo3 = UI_CreateCompent(frmFelierInfo, IMAGE_TYPE,"imgFelierInfo3", 256, 194, 0, 256)
+-- UI_LoadImage( imgFelierInfo3, "texture/ui/newshelp/frmFelier03.tga", NORMAL, 256, 194, 0, 0)
+-- imgFelierInfo4 = UI_CreateCompent(frmFelierInfo, IMAGE_TYPE,"imgFelierInfo4", 256, 194, 256, 256)
+-- UI_LoadImage( imgFelierInfo4, "texture/ui/newshelp/frmFelier04.tga", NORMAL, 256, 194, 0, 0)
+-- imgFelierInfo5 = UI_CreateCompent(frmFelierInfo, IMAGE_TYPE,"imgFelierInfo5", 88, 256, 512, 0)
+-- UI_LoadImage( imgFelierInfo5, "texture/ui/newshelp/frmFelier05.tga", NORMAL, 88,256, 0, 0)
+-- imgFelierInfo6 = UI_CreateCompent(frmFelierInfo, IMAGE_TYPE,"imgFelierInfo6", 88, 194, 512, 256)
+-- UI_LoadImage( imgFelierInfo6, "texture/ui/newshelp/frmFelier05.tga", NORMAL, 88,194, 88, 0)
+
+-- заголовок
+labTitle = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+-- UI_SetCaption( labTitle, "Available class for Phyllis")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Филлис Новичок
+btnViewPlayer_11 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_11", 116, 185, 39, 63 )
+UI_ButtonSetHint(btnViewPlayer_11,"Phyllis Newbie")
+-- подпись для Филлис Новичок
+labTitle11 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle11", 400, 150, 77, 274 )
+-- UI_SetCaption( labTitle11, "Phyllis Newbie")
+UI_SetTextColor( labTitle11, COLOR_BLACK )
+UI_SetLabelExFont( labTitle11, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Филлис Охотник
+btnViewPlayer_12 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_12", 107, 165, 228, 65)
+UI_ButtonSetHint(btnViewPlayer_12,"Phyllis Hunter")
+-- подпись для Филлис Охотник
+labTitle12 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle12", 400, 150, 256, 151 )
+-- UI_SetCaption( labTitle12, "Phyllis Hunter")
+UI_SetTextColor( labTitle12, COLOR_BLACK )
+UI_SetLabelExFont( labTitle12, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Филлис Знахарка
+btnViewPlayer_13 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_13", 125, 165, 358, 65)
+UI_ButtonSetHint(btnViewPlayer_13,"Phyllis Herbalist")
+-- подпись для Филлис Знахарка
+labTitle13 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle13", 400, 150, 256, 274 )
+-- UI_SetCaption( labTitle13, "Phyllis Herbalist")
+UI_SetTextColor( labTitle13, COLOR_BLACK )
+UI_SetLabelExFont( labTitle13, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Филлис Мореплаватель
+btnViewPlayer_14 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_14", 125, 165, 496, 65)
+UI_ButtonSetHint(btnViewPlayer_14,"Phyllis Explorer")
+-- подпись для Филлис Мореплаватель
+labTitle14 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle14", 400, 150, 256, 401 )
+-- UI_SetCaption( labTitle14, "Phyllis Explorer")
+UI_SetTextColor( labTitle14, COLOR_BLACK )
+UI_SetLabelExFont( labTitle14, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Филлис Мечник
+btnViewPlayer_25 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_25", 85, 165, 630, 65)
+UI_ButtonSetHint(btnViewPlayer_25,"Phyllis Swordsman")
+-- подпись для Филлис  Мечник
+labTitle25 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle25", 400, 150, 256, 401 )
+-- UI_SetCaption( labTitle25, "Phyllis Swordsman")
+UI_SetTextColor( labTitle25, COLOR_BLACK )
+UI_SetLabelExFont( labTitle25, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Филлис Стрелок
+btnViewPlayer_15 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_15", 88, 168, 217, 300)
+UI_ButtonSetHint(btnViewPlayer_15,"Phyllis Sharpshooter")
+-- подпись для Филлис Стрелок
+labTitle15 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle15", 400, 150, 435, 111 )
+-- UI_SetCaption( labTitle15, "Phyllis Sharpshooter")
+UI_SetTextColor( labTitle15, COLOR_WHITE )
+UI_SetLabelExFont( labTitle15, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- область выделения Филлис Целительница
+btnViewPlayer_16 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_16", 88, 168, 322, 300)
+UI_ButtonSetHint(btnViewPlayer_16,"Phyllis Cleric")
+-- подпись для Филлис Целительница
+labTitle16 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle16", 400, 150, 435, 215 )
+-- UI_SetCaption( labTitle16, "Phyllis Cleric")
+UI_SetTextColor( labTitle16, COLOR_WHITE )
+UI_SetLabelExFont( labTitle16, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- область выделения Филлис Колдунья
+btnViewPlayer_17 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_17", 88, 168, 433, 300)
+UI_ButtonSetHint(btnViewPlayer_17,"Phyllis Seal Master")
+-- подпись для Филлис Колдунья
+labTitle17 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle17", 400, 150, 435, 319 )
+-- UI_SetCaption( labTitle17, "Phyllis Seal Master")
+UI_SetTextColor( labTitle17, COLOR_WHITE )
+UI_SetLabelExFont( labTitle17, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- область выделения Филлис Покоритель морей
+btnViewPlayer_18 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_18", 88, 168, 533, 300)
+UI_ButtonSetHint(btnViewPlayer_18,"Phyllis Voyager")
+-- подпись для Филлис Покоритель морей
+labTitle18 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle18", 400, 150, 435, 425 )
+-- UI_SetCaption( labTitle18, "Phyllis Voyager")
+UI_SetTextColor( labTitle18, COLOR_WHITE)
+UI_SetLabelExFont( labTitle18, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- область выделения Филлис Воитель
+btnViewPlayer_26 = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnViewPlayer_26", 88, 168, 624, 300)
+UI_ButtonSetHint(btnViewPlayer_26,"Phyllis Crusader")
+-- подпись для Филлис Воитель
+labTitle26 = UI_CreateCompent( frmFelierInfo, LABELEX_TYPE, "labTitle26", 400, 150, 435, 425 )
+-- UI_SetCaption( labTitle26, "Phyllis Crusader")
+UI_SetTextColor( labTitle26, COLOR_WHITE)
+UI_SetLabelExFont( labTitle26, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- кнопка далее
+btnNextStep = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnNextStep", 61, 26, 105, 449 )
+UI_LoadButtonImage( btnNextStep, "texture/ui/xDesign/LanchPhillis.tga", 61, 26, 0, 500, FALSE )
+UI_ButtonSetHint(btnNextStep,"Далее ")
+
+-- кнопка назад
+btnPrevStep = UI_CreateCompent(frmFelierInfo, BUTTON_TYPE,"btnPrevStep", 61, 26, 36, 449 )
+UI_LoadButtonImage( btnPrevStep, "texture/ui/xDesign/LanchPhillis.tga", 61, 26, 69, 500, FALSE )
+UI_ButtonSetHint(btnPrevStep,"Назад ")
+
+
+-------------------------------------------------------------------------
+-- окно описания профессий для класса при созданиии персоонажа - Ами
+-------------------------------------------------------------------------
+frmAimiInfo = UI_CreateForm("frmAimiInfo", TRUE, 730, 494, 50 , 450, TRUE,TRUE)
+UI_ShowForm(frmAimiInfo, FALSE )
+UI_SetIsDrag(frmAimiInfo, FALSE)
+UI_FormSetIsEscClose(frmAimiInfo, FALSE)
+UI_SetFormStyle(frmAimiInfo,1)
+UI_AddFormToTemplete( frmAimiInfo, FORM_CREATE_CHA )
+-- UI_FormSetHotKey( frmAimiInfo, ALT_KEY, HOTKEY_J ) 
+
+-- 
+imgAimiInfo1 = UI_CreateCompent(frmAimiInfo, IMAGE_TYPE,"imgAimiInfo1", 730, 494, 0, 0)
+UI_LoadImage( imgAimiInfo1, "texture/ui/xDesign/LanchAmi.tga", NORMAL, 730, 494, 0, 0)
+
+-- imgAimiInfo2 = UI_CreateCompent(frmAimiInfo, IMAGE_TYPE,"imgAimiInfo2", 256, 256, 256, 0)
+-- UI_LoadImage( imgAimiInfo2, "texture/ui/newshelp/frmAimi02.tga", NORMAL, 256, 256, 0, 0)
+-- imgAimiInfo3 = UI_CreateCompent(frmAimiInfo, IMAGE_TYPE,"imgAimiInfo3", 256, 194, 0, 256)
+-- UI_LoadImage( imgAimiInfo3, "texture/ui/newshelp/frmAimi03.tga", NORMAL, 256, 194, 0, 0)
+-- imgAimiInfo4 = UI_CreateCompent(frmAimiInfo, IMAGE_TYPE,"imgAimiInfo4", 256, 194, 256, 256)
+-- UI_LoadImage( imgAimiInfo4, "texture/ui/newshelp/frmAimi04.tga", NORMAL, 256, 194, 0, 0)
+-- imgAimiInfo5 = UI_CreateCompent(frmAimiInfo, IMAGE_TYPE,"imgAimiInfo5", 88, 256, 512, 0)
+-- UI_LoadImage( imgAimiInfo5, "texture/ui/newshelp/frmAimi05.tga", NORMAL, 88,256, 0, 0)
+-- imgAimiInfo6 = UI_CreateCompent(frmAimiInfo, IMAGE_TYPE,"imgAimiInfo6", 88, 194, 512, 256)
+-- UI_LoadImage( imgAimiInfo6, "texture/ui/newshelp/frmAimi05.tga", NORMAL, 88,194, 88, 0)
+
+-- заголовок
+labTitle = UI_CreateCompent( frmAimiInfo, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+-- UI_SetCaption( labTitle, "Available class for Ami")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Ами Новичок
+btnViewPlayer_19 = UI_CreateCompent(frmAimiInfo, BUTTON_TYPE,"btnViewPlayer_19", 94, 150, 54, 88)
+UI_ButtonSetHint(btnViewPlayer_19,"Ami Newbie")
+-- подпись для Ами Новичок
+labTitle19 = UI_CreateCompent( frmAimiInfo, LABELEX_TYPE, "labTitle19", 400, 150, 77, 274 )
+-- UI_SetCaption( labTitle19, "Ami Newbie")
+UI_SetTextColor( labTitle19, COLOR_BLACK )
+UI_SetLabelExFont( labTitle19, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Ами Знахарка
+btnViewPlayer_20 = UI_CreateCompent(frmAimiInfo, BUTTON_TYPE,"btnViewPlayer_20", 134, 176, 348, 64)
+UI_ButtonSetHint(btnViewPlayer_20,"Ami Herbalist")
+-- подпись для Ами Знахарка
+labTitle20 = UI_CreateCompent( frmAimiInfo, LABELEX_TYPE, "labTitle20", 400, 150, 255, 196 )
+-- UI_SetCaption( labTitle20, "Ami Herbalist")
+UI_SetTextColor( labTitle20, COLOR_BLACK )
+UI_SetLabelExFont( labTitle20, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Ами Мореплаватель
+btnViewPlayer_21 = UI_CreateCompent(frmAimiInfo, BUTTON_TYPE,"btnViewPlayer_21", 134, 176, 498, 64)
+UI_ButtonSetHint(btnViewPlayer_21,"Ami Explorer")
+-- подпись для Ами Мореплаватель
+labTitle21 = UI_CreateCompent( frmAimiInfo, LABELEX_TYPE, "labTitle21", 400, 150, 255, 352 )
+-- UI_SetCaption( labTitle21, "Ami Explorer")
+UI_SetTextColor( labTitle21, COLOR_BLACK )
+UI_SetLabelExFont( labTitle21, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Ами Целительница
+btnViewPlayer_22 = UI_CreateCompent(frmAimiInfo, BUTTON_TYPE,"btnViewPlayer_22", 136, 176, 254, 290)
+UI_ButtonSetHint(btnViewPlayer_22,"Ami Cleric")
+-- подпись для Ами Целительница
+labTitle22 = UI_CreateCompent( frmAimiInfo, LABELEX_TYPE, "labTitle22", 400, 150, 439, 151 )
+-- UI_SetCaption( labTitle22, "Ami Cleric")
+UI_SetTextColor( labTitle22, COLOR_BLACK )
+UI_SetLabelExFont( labTitle22, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Ами Колдунья
+btnViewPlayer_23 = UI_CreateCompent(frmAimiInfo, BUTTON_TYPE,"btnViewPlayer_23", 136, 176, 408, 290)
+UI_ButtonSetHint(btnViewPlayer_23,"Ami Seal Master")
+-- подпись для Ами Колдунья
+labTitle23 = UI_CreateCompent( frmAimiInfo, LABELEX_TYPE, "labTitle23", 400, 150, 439, 274 )
+-- UI_SetCaption( labTitle23, "Ami Seal Master")
+UI_SetTextColor( labTitle23, COLOR_BLACK )
+UI_SetLabelExFont( labTitle23, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- область выделения Ами Покоритель морей
+btnViewPlayer_24 = UI_CreateCompent(frmAimiInfo, BUTTON_TYPE,"btnViewPlayer_24", 136, 176, 545, 290)
+UI_ButtonSetHint(btnViewPlayer_24,"Ami Voyager")
+-- подпись для Ами Ами Покоритель морей
+labTitle24 = UI_CreateCompent( frmAimiInfo, LABELEX_TYPE, "labTitle24", 400, 150, 439, 401 )
+-- UI_SetCaption( labTitle24, "Ami Voyager")
+UI_SetTextColor( labTitle24, COLOR_BLACK )
+UI_SetLabelExFont( labTitle24, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопка далее
+btnNextStep = UI_CreateCompent(frmAimiInfo, BUTTON_TYPE,"btnNextStep", 61, 26, 105, 449 )
+UI_LoadButtonImage( btnNextStep, "texture/ui/xDesign/LanchPhillis.tga", 61, 26, 0, 500, FALSE )
+UI_ButtonSetHint(btnNextStep,"Далее ")
+
+-- кнопка назад
+btnPrevStep = UI_CreateCompent(frmAimiInfo, BUTTON_TYPE,"btnPrevStep", 61, 26, 36, 449 )
+UI_LoadButtonImage( btnPrevStep, "texture/ui/xDesign/LanchPhillis.tga", 61, 26, 69, 500, FALSE )
+UI_ButtonSetHint(btnPrevStep,"Назад ")
+
+
+-------------------------------------------------------------------------
+--  Второе окно подробного описания профессий при созданиии персоонажа
+-------------------------------------------------------------------------
+frmRoleAllInfo = UI_CreateForm("frmRoleAllInfo", TRUE, 730, 494, 50, 450, TRUE,TRUE)
+UI_ShowForm(frmRoleAllInfo, FALSE )
+UI_SetIsDrag(frmRoleAllInfo, FALSE)
+UI_FormSetIsEscClose(frmRoleAllInfo, FALSE)
+UI_SetFormStyle(frmRoleAllInfo,1)
+UI_AddFormToTemplete( frmRoleAllInfo, FORM_CREATE_CHA )
+-- UI_FormSetHotKey( frmRoleAllInfo, ALT_KEY, HOTKEY_J ) 
+
+-- 
+imgFoundTop = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgFoundTop", 730, 494, 0, 0 )
+UI_LoadImage( imgFoundTop, "texture/ui/xDesign/RoleInfo/frmRoleInfo.tga", NORMAL, 730, 494, 0, 0 )
+
+-- imgFoundDown = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgFoundDown", 191, 256, 256, 0 )
+-- UI_LoadImage( imgFoundDown, "texture/ui/newshelp/frmRoleInfo02.tga", NORMAL, 191, 256, 0, 0 )
+-- imgFoundTopR = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgFoundTopR", 256, 117, 0, 256 )
+-- UI_LoadImage( imgFoundTopR, "texture/ui/newshelp/frmRoleInfo03.tga", NORMAL, 256, 117, 0, 0 )
+-- imgFoundDownR = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgFoundDownR", 191, 117, 256, 256 )
+-- UI_LoadImage( imgFoundDownR, "texture/ui/newshelp/frmRoleInfo03.tga", NORMAL, 191, 117, 0, 117 )
+
+-- Описание профессии
+memChaDescribeUp  = UI_CreateCompent( frmRoleAllInfo, MEMO_TYPE, "memChaDescribeUp", 162, 154, -1000 , -1000 )  --  287, 26
+-- UI_SetTextColor( memChaDescribeUp, COLOR_BLACK )
+-- UI_SetLabelExFont( memChaDescribeUp, DEFAULT_FONT, TRUE, COLOR_WHITE )
+-- UI_SetMemoMaxNumPerRow( memChaDescribeUp, 24 )
+-- UI_SetMemoPageShowNum( memChaDescribeUp, 7 )
+
+-- Текст рекомендации к персонажу
+memChaDescribeDown  = UI_CreateCompent( frmRoleAllInfo, MEMO_TYPE, "memChaDescribeDown", 162, 154, -1000,-1000 )  --  287, 198 
+-- UI_SetTextColor( memChaDescribeDown, COLOR_BLACK )
+-- UI_SetLabelExFont( memChaDescribeDown, DEFAULT_FONT, TRUE, COLOR_WHITE )
+-- UI_SetMemoMaxNumPerRow( memChaDescribeDown, 95 )
+-- UI_SetMemoPageShowNum( memChaDescribeDown, 9 )
+
+-- 
+local tabImage = {}
+tabImage[1]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView1", 698,390, 16, 38 )
+UI_LoadImage( tabImage[1], "texture/ui/xDesign/RoleInfo/Lance Newbie.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[2]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView2", 698,390, 16, 38 )
+UI_LoadImage( tabImage[2], "texture/ui/xDesign/RoleInfo/Lance Swordsman.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[3]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView3", 698,390, 16, 38 )
+UI_LoadImage( tabImage[3], "texture/ui/xDesign/RoleInfo/Lance Hunter.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[4]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView4", 698,390, 16, 38 )
+UI_LoadImage( tabImage[4], "texture/ui/xDesign/RoleInfo/Lance Explorer.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[5]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView5", 698,390, 16, 38 )
+UI_LoadImage( tabImage[5], "texture/ui/xDesign/RoleInfo/Lance Crusader.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[6]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView6", 698,390, 16, 38 )
+UI_LoadImage( tabImage[6], "texture/ui/xDesign/RoleInfo/Lance Sharpshooter.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[7]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView7", 698,390, 16, 38 )
+UI_LoadImage( tabImage[7], "texture/ui/xDesign/RoleInfo/Lance Voyager.tga", NORMAL, 698,390, 0, 0 )
+
+-- 
+tabImage[8]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView8", 698,390, 16, 38 )
+UI_LoadImage( tabImage[8], "texture/ui/xDesign/RoleInfo/Carsise Newbie.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[9]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView9", 698,390, 16, 38 )
+UI_LoadImage( tabImage[9], "texture/ui/xDesign/RoleInfo/Carsise Swordsman.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[10]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView10", 698,390, 16, 38 )
+UI_LoadImage( tabImage[10], "texture/ui/xDesign/RoleInfo/Carsise Champion.tga", NORMAL, 698,390, 0, 0 )
+
+-- 
+tabImage[11]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView11", 698,390, 16, 38 )
+UI_LoadImage( tabImage[11], "texture/ui/xDesign/RoleInfo/Phyllis Newbie.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[12]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView12", 698,390, 16, 38 )
+UI_LoadImage( tabImage[12], "texture/ui/xDesign/RoleInfo/Phyllis Hunter.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[13]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView13", 698,390, 16, 38 )
+UI_LoadImage( tabImage[13], "texture/ui/xDesign/RoleInfo/Phyllis Herbalist.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[14]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView14", 698,390, 16, 38 )
+UI_LoadImage( tabImage[14], "texture/ui/xDesign/RoleInfo/Phyllis Explorer.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[15]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView15", 698,390, 16, 38 )
+UI_LoadImage( tabImage[15], "texture/ui/xDesign/RoleInfo/Phyllis Sharpshooter.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[16]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView16", 698,390, 16, 38 )
+UI_LoadImage( tabImage[16], "texture/ui/xDesign/RoleInfo/Phyllis Cleric.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[17]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView17", 698,390, 16, 38 )
+UI_LoadImage( tabImage[17], "texture/ui/xDesign/RoleInfo/Phyllis Seal Master.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[18]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView18", 698,390, 16, 38 )
+UI_LoadImage( tabImage[18], "texture/ui/xDesign/RoleInfo/Phyllis Voyager.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[19]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView19", 698,390, 16, 38 )
+UI_LoadImage( tabImage[19], "texture/ui/xDesign/RoleInfo/Ami Newbie.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[20]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView20", 698,390, 16, 38 )
+UI_LoadImage( tabImage[20], "texture/ui/xDesign/RoleInfo/Ami Herbalist.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[21]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView21", 698,390, 16, 38 )
+UI_LoadImage( tabImage[21], "texture/ui/xDesign/RoleInfo/Ami Explorer.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[22]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView22", 698,390, 16, 38 )
+UI_LoadImage( tabImage[22], "texture/ui/xDesign/RoleInfo/Ami Cleric.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[23]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView23", 698,390, 16, 38 )
+UI_LoadImage( tabImage[23], "texture/ui/xDesign/RoleInfo/Ami Seal Master.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[24]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView24", 698,390, 16, 38 )
+UI_LoadImage( tabImage[24], "texture/ui/xDesign/RoleInfo/Ami Voyager.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[25]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView25", 698,390, 16, 38 )
+UI_LoadImage( tabImage[25], "texture/ui/xDesign/RoleInfo/Phyllis Swordsman.tga", NORMAL, 698,390, 0, 0 )
+
+tabImage[26]  = UI_CreateCompent( frmRoleAllInfo, IMAGE_TYPE, "imgChaView26", 698,390, 16, 38 )
+UI_LoadImage( tabImage[26], "texture/ui/xDesign/RoleInfo/Phyllis Crusader.tga", NORMAL, 698,390, 0, 0 )
+
+for i=1,26,1 do
+	UI_SetIsShow(tabImage[i],FALSE)
+end
+
+-- кнопка назад
+btnPrevStep = UI_CreateCompent(frmRoleAllInfo, BUTTON_TYPE,"btnPrevStep", 61, 26, 36, 449 )
+UI_LoadButtonImage( btnPrevStep, "texture/ui/xDesign/RoleInfo/frmRoleInfo.tga", 61, 26, 69, 500, FALSE )
+UI_ButtonSetHint(btnPrevStep,"Назад ")

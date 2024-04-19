@@ -1,0 +1,511 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- форма окна выбора настроек игры
+-----------------------------------------------------------------------
+frmSystem = UI_CreateForm( "frmSystem", FALSE, 190, 274, 150, 200, TRUE, FALSE )
+UI_FormSetHotKey( frmSystem, ALT_KEY, HOTKEY_O )
+UI_ShowForm( frmSystem, TRUE )
+UI_AddFormToTemplete( frmSystem, 1 )
+UI_SetIsDrag( frmSystem, TRUE )
+UI_SetFormStyle( frmSystem, 0 )
+UI_SetAlpha( frmSystem, 235 )
+
+-- текстура
+imgSystemT = UI_CreateCompent( frmSystem, IMAGE_TYPE, "imgSystemT", 190, 309, 0, 0 )
+UI_LoadImage( imgSystemT, "texture/ui/xDesign/system1.tga", NORMAL, 190, 309, 0, 0 )
+
+-- верх кнопка закрытия
+btnClose = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnClose", 14, 14, 171, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- настройки экрана
+btnVideo = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnVideo", 121, 26, 35, 90 )
+UI_LoadButtonImage( btnVideo, "texture/ui/xDesign/SettingsButton.tga", 121, 26, 0, 0, FALSE )
+-- настройки звука
+btnAudio = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnAudio", 121, 26, 35, 120 )
+UI_LoadButtonImage( btnAudio, "texture/ui/xDesign/SettingsButton.tga", 121, 26, 121, 0, FALSE )
+-- настройки игры
+btnGame = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnGame", 121, 26, 35, 150 )
+UI_LoadButtonImage( btnGame, "texture/ui/xDesign/SettingsButton.tga", 121, 26, 242, 0, FALSE )
+
+-- сменить персоонаж
+btnChange = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnChange", 121, 26, 35, 190 )
+UI_LoadButtonImage( btnChange, "texture/ui/xDesign/SettingsButton.tga", 121, 26, 0, 109, FALSE )
+-- выбор сервера
+btnRelogin = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnRelogin", 121, 26, 35, 220 )
+UI_LoadButtonImage( btnRelogin, "texture/ui/xDesign/SettingsButton.tga", 121, 26, 121, 109, FALSE )
+-- закрыть игру
+btnExit = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnExit", 121, 26, 35, 250 )
+UI_LoadButtonImage( btnExit, "texture/ui/xDesign/SettingsButton.tga", 121, 26, 242, 109, FALSE )
+
+
+-----------------------------------------------------------------------
+-- форма окна настроек звука - volume settings window
+-----------------------------------------------------------------------
+frmAudio = UI_CreateForm( "frmAudio",  FALSE, 185, 100, 397, 500, FALSE, FALSE )
+UI_LoadFormImage( frmAudio, "texture/ui/xDesign/frmaudio.tga", 185, 100, 0, 0, "", 0, 0 )
+UI_ShowForm( frmAudio, FALSE )
+UI_AddFormToTemplete( frmAudio, FORM_MAIN )
+-- UI_FormSetHotKey( frmAudio, ALT_KEY, HOTKEY_J )
+UI_SetFormStyle( frmAudio, 0 )
+UI_SetIsDrag( frmAudio, TRUE )
+UI_SetAlpha( frmAudio, 235 )
+
+-- верх кнопка закрытия
+-- btnClose = UI_CreateCompent( frmAudio, BUTTON_TYPE, "btnClose", 14, 14, 165, 3 )
+-- UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+-- UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- заголовок
+labTitle = UI_CreateCompent( frmAudio, LABELEX_TYPE, "labTitle", 400, 150, 7, 6 )
+UI_SetCaption( labTitle, "\237\224\241\242\240\238\233\234\224 \231\226\243\234\224")
+UI_SetTextColor( labTitle, 4289000470 )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- ползунки
+proAudioMusic = UI_CreateCompent( frmAudio, PROGRESS_TYPE, "proAudioMusic", 95, 9, 71, 32 )
+UI_LoadScaleImage( proAudioMusic, "texture/ui/xDesign/Sysbotton2.tga", PROGRESS_PROGRESS, 95, 9, 88, 234, 1.0, 1.0 )
+UI_SetProgressActiveMouse( proAudioMusic, 1 )
+
+proAudioMidi = UI_CreateCompent( frmAudio, PROGRESS_TYPE, "proAudioMidi", 95, 9, 71, 53 )
+UI_LoadScaleImage( proAudioMidi, "texture/ui/xDesign/Sysbotton2.tga", PROGRESS_PROGRESS, 95, 9, 88, 234, 1.0, 1.0 )
+UI_SetProgressActiveMouse( proAudioMidi, 1 )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmAudio, BUTTON_TYPE, "btnYes", 40, 14, 87, 78 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmAudio, BUTTON_TYPE, "btnNo", 40, 14, 136, 78 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+
+
+-----------------------------------------------------------------------
+-- форма окна настроек экрана - display settings window
+----------------------------------------------------------------------- 
+frmVideo = UI_CreateForm( "frmVideo", FALSE, 190, 229, 150, 150, FALSE, FALSE )
+-- UI_FormSetHotKey( frmVideo, ALT_KEY, HOTKEY_J )
+UI_ShowForm( frmVideo, FALSE )
+UI_AddFormToTemplete( frmVideo, 1 )
+UI_SetIsDrag( frmVideo, TRUE )
+-- UI_SetFormStyle( frmVideo, 0 )
+UI_SetAlpha( frmVideo, 235 )
+
+-- текстура
+imgVideoT = UI_CreateCompent( frmVideo, IMAGE_TYPE, "imgVideoT", 190, 229, 0, 0 )
+UI_LoadImage( imgVideoT, "texture/ui/xDesign/video.tga", NORMAL, 190, 229, 0, 0 )
+
+-- верх кнопка закрытия
+-- btnClose = UI_CreateCompent( frmVideo, BUTTON_TYPE, "btnClose", 14, 14, 168, 5 )
+-- UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+-- UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- заголовок
+labTitle = UI_CreateCompent( frmVideo, LABELEX_TYPE, "labTitle", 400, 150, 10, 5 )
+UI_SetCaption( labTitle, "\237\224\241\242\240\238\233\234\224 \253\234\240\224\237\224")
+UI_SetTextColor( labTitle, 4289000470 )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmVideo, BUTTON_TYPE, "btnYes", 40, 14, 94, 208 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmVideo, BUTTON_TYPE, "btnNo", 40, 14, 143, 208 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+
+
+-- чекбоксы настроек
+-- 
+chkTextureHigh = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTextureHigh", 10, 10, 102, 46 )
+UI_LoadImage( chkTextureHigh, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkTextureHigh, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkTextureNormal = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTextureNormal", 10, 10, 134, 46 )
+UI_LoadImage( chkTextureNormal, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkTextureNormal, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkTextureLow = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTextureLow", 10, 10, 165, 46 )
+UI_LoadImage( chkTextureLow, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkTextureLow, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxTexture = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxTexture", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxTexture, chkTextureHigh )
+UI_AddGroupBox( cbxTexture, chkTextureNormal )
+UI_AddGroupBox( cbxTexture, chkTextureLow )
+
+--------- 
+
+-- 
+chkMovieOn = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkMovieOn", 10, 10, 134, 66 )
+UI_LoadImage( chkMovieOn, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkMovieOn, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkMovieOff = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkMovieOff", 10, 10, 165, 66 )
+UI_LoadImage( chkMovieOff, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkMovieOff, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxMovie = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxMovie", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxMovie, chkMovieOn )
+UI_AddGroupBox( cbxMovie, chkMovieOff )
+
+----------- 
+
+-- 
+chkCameraOn = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkCameraOn", 10, 10, 134, 86)
+UI_LoadImage( chkCameraOn, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkCameraOn, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+
+-- 
+chkCameraOff = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkCameraOff", 10, 10, 165, 86 )
+UI_LoadImage( chkCameraOff, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkCameraOff, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxCamera = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxCamera", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxCamera, chkCameraOn )
+UI_AddGroupBox( cbxCamera, chkCameraOff )
+
+-------------- 
+
+-- 
+chkViewFar = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkViewFar", 10, 10, 134, 106 )
+--UI_LoadImage( chkViewFar, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+--UI_LoadImage( chkViewFar, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkViewNear = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkViewNear", 10, 10, 165, 106 )
+--UI_LoadImage( chkViewNear, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+--UI_LoadImage( chkViewNear, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxView = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxView", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxView, chkViewFar )
+UI_AddGroupBox( cbxView, chkViewNear )
+
+---------------
+
+-- 
+chkTrailOn = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTrailOn", 10, 10, 134, 106 )
+UI_LoadImage( chkTrailOn, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkTrailOn, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkTrailOff = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTrailOff", 10, 10, 165, 106 )
+UI_LoadImage( chkTrailOff, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkTrailOff, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxTrail = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxTrail", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxTrail, chkTrailOn )
+UI_AddGroupBox( cbxTrail, chkTrailOff )
+
+--------------   32   16
+
+-- 
+chkColor32 = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkColor32", 10, 10, 134, 126 )
+UI_LoadImage( chkColor32, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkColor32, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkColor16 = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkColor16", 10, 10, 165, 126 )
+UI_LoadImage( chkColor16, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkColor16, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxColor = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxColor", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxColor, chkColor32 )
+UI_AddGroupBox( cbxColor, chkColor16 )
+
+--------------
+
+-- 1024*768
+chk1024 = UI_CreateCompent( frmVideo, CHECK_TYPE, "chk1024", 10, 10, 134, 186 )
+UI_LoadImage( chk1024, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chk1024, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+
+-- 800*600
+chk800 = UI_CreateCompent( frmVideo, CHECK_TYPE, "chk800", 10, 10, 165, 186 )
+UI_LoadImage( chk800, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chk800, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxSize = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxSize", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxSize, chk800 )
+UI_AddGroupBox( cbxSize, chk1024 )
+
+-----------------
+
+-- 
+chkFull = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkFull", 10, 10, 134, 165 )
+UI_LoadImage( chkFull, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkFull, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkWindow = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkWindow", 10, 10, 165, 165 )
+UI_LoadImage( chkWindow, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkWindow, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+
+-- 
+cbxModel = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxModel", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxModel, chkFull )
+UI_AddGroupBox( cbxModel, chkWindow )
+
+-------------------
+
+-- 
+chkHigh = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkHigh", 10, 10, 102, 146 )
+UI_LoadImage( chkHigh, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkHigh, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkNormal = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkNormal", 10, 10, 134, 146 )
+UI_LoadImage( chkNormal, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkNormal, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+chkLow = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkLow", 10, 10, 165, 146 )
+UI_LoadImage( chkLow, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkLow, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxQuality = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxQuality", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxQuality, chkHigh )
+UI_AddGroupBox( cbxQuality, chkNormal )
+UI_AddGroupBox( cbxQuality, chkLow )
+
+
+
+-----------------------------------------------------------------------
+-- форма окна настроек игры
+-----------------------------------------------------------------------
+frmGame = UI_CreateForm( "frmGame", FALSE, 190, 230, 150, 150, FALSE, FALSE )
+-- UI_FormSetHotKey( frmGame, ALT_KEY, HOTKEY_J )
+UI_ShowForm( frmGame, FALSE )
+UI_AddFormToTemplete( frmGame, 1 )
+UI_SetIsDrag( frmGame, TRUE )
+UI_SetAlpha( frmGame, 230 )
+-- UI_SetFormStyle( frmGame, 0 )
+
+-- текстура
+imgVideoT = UI_CreateCompent( frmGame, IMAGE_TYPE, "imgVideoT", 190, 230, 0, 0 )
+UI_LoadImage( imgVideoT, "texture/ui/xDesign/frmgame.tga", NORMAL, 190, 230, 0, 0 )
+
+-- верх кнопка закрытия
+-- btnClose = UI_CreateCompent( frmGame, BUTTON_TYPE, "btnClose", 14, 14, 165, 5 )
+-- UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+-- UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- заголовок
+labGame = UI_CreateCompent( frmGame, LABELEX_TYPE, "labGame", 47, 11, 7, 5 )
+UI_SetCaption( labGame, "\237\224\241\242\240\238\233\234\224 \232\227\240\251" )
+UI_SetTextColor( labGame, 4289000470 )
+UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmGame, BUTTON_TYPE, "btnYes", 40, 14, 94, 207 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+UI_SetButtonModalResult( btnYes, BUTTON_CLOSE )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmGame, BUTTON_TYPE, "btnNo", 40, 14, 143, 207 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+
+-- чекбоксы настроек
+-- предсказание пути
+
+
+chkRunmodel1 = UI_CreateCompent( frmGame, CHECK_TYPE, "chkRunmodel1", 10, 10, 134, 59 )
+UI_LoadImage( chkRunmodel1, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkRunmodel1, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+chkRunmodel2 = UI_CreateCompent( frmGame, CHECK_TYPE, "chkRunmodel2", 10, 10, 165, 59 )
+UI_LoadImage( chkRunmodel2, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkRunmodel2, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxRunmodel = UI_CreateCompent( frmGame, CHECK_GROUP_TYPE, "cbxRunmodel", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxRunmodel, chkRunmodel1 )
+UI_AddGroupBox( cbxRunmodel, chkRunmodel2 )
+
+-- 
+--labGame = UI_CreateCompent( frmGame, LABELEX_TYPE, "labGame", 30, 10, 12, 107 )
+--UI_SetCaption( labGame, "Automatic Lock" )
+--UI_SetTextColor( labGame, COLOR_BLACK )
+--UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+--UI_SetHint(labGame,"Log out and activate auto lock inventory")
+
+-- 
+--labGame = UI_CreateCompent( frmGame, LABELEX_TYPE, "labGame", 30, 10, 70, 107 )
+--UI_SetCaption( labGame, "Manual" )
+--UI_SetTextColor( labGame, COLOR_BLACK )
+--UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+chkLockmodel1 = UI_CreateCompent( frmGame, CHECK_TYPE, "chkLockmodel1", 10, 10, 134, 107 )
+UI_LoadImage( chkLockmodel1, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkLockmodel1, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+--labGame = UI_CreateCompent( frmGame, LABELEX_TYPE, "labGame", 30, 10, 115, 107 )
+--UI_SetCaption( labGame, "Auto" )
+--UI_SetTextColor( labGame, COLOR_BLACK )
+--UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+chkLockmodel2 = UI_CreateCompent( frmGame, CHECK_TYPE, "chkLockmodel2", 10, 10, 165, 107 )
+UI_LoadImage( chkLockmodel2, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkLockmodel2, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxLockmodel = UI_CreateCompent( frmGame, CHECK_GROUP_TYPE, "cbxLockmodel", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxLockmodel, chkLockmodel1 )
+UI_AddGroupBox( cbxLockmodel, chkLockmodel2 )
+
+-- 
+--labGame = UI_CreateCompent( frmGame, LABELEX_TYPE, "labGame", 30, 10, 12, 155 )
+--UI_SetCaption( labGame, "Show Help" )
+--UI_SetTextColor( labGame, COLOR_BLACK )
+--UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+--UI_SetHint(labGame,"Show Help System")
+
+-- 
+--labGame = UI_CreateCompent( frmGame, LABELEX_TYPE, "labGame", 30, 10, 70, 155 )
+--UI_SetCaption( labGame, "Hide" )
+--UI_SetTextColor( labGame, COLOR_BLACK )
+--UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+chkHelpmodel1 = UI_CreateCompent( frmGame, CHECK_TYPE, "chkHelpmodel1", 10, 10, 134, 155 )
+UI_LoadImage( chkHelpmodel1, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkHelpmodel1, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+--labGame = UI_CreateCompent( frmGame, LABELEX_TYPE, "labGame", 30, 10, 115, 155 )
+--UI_SetCaption( labGame, "Display" )
+--UI_SetTextColor( labGame, COLOR_BLACK )
+--UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+chkHelpmodel2 = UI_CreateCompent( frmGame, CHECK_TYPE, "chkHelpmodel2", 10, 10, 165, 155 )
+UI_LoadImage( chkHelpmodel2, "texture/ui/xDesign/PublicC.tga", UNCHECKED, 10, 10, 228, 241 )
+UI_LoadImage( chkHelpmodel2, "texture/ui/xDesign/PublicC.tga", CHECKED, 10, 10, 240, 241 )
+
+-- 
+cbxHelpmodel = UI_CreateCompent( frmGame, CHECK_GROUP_TYPE, "cbxHelpmodel", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxHelpmodel, chkHelpmodel1 )
+UI_AddGroupBox( cbxHelpmodel, chkHelpmodel2 )
+
+
+-----------------------------------------------------------------------
+-- форма окна предупреждения для смены персоонажа
+-----------------------------------------------------------------------
+frmAskChange = UI_CreateForm( "frmAskChange", FALSE, 185, 100, 397, 500, FALSE, FALSE )
+UI_LoadFormImage( frmAskChange, "texture/ui/xDesign/frmsistem.tga", 185, 100, 0, 0, "", 0, 0 )
+
+UI_ShowForm( frmAskChange, FALSE )
+UI_AddFormToTemplete( frmAskChange, FORM_MAIN )
+UI_SetFormStyle( frmAskChange, 0 )
+-- UI_SetAlpha( frmAskChange, 240 )
+
+-- заголовок
+labchange = UI_CreateCompent( frmAskChange, LABELEX_TYPE, "labchange", 47, 11, 7, 3 )
+-- UI_SetCaption( labchange, "\241\236\229\237\224 \239\229\240\241\238\238\237\224\230\224" )
+UI_SetTextColor( labchange, 4289000470 )
+UI_SetLabelExFont( labchange, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- коментарий
+labLogin = UI_CreateCompent( frmAskChange, LABELEX_TYPE, "labLogin", 59, 11, 35, 40 )
+UI_SetCaption( labLogin, "\245\238\242\232\242\229 \241\236\229\237\232\242\252 \239\229\240\241\238\238\237\224\230 ?" )
+UI_SetTextColor( labLogin, 4289000470 )
+-- UI_SetLabelExFont( labLogin, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmAskChange, BUTTON_TYPE, "btnYes", 40, 14, 89, 80 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmAskChange, BUTTON_TYPE, "btnNo", 40, 14, 138, 80 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+
+
+-----------------------------------------------------------------------
+-- форма окна предупреждения для смены сервера
+-----------------------------------------------------------------------
+frmAskRelogin = UI_CreateForm( "frmAskRelogin", FALSE, 185, 100, 397, 500, FALSE, FALSE )
+UI_LoadFormImage( frmAskRelogin, "texture/ui/xDesign/frmsistem.tga", 185, 100, 0, 0, "", 0, 0 )
+
+UI_ShowForm( frmAskRelogin, FALSE )
+UI_AddFormToTemplete( frmAskRelogin, FORM_MAIN )
+UI_SetFormStyle( frmAskRelogin, 0 )
+-- UI_SetAlpha( frmAskRelogin, 240 )
+
+-- заголовок
+labchange = UI_CreateCompent( frmAskRelogin, LABELEX_TYPE, "labchange", 47, 11, 7, 3 )
+-- UI_SetCaption( labchange, "Logout" )
+UI_SetTextColor( labchange, 4289000470 )
+UI_SetLabelExFont( labchange, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- коментарий
+labLogin = UI_CreateCompent( frmAskRelogin, LABELEX_TYPE, "labLogin", 59, 11, 35, 40 )
+UI_SetCaption( labLogin, "\245\238\242\232\242\229 \241\236\229\237\232\242\252 \241\229\240\226\229\240 ?" )
+UI_SetTextColor( labLogin, 4289000470 )
+UI_SetLabelExFont( labLogin, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmAskRelogin, BUTTON_TYPE, "btnYes", 40, 14, 89, 80 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmAskRelogin, BUTTON_TYPE, "btnNo", 40, 14, 138, 80 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+
+
+-----------------------------------------------------------------------
+-- форма окна предупреждения для выход из игры
+-----------------------------------------------------------------------
+frmAskExit = UI_CreateForm( "frmAskExit",  FALSE, 185, 100, 397, 500, FALSE, FALSE )
+UI_LoadFormImage( frmAskExit, "texture/ui/xDesign/frmsistem.tga", 185, 100, 0, 0, "", 0, 0 )
+
+UI_ShowForm( frmAskExit, FALSE )
+UI_AddFormToTemplete( frmAskExit, FORM_MAIN )
+-- UI_FormSetHotKey( frmAskExit, ALT_KEY, HOTKEY_J )
+UI_SetFormStyle( frmAskExit, 0 )
+UI_SetAlpha( frmAskExit, 235 )
+
+-- заголовок
+labchange = UI_CreateCompent( frmAskExit, LABELEX_TYPE, "labchange", 47, 11, 7, 3 )
+-- UI_SetCaption( labchange, "Exit Game" )
+UI_SetTextColor( labchange, 4289000470 )
+UI_SetLabelExFont( labchange, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- коментарий
+labLogin = UI_CreateCompent( frmAskExit, LABELEX_TYPE, "labLogin", 63, 5, 35, 40 )
+UI_SetCaption( labLogin, "\245\238\242\232\242\229 \226\251\233\242\232 \232\231 \232\227\240\251 ?" )
+UI_SetTextColor( labLogin, 4289000470 )
+UI_SetLabelExFont( labLogin, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmAskExit, BUTTON_TYPE, "btnYes", 40, 14, 89, 80 )
+UI_LoadButtonImage( btnYes, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 498, TRUE )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmAskExit, BUTTON_TYPE, "btnNo", 40, 14, 138, 80 )
+UI_LoadButtonImage( btnNo, "texture/ui/xDesign/Button1.tga", 40, 14, 0, 484, TRUE )
+
+

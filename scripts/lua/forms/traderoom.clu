@@ -1,0 +1,272 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+-- xDesign Rus - ODS Noir skin - Tales of Pirates											------------------ ==
+-- Основано на твике ODS Noir skin от Ryohll - Адаптация к "Пиратия 1.38" : mef1sto			------------------ ==
+-- Модификация и создание части текстур, а так же 										------------------ ==
+-- Русский перевод текстур и коментариев в скриптах : Vzor	16.11.2010					------------------ ==
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ==
+
+
+-----------------------------------------------------------------------
+-- форма окна торговли корабельным грузом
+----------------------------------------------------------------------- 
+frmSeaTrade = UI_CreateForm( "frmSeaTrade", FALSE, 471, 319, 150, 75, TRUE, FALSE )
+-- UI_FormSetHotKey(frmSeaTrade, ALT_KEY, HOTKEY_J )
+UI_ShowForm( frmSeaTrade, FALSE )
+UI_AddFormToTemplete( frmSeaTrade, 1 )
+UI_SetIsDrag(frmSeaTrade, TRUE )
+
+-- текстура
+imgTradeTop = UI_CreateCompent( frmSeaTrade, IMAGE_TYPE, "imgTradeTop", 471, 319, 0, 0 )
+UI_LoadImage( imgTradeTop, "texture/ui/xDesign/ShipTrade.tga", NORMAL, 471, 319, 0, 0 )
+
+-- imgTradeDown = UI_CreateCompent( frmSeaTrade, IMAGE_TYPE, "imgTradeDown", 126, 216, 256, 0 )
+-- UI_LoadImage( imgTradeDown, "texture/ui/trade2.tga", NORMAL, 126, 216, 0, 0 )
+-- imgTradePL = UI_CreateCompent( frmSeaTrade, IMAGE_TYPE, "imgTradePL", 256, 168, 0, 216 )
+-- UI_LoadImage( imgTradePL, "texture/ui/shipR2.tga", NORMAL, 256, 168, 0, 0 )
+-- imgTradePR = UI_CreateCompent( frmSeaTrade, IMAGE_TYPE, "imgTradePR", 126, 168, 256, 216 )
+-- UI_LoadImage( imgTradePR, "texture/ui/shipR.tga", NORMAL, 126, 168, 0, 0 )
+
+-- 
+btnRight = UI_CreateCompent( frmSeaTrade, BUTTON_TYPE, "btnRight", 15, 39, 350, 59 )
+--  UI_LoadButtonImage( btnRight, "texture/ui/SysBotton4.tga", 15, 39, 165, 0, TRUE )
+
+-- 
+btnLeft = UI_CreateCompent( frmSeaTrade, BUTTON_TYPE, "btnLeft", 15, 39, 15, 59 )
+--  UI_LoadButtonImage( btnLeft, "texture/ui/SysBotton4.tga", 15, 39, 165, 39, TRUE )
+
+--  верх кнопка закрытия
+btnClose = UI_CreateCompent( frmSeaTrade, BUTTON_TYPE, "btnClose", 14, 14, 452, 4 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+--  cmdItem1 = UI_CreateCompent( frmSeaTrade, COMMAND_ONE_TYPE, "cmdItem1", 32, 32, 67, 47 )
+--  cmdItem2 = UI_CreateCompent( frmSeaTrade, COMMAND_ONE_TYPE, "cmdItem2", 32, 32, 174, 47 )
+--  cmdItem3 = UI_CreateCompent( frmSeaTrade, COMMAND_ONE_TYPE, "cmdItem3", 32, 32, 281, 47 )
+
+labItem1 = UI_CreateCompent( frmSeaTrade, LABELEX_TYPE, "labItem1", 96, 11, 35, 86 )
+--UI_SetCaption( labItem1, "ѕНѕНѕНѕНѕНѕНѕНѕН" )
+UI_SetTextColor( labItem1, COLOR_BLACK )
+UI_SetLabelExFont( labItem1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labItem2 = UI_CreateCompent( frmSeaTrade, LABELEX_TYPE, "labItem2", 96, 11, 142, 86 )
+--UI_SetCaption( labItem2, "ѕНѕНѕНѕНѕНѕНѕНѕН" )
+UI_SetTextColor( labItem2, COLOR_BLACK )
+UI_SetLabelExFont( labItem2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labItem3 = UI_CreateCompent( frmSeaTrade, LABELEX_TYPE, "labItem3", 96, 11, 249, 86 )
+--UI_SetCaption( labItem3, "ѕНѕНѕНѕНѕНѕНѕНѕН" )
+UI_SetTextColor( labItem3, COLOR_BLACK )
+UI_SetLabelExFont( labItem3, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 
+labMen1 = UI_CreateCompent( frmSeaTrade, LABELEX_TYPE, "labMen1", 46, 8, 59, 103 )
+--  UI_SetCaption( labMen1, "11111111" )
+UI_SetTextColor( labMen1, COLOR_BLACK )
+UI_SetLabelExFont( labMen1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labMen2 = UI_CreateCompent( frmSeaTrade, LABELEX_TYPE, "labMen2", 46, 8, 166, 103 )
+--  UI_SetCaption( labMen2, "11111111" )
+UI_SetTextColor( labMen2, COLOR_BLACK )
+UI_SetLabelExFont( labMen2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labMen3 = UI_CreateCompent( frmSeaTrade, LABELEX_TYPE, "labMen3", 46, 8, 273, 103 )
+--  UI_SetCaption( labMen3, "11111111" )
+UI_SetTextColor( labMen3, COLOR_BLACK )
+UI_SetLabelExFont( labMen3, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 
+grdItemSale = UI_CreateCompent( frmSeaTrade, GOODS_GRID_TYPE, "grdItemSale", 438, 235, 15, 10 ) 
+UI_SetGridSpace( grdItemSale, 35, 6 )
+UI_SetGridContent( grdItemSale, 6, 4 )
+UI_SetGridUnitSize( grdItemSale, 68, 68 )
+UI_SetMargin( grdItemSale, 10, 0, 0, 0 )
+
+-- полоса прокрутки
+scrollid = UI_GetScroll( grdItemSale )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- прокрутка верх
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- прокрутка низ
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+
+-- прокрутка низ
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- 
+grdItemBuy = UI_CreateCompent( frmSeaTrade, GOODS_GRID_TYPE, "grdItemBuy", 438, 235, 15, 10 ) 
+UI_SetGridSpace( grdItemBuy, 35, 6 )
+UI_SetGridContent( grdItemBuy, 6, 4 )
+UI_SetGridUnitSize( grdItemBuy, 68, 68 )
+UI_SetMargin( grdItemBuy, 10, 0, 0, 0 )
+
+-- 
+scrollid = UI_GetScroll( grdItemBuy )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 43 )
+
+-- 
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- 
+pgeTrade = UI_CreateCompent( frmSeaTrade, PAGE_TYPE, "pgeTrade", 400, 225, 10, 57 )
+UI_SetPageButton( pgeTrade, PAGE_BUTTON_CUSTOM, 106, 23 )
+
+-- 
+Itemsale = UI_CreatePageItem( pgeTrade )
+ttlSale = UI_GetPageItemObj( Itemsale, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlSale, "texture/ui/xDesign/ShipTrade.tga", PAGE_ITEM_TITLE_NORMAL, 106, 23, 0, 355 )
+UI_LoadImage( ttlSale, "texture/ui/xDesign/ShipTrade.tga", PAGE_ITEM_TITLE_ACTIVE, 106, 23, 106, 355 )
+UI_SetPos( ttlSale, 16, -25 )
+UI_SetSize( ttlSale, 106, 23 )
+UI_AddCompent( Itemsale, grdItemSale )
+
+-- 
+Itembuy = UI_CreatePageItem( pgeTrade )
+ttlBuy = UI_GetPageItemObj( Itembuy, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlBuy, "texture/ui/xDesign/ShipTrade.tga", PAGE_ITEM_TITLE_NORMAL, 106, 23, 0, 327 )
+UI_LoadImage( ttlBuy, "texture/ui/xDesign/ShipTrade.tga", PAGE_ITEM_TITLE_ACTIVE, 106, 23, 106, 327 )
+UI_SetPos( ttlBuy, 124, -25 )
+UI_SetSize( ttlBuy, 106, 23 )
+UI_AddCompent( Itembuy, grdItemBuy )
+
+--  
+btnYes = UI_CreateCompent( frmSeaTrade, BUTTON_TYPE, "btnYes", 41, 19, 239, 350 )
+--  UI_LoadButtonImage( btnYes, "texture/ui/PublicC.tga", 41, 19, 0, 0, TRUE )
+
+--  
+btnNo = UI_CreateCompent( frmSeaTrade, BUTTON_TYPE, "btnNo", 41, 19, 287, 350 )
+--  UI_LoadButtonImage( btnNo, "texture/ui/PublicC.tga", 41, 19, 0, 20, TRUE )
+--  UI_SetButtonModalResult( btnNo, BUTTON_NO )
+
+
+------------------------------------------------------------------------
+--  форма окна торговли, обмена по принципу чёрного рынка
+------------------------------------------------------------------------
+frmBlackTrade = UI_CreateForm( "frmBlackTrade", FALSE, 512, 318, 200, 200, TRUE, FALSE )
+-- UI_FormSetHotKey(frmBlackTrade, ALT_KEY, HOTKEY_J )
+UI_ShowForm( frmBlackTrade, FALSE )
+UI_AddFormToTemplete( frmBlackTrade, 1 )
+UI_SetIsDrag(frmBlackTrade, TRUE )
+
+-- текстура верх
+imgTradeTop = UI_CreateCompent( frmBlackTrade, IMAGE_TYPE, "imgTradeTop", 512, 318, 0, 0 )
+UI_LoadImage( imgTradeTop, "texture/ui/xDesign/MarketTrade.tga", NORMAL, 512, 318, 0, 0 )
+-- imgTradeDown = UI_CreateCompent( frmBlackTrade, IMAGE_TYPE, "imgTradeDown", 126, 216, 256, 0 )
+-- UI_LoadImage( imgTradeDown, "texture/ui/trade2.tga", NORMAL, 126, 216, 0, 0 )
+
+-- текстура низ
+imgTradePL = UI_CreateCompent( frmBlackTrade, IMAGE_TYPE, "imgTradePL", 512, 120, 0, 250 )
+UI_LoadImage( imgTradePL, "texture/ui/xDesign/MarketTrade.tga", NORMAL, 512, 120, 0, 392 )
+-- imgTradePR = UI_CreateCompent( frmBlackTrade, IMAGE_TYPE, "imgTradePR", 126, 168, 256, 216 )
+-- UI_LoadImage( imgTradePR, "texture/ui/shipR.tga", NORMAL, 126, 168, 0, 0 )
+
+btnRight = UI_CreateCompent( frmBlackTrade, BUTTON_TYPE, "btnRight", 15, 39, 350, 59 )
+--UI_LoadButtonImage( btnRight, "texture/ui/SysBotton4.tga", 15, 39, 165, 0, TRUE )
+btnLeft = UI_CreateCompent( frmBlackTrade, BUTTON_TYPE, "btnLeft", 15, 39, 15, 59 )
+-- UI_LoadButtonImage( btnLeft, "texture/ui/SysBotton4.tga", 15, 39, 165, 39, TRUE )
+
+-- верх кнопка закрытия
+btnClose = UI_CreateCompent( frmBlackTrade, BUTTON_TYPE, "btnClose", 14, 14, 492, 5 )
+UI_LoadButtonImage( btnClose, "texture/ui/xDesign/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- cmdItem1 = UI_CreateCompent( frmBlackTrade, COMMAND_ONE_TYPE, "cmdItem1", 32, 32, 67, 47 )
+-- cmdItem2 = UI_CreateCompent( frmBlackTrade, COMMAND_ONE_TYPE, "cmdItem2", 32, 32, 174, 47 )
+-- cmdItem3 = UI_CreateCompent( frmBlackTrade, COMMAND_ONE_TYPE, "cmdItem3", 32, 32, 281, 47 )
+
+-- 
+labItem1 = UI_CreateCompent( frmBlackTrade, LABELEX_TYPE, "labItem1", 13, 11, 35, 86 )
+-- UI_SetCaption( labItem1, "ѕНѕНѕНѕНѕНѕНѕНѕН" )
+UI_SetTextColor( labItem1, COLOR_BLACK )
+UI_SetLabelExFont( labItem1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labItem2 = UI_CreateCompent( frmBlackTrade, LABELEX_TYPE, "labItem2", 16, 11, 142, 86 )
+-- UI_SetCaption( labItem2, "ѕНѕНѕНѕНѕНѕНѕНѕН" )
+UI_SetTextColor( labItem2, COLOR_BLACK )
+UI_SetLabelExFont( labItem2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labItem3 = UI_CreateCompent( frmBlackTrade, LABELEX_TYPE, "labItem3", 16, 11, 249, 86 )
+-- UI_SetCaption( labItem3, "ѕНѕНѕНѕНѕНѕНѕНѕН" )
+UI_SetTextColor( labItem3, COLOR_BLACK )
+UI_SetLabelExFont( labItem3, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 
+labMen1 = UI_CreateCompent( frmBlackTrade, LABELEX_TYPE, "labMen1", 46, 8, 59, 103 )
+-- UI_SetCaption( labMen1, "11111111" )
+UI_SetTextColor( labMen1, COLOR_BLACK )
+UI_SetLabelExFont( labMen1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labMen2 = UI_CreateCompent( frmBlackTrade, LABELEX_TYPE, "labMen2", 46, 8, 166, 103 )
+-- UI_SetCaption( labMen2, "11111111" )
+UI_SetTextColor( labMen2, COLOR_BLACK )
+UI_SetLabelExFont( labMen2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labMen3 = UI_CreateCompent( frmBlackTrade, LABELEX_TYPE, "labMen3", 46, 8, 273, 103 )
+-- UI_SetCaption( labMen3, "11111111" )
+UI_SetTextColor( labMen3, COLOR_BLACK )
+UI_SetLabelExFont( labMen3, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- сетка товаров для покупки
+grdItemSale = UI_CreateCompent( frmBlackTrade, GOODS_GRID_TYPE, "grdItemSale", 490, 170, 20, 60 ) 
+UI_SetGridSpace( grdItemSale, 28, 17 )
+UI_SetGridContent( grdItemSale, 14, 3 )
+UI_SetGridUnitSize( grdItemSale, 134,68 )
+UI_SetMargin( grdItemSale, 10, 0, 0, 0 )
+
+-- прокрутка
+scrollid = UI_GetScroll( grdItemSale )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+-- прокрутка верх
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- прокрутка ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/xDesign/PublicC.tga", COMPENT_BACK, 9, 44, 166, 9 )
+UI_SetSize( id, 9, 44 )
+
+-- прокрутка низ
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/xDesign/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-- 
+grdItemBuy = UI_CreateCompent( frmBlackTrade, GOODS_GRID_TYPE, "grdItemBuy", 480, 106, 27, 268 ) 
+UI_SetGridSpace( grdItemBuy, 4, 3 )
+UI_SetGridContent( grdItemBuy, 2, 13 )
+UI_SetGridUnitSize( grdItemBuy, 32, 32 )
+UI_SetMargin( grdItemBuy, 10, 0, 0, 0 )
+
+-- 
+btnYes = UI_CreateCompent( frmBlackTrade, BUTTON_TYPE, "btnYes", 41, 19, 239, 350 )
+--  UI_LoadButtonImage( btnYes, "texture/ui/PublicC.tga", 41, 19, 0, 0, TRUE )
+
+-- 
+btnNo = UI_CreateCompent( frmBlackTrade, BUTTON_TYPE, "btnNo", 41, 19, 287, 350 )
+--  UI_LoadButtonImage( btnNo, "texture/ui/PublicC.tga", 41, 19, 0, 20, TRUE )
+--  UI_SetButtonModalResult( btnNo, BUTTON_NO )

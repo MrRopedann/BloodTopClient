@@ -1,0 +1,1 @@
+system\Game.exe startgame > output.txt 

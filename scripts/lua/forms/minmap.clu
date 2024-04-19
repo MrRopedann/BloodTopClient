@@ -1,0 +1,11 @@
+------------------------------------------------------------------------------------------
+-- Discord кнопка
+------------------------------------------------------------------------------------------
+btnDiscord = UI_CreateCompent(frmMinimap, BUTTON_TYPE, "btnDiscord", 64, 16, 72, 164)
+UI_LoadButtonImage(btnDiscord, "texture/ui/store8.tga", 48, 19, 0, 76, FALSE )
+	
+labDiscord = UI_CreateCompent(frmMinimap, LABELEX_TYPE, "labDiscord", 20 , 15 , 84, 166)
+UI_SetCaption(labDiscord, "Discord")
+UI_SetTextColor(labDiscord, COLOR_BLACK )
+UI_SetLabelExFont(labDiscord, DEFAULT_FONT, TRUE, COLOR_WHITE)
+------------------------------------------------------------------------------------------
